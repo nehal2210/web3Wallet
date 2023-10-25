@@ -1,1 +1,4 @@
-export { }
+
+const ApiService = async () => {}
+
+export default ApiService;

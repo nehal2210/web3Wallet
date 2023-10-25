@@ -1,12 +1,15 @@
+import MainComponenet from "../components/main";
 
 
 function Home() {
-
     return (
         <>
+            <div className="flex justify-center items-center h-[100vh]">
+                <MainComponenet />
+                
+            </div>
 
-            <h3>Landing Page</h3>
-            <button onClick={() => { }}>Create Wallet</button>
+
         </>
     );
 }
