@@ -159,7 +159,7 @@ async function createAccount(walletId, password, accountName, accountNumber) {
         const decryptResponse = await axios.post(baseUrl + "account/decrypt", {
             sp: saltySp
         })
-        console.log("aaaaaaaaaaaaa")
+        // console.log("aaaaaaaaaaaaa")
         console.log(decryptResponse.data.data.esp)
         const esp = decryptResponse.data.data.esp
 
@@ -202,9 +202,16 @@ async function createAccount(walletId, password, accountName, accountNumber) {
     })
 }
 
-async function importToken(tokenAddress) {
+async function importToken(walletId, accountId, token) {
 
-    const contract = new ethers.Contract(tokenAddress, tokenABI,)
+    // const contract = new ethers.Contract(tokenAddress, tokenABI,)
+    const response = await axios.post(baseUrl + "token/" + walletId + "/" + accountId, {
+        ...token
+    })
+
+
+    console.log(response.data)
+
 
 
 }
@@ -258,16 +265,16 @@ async function getTokens(walletId, accountId) {
 }
 
 
-async function addNetwork(walletId) {
+async function addNetwork(walletId, network) {
 
-    const network = {
-        "name": "fuji",
-        "providerURL": "https://rpc.ankr.com/avalanche_fuji",
-        "scanURL": "https://testnet.snowtrace.io/",
-        "coinName": "AVAX",
-        "chainId": "43113"
+    // const network = {
+    //     "name": "fuji",
+    //     "providerURL": "https://rpc.ankr.com/avalanche_fuji",
+    //     "scanURL": "https://testnet.snowtrace.io/",
+    //     "coinName": "AVAX",
+    //     "chainId": "43113"
 
-    }
+    // }
 
     const response = await axios.post(baseUrl + "network/" + walletId, {
         ...network
@@ -300,33 +307,62 @@ async function getNetworks(walletId) {
 async function main() {
 
 
-    const username = "Noman"
-    const password = "abcdefg"
-    await createWallet(username, password)
+    const username = "fahda"
+    const password = "abcasddefg"
+    const walletId = '653170cc8b470d03bc5dd47b'
+    const accountCount = 0
+    const accountName = "fahad account"
+    const accountId = "653170cc8b470d03bc5dd479"
+    const network = {
+        "name": "fuji",
+        "providerURL": "https://rpc.ankr.com/avalanche_fuji",
+        "scanURL": "https://testnet.snowtrace.io/",
+        "coinName": "AVAX",
+        "chainId": "43113"
 
-    // await getWallets()
+    }
 
-    // const walletId = '6524c1dc0379cd66849498c1'
-    // const accountId = "6512bdcac6e47751f00b275b"
+    token = {
+        name: "Chainlink Token on Avalanche",
+        address: "0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846",
+        symbol: "LINK",
+        decimal: 18,
+        network: "fuji",
+    }
+
+
+
+    // await createWallet(username, password)
+    // await getWallets() // not use in frontend
+
+
     // await getWallet(walletId)
 
-    // await createAccount()
 
-    // const response = await getWallet(walletId)
-
-    // console.log(response.data.accountCount)
-    // const accountCount = response.data.accountCount
-    // const accountName = "Acasde"
     // await createAccount(walletId, password, accountName, accountCount + 1)
-
-
-    // await addNetwork(walletId)
-
-    // await getNetworks(walletId)
 
     // await getAccountS(walletId)
 
+
+
+
+
+
+    // await addNetwork(walletId, network)
+
+    // await getNetworks(walletId)
+
+
+    // await importToken(walletId, accountId, token)
+
+
     // await getTokens(walletId, accountId)
+
+
+    // work has been going on  send tx, maintain history of Tx
+
+    // all private keys and seed phrase will be store in local machine (path ="./static/")
+
 }
 
 main()
