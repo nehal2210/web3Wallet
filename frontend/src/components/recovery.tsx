@@ -1,12 +1,18 @@
+import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { incrementStep } from "../redux/counter";
 import { AiOutlineEye } from "react-icons/ai";
 
 function Recovery() {
   const dispatch = useDispatch();
+  const [showBlur, setShowBlur] = useState(true);
 
   const setSteps = () => {
-    dispatch(incrementStep(0));
+    if(showBlur){
+      setShowBlur(false);
+    }else{
+      dispatch(incrementStep(3));
+    }
   };
   return (
     <>
@@ -20,10 +26,10 @@ function Recovery() {
           </div>
 
           {/* Divider Line */}
-          <div className="w-16 h-1 rounded-full bg-btnColor opacity-40"></div>
+          <div style={{opacity: showBlur ? '0.4' : '1'}} className="w-16 h-1 rounded-full bg-btnColor"></div>
 
           <div className="bg-bg-color rounded-full flex justify-center items-center h-10 w-10 ">
-            <div className="bg-white rounded-full flex justify-center items-center h-7 w-7 opacity-30">
+            <div style={{opacity: showBlur ? '0.3' : '1'}} className="bg-white rounded-full flex justify-center items-center h-7 w-7">
               <p className="">2</p>
             </div>
           </div>
@@ -173,7 +179,7 @@ function Recovery() {
           </div>
 
           {/* Overflow Container */}
-          <div className="w-full flex flex-col justify-center items-center h-full top-0 absolute rounded-lg backdrop-blur-sm bg-bg-color/70">
+          <div className={showBlur ? 'w-full flex flex-col justify-center items-center h-full top-0 absolute rounded-lg backdrop-blur-sm bg-bg-color/70' : 'hidden'}>
             <AiOutlineEye className="text-btnColor" />
             <p className="text-white">Save in a password manager</p>
           </div>
@@ -185,7 +191,7 @@ function Recovery() {
             onClick={setSteps}
             className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover"
           >
-            Reveal Recovery Phrase
+            {showBlur ? 'Reveal Recovery Phrase' : 'Next'}
           </button>
           {/* <button className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover">Import Wallet</button> */}
         </div>
