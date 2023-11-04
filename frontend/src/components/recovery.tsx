@@ -1,19 +1,38 @@
-import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { incrementStep } from "../redux/counter";
 import { AiOutlineEye } from "react-icons/ai";
+import {useState} from "react"
+import { generateWallet } from "../services/blockchain";
+import PhraseBox from "./PhraseBox";
+
+
+
+interface  IWallet{
+  "address":String,
+  "phrase": Array<String>,
+  "privateKey":String
+}
+
 
 function Recovery() {
-  const dispatch = useDispatch();
-  const [showBlur, setShowBlur] = useState(true);
+ 
 
+  const dispatch = useDispatch();
+  const [wallet,setWallet] = useState<IWallet>({"address":"",
+  "phrase": [],
+  "privateKey":""})
   const setSteps = () => {
-    if(showBlur){
-      setShowBlur(false);
-    }else{
-      dispatch(incrementStep(3));
-    }
+    dispatch(incrementStep(0));
   };
+
+
+  const revealPhrase = ()=>{
+
+    const walletObj = generateWallet();
+    console.log(walletObj)
+    setWallet (walletObj)
+  }
+
   return (
     <>
       <div className="w-[50%] relative bg-primary rounded-2xl pb-8">
@@ -26,10 +45,10 @@ function Recovery() {
           </div>
 
           {/* Divider Line */}
-          <div style={{opacity: showBlur ? '0.4' : '1'}} className="w-16 h-1 rounded-full bg-btnColor"></div>
+          <div className="w-16 h-1 rounded-full bg-btnColor opacity-40"></div>
 
           <div className="bg-bg-color rounded-full flex justify-center items-center h-10 w-10 ">
-            <div style={{opacity: showBlur ? '0.3' : '1'}} className="bg-white rounded-full flex justify-center items-center h-7 w-7">
+            <div className="bg-white rounded-full flex justify-center items-center h-7 w-7 opacity-30">
               <p className="">2</p>
             </div>
           </div>
@@ -88,110 +107,23 @@ function Recovery() {
         {/* Password Section */}
         <div className="w-3/4 mx-auto rounded-lg  bg-black3 relative">
           {/* parent */}
-          <div className="p-4">
-            <div className="flex  justify-between items-center gap-2">
-              <div className="text-heading bg-btnColorHover border-white border-2 py-2 pr-2 rounded-lg">
-                <span className="p-2 border-white border-2 bg-btnColor rounded-lg">
-                  1
-                </span>
-                <span className="ml-2">asperiores</span>
-              </div>
-
-              <div className="text-heading bg-btnColorHover border-white border-2 py-2 pr-2 rounded-lg">
-                <span className="p-2 border-white border-2 bg-btnColor rounded-lg">
-                  2
-                </span>
-                <span className="ml-2">asperiores</span>
-              </div>
-
-              <div className="text-heading bg-btnColorHover border-white border-2 py-2 pr-2 rounded-lg">
-                <span className="p-2 border-white border-2 bg-btnColor rounded-lg">
-                  3
-                </span>
-                <span className="ml-2">asperiores</span>
-              </div>
-
-              <div className="text-heading bg-btnColorHover border-white border-2 py-2 pr-2 rounded-lg">
-                <span className="p-2 border-white border-2 bg-btnColor rounded-lg">
-                  4
-                </span>
-                <span className="ml-2">asperiores</span>
-              </div>
-            </div>
-            <div className="mt-2 flex justify-between items-center gap-2">
-              <div className="text-heading bg-btnColorHover border-white border-2 py-2 pr-2 rounded-lg">
-                <span className="p-2 border-white border-2 bg-btnColor rounded-lg">
-                  1
-                </span>
-                <span className="ml-2">asperiores</span>
-              </div>
-
-              <div className="text-heading bg-btnColorHover border-white border-2 py-2 pr-2 rounded-lg">
-                <span className="p-2 border-white border-2 bg-btnColor rounded-lg">
-                  2
-                </span>
-                <span className="ml-2">asperiores</span>
-              </div>
-
-              <div className="text-heading bg-btnColorHover border-white border-2 py-2 pr-2 rounded-lg">
-                <span className="p-2 border-white border-2 bg-btnColor rounded-lg">
-                  3
-                </span>
-                <span className="ml-2">asperiores</span>
-              </div>
-
-              <div className="text-heading bg-btnColorHover border-white border-2 py-2 pr-2 rounded-lg">
-                <span className="p-2 border-white border-2 bg-btnColor rounded-lg">
-                  4
-                </span>
-                <span className="ml-2">asperiores</span>
-              </div>
-            </div>
-            <div className="mt-2  flex justify-between items-center gap-2">
-              <div className="text-heading bg-btnColorHover border-white border-2 py-2 pr-2 rounded-lg">
-                <span className="p-2 border-white border-2 bg-btnColor rounded-lg">
-                  1
-                </span>
-                <span className="ml-2">asperiores</span>
-              </div>
-
-              <div className="text-heading bg-btnColorHover border-white border-2 py-2 pr-2 rounded-lg">
-                <span className="p-2 border-white border-2 bg-btnColor rounded-lg">
-                  2
-                </span>
-                <span className="ml-2">asperiores</span>
-              </div>
-
-              <div className="text-heading bg-btnColorHover border-white border-2 py-2 pr-2 rounded-lg">
-                <span className="p-2 border-white border-2 bg-btnColor rounded-lg">
-                  3
-                </span>
-                <span className="ml-2">asperiores</span>
-              </div>
-
-              <div className="text-heading bg-btnColorHover border-white border-2 py-2 pr-2 rounded-lg">
-                <span className="p-2 border-white border-2 bg-btnColor rounded-lg">
-                  4
-                </span>
-                <span className="ml-2">asperiores</span>
-              </div>
-            </div>
-          </div>
-
+          
+          <PhraseBox wallet={wallet}/>
+          
           {/* Overflow Container */}
-          <div className={showBlur ? 'w-full flex flex-col justify-center items-center h-full top-0 absolute rounded-lg backdrop-blur-sm bg-bg-color/70' : 'hidden'}>
+          {!wallet.address &&
+          <div className="w-full flex flex-col justify-center items-center h-full top-0 absolute rounded-lg backdrop-blur-sm bg-bg-color/70">
             <AiOutlineEye className="text-btnColor" />
             <p className="text-white">Save in a password manager</p>
-          </div>
+          </div>}
         </div>
-
         {/* Button */}
         <div className="flex justify-center flex-col items-center">
           <button
-            onClick={setSteps}
+            onClick={revealPhrase}
             className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover"
           >
-            {showBlur ? 'Reveal Recovery Phrase' : 'Next'}
+            Reveal Recovery Phrase
           </button>
           {/* <button className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover">Import Wallet</button> */}
         </div>
