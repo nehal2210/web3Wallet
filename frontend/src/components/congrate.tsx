@@ -26,11 +26,10 @@ const Congrate = () => {
                                 Never share your Secret Recover or risk your funds being stolen.
                             </span>
                         </li>
-                        <li className="text-btnColor underline">Learn more</li>
                     </ul>
 
                 </div>
-                <p className='text-white'>Advanced Configration</p>
+    
 
                 <button className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover"> Next </button>
 
