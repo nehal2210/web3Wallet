@@ -1,10 +1,12 @@
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { incrementStep } from "../redux/counter";
 import { AiOutlineEye } from "react-icons/ai";
 import { useState } from "react"
-import { generateWallet } from "../services/blockchain";
+import { createWallet, generateWallet } from "../services/blockchain";
 import PhraseBox from "./PhraseBox";
 import {BiSolidCopy} from "react-icons/bi"
+import { RootState } from "../redux/store";
+
 
 interface IWallet {
   "address": String,
@@ -15,9 +17,10 @@ interface IWallet {
 
 
 function Recovery() {
-
-
+  
+  
   const dispatch = useDispatch();
+  const User = useSelector((state: RootState) => state.wallet)
   const [wallet, setWallet] = useState<IWallet>({
     "address": "",
     "phrase": [],
@@ -49,8 +52,7 @@ console.log(confirmWord)
 if (confirmWord[0] == wallet.phrase[0] && confirmWord[4] == wallet.phrase[4] && confirmWord[8] == wallet.phrase[8]) {
   
   console.log("Confirmed")
-  
-  
+  createWallet(User.username, User.password, wallet)
   dispatch(incrementStep(3));
 
 

@@ -16,8 +16,7 @@ function SignUp() {
 
   const handleSignUp = (e:any) => {
     e.preventDefault()
-    // console.log(formData.username)
-    // console.log(formData.password)
+
 
 if (formData.username && formData.password) {
   
