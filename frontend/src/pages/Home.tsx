@@ -3,6 +3,7 @@ import MainComponenet from "../components/main";
 import { RootState } from "../redux/store";
 import SignUp from "../components/sign-up";
 import Recovery from "../components/recovery";
+import Congrate from "../components/congrate";
 
 function Home() {
   const step = useSelector((state: RootState) => state.user.step);
@@ -15,8 +16,11 @@ function Home() {
         return <SignUp />;
       case 2:
         return <Recovery />;
+      case 3:
+        return <Congrate />;
       default:
-        break;
+        return <MainComponenet />;
+        // break;
     }
   };
 
