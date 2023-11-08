@@ -4,6 +4,7 @@ import { RootState } from "../redux/store";
 import SignUp from "../components/sign-up";
 import Recovery from "../components/recovery";
 import Congrate from "../components/congrate";
+import WalletApp from "./WalletApp";
 
 function Home() {
   const step = useSelector((state: RootState) => state.user.step);
@@ -18,6 +19,8 @@ function Home() {
         return <Recovery />;
       case 3:
         return <Congrate />;
+      case 4:
+          return <WalletApp />;
       default:
         return <MainComponenet />;
         // break;

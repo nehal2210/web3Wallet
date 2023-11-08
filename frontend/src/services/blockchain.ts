@@ -2,7 +2,7 @@ import { ethers } from "ethers"
 
 import {AES,SHA256} from "crypto-js"
 import axios from "axios"
-import { API, BASE_API_URL } from "../constants"
+import { API, BASE_API_URL,DATABASE,DB_TABLE } from "../constants"
 import Dexie from 'dexie'
 
 
@@ -63,13 +63,13 @@ async function createWallet(username: string, password: string, wallet: any) {
 
 
 
-    const db = new Dexie('WalletX');
+    const db = new Dexie(DATABASE);
 
     db.version(1).stores(
-  { seedPhrase: "++id,phrase" })
+  { [DB_TABLE.SEED_PHRASE]: "++id,phrase" })
   
 db.version(1).stores(
-    { privateKeys: "++id,keyId,pk" })
+    { [DB_TABLE.PRIVATE_KEYS]: "++id,keyId,pk" })
 
     await db.table("seedPhrase").add({
       phrase: response.data?.data?.saltySp

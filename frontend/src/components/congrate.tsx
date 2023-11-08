@@ -1,6 +1,10 @@
 
 import congratIcon from '../assets/images/congrate-icon.png';
+import { useNavigate } from "react-router-dom";
+
 const Congrate = () => {
+    const navigate = useNavigate(); 
+
     return (
         <>
             <div className="w-[50%] flex justify-center items-center flex-col bg-primary rounded-2xl pb-8">
@@ -31,7 +35,7 @@ const Congrate = () => {
                 </div>
     
 
-                <button className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover"> Next </button>
+                <button className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover" onClick={()=>navigate("/app")}> Next </button>
 
             </div>
         </>

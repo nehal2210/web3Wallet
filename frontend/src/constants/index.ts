@@ -5,8 +5,17 @@ const API = {
 
 }
 
+const DATABASE = "WalletX"
+
+const DB_TABLE = {
+
+    SEED_PHRASE:"seedPhrase",
+    PRIVATE_KEYS:"privateKeys"
+}
 
 export {
     BASE_API_URL,
-    API
+    API,
+    DB_TABLE,
+    DATABASE
 }
