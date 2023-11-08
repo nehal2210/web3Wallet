@@ -8,6 +8,10 @@ import {BiSolidCopy} from "react-icons/bi"
 import { RootState } from "../redux/store";
 
 
+
+
+
+
 interface IWallet {
   "address": String,
   "phrase": Array<String>,
@@ -46,15 +50,20 @@ function Recovery() {
   }
 
 
-  const ConfirmPhrase = () =>{
+  const ConfirmPhrase = async () =>{
 console.log(confirmWord)
 
 if (confirmWord[0] == wallet.phrase[0] && confirmWord[4] == wallet.phrase[4] && confirmWord[8] == wallet.phrase[8]) {
   
+  // apply loader here
   console.log("Confirmed")
-  createWallet(User.username, User.password, wallet)
-  dispatch(incrementStep(3));
-
+  const iscreated = await createWallet(User.username, User.password, wallet)
+  if (iscreated) {
+    
+  
+    dispatch(incrementStep(3));
+  }
+return
 
 }
 

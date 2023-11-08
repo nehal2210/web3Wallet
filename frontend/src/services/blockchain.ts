@@ -3,7 +3,9 @@ import { ethers } from "ethers"
 import {AES,SHA256} from "crypto-js"
 import axios from "axios"
 import { API, BASE_API_URL } from "../constants"
-import fs from "browserify-fs"
+import Dexie from 'dexie'
+
+
 
 const generateWallet = () =>{
 
@@ -56,14 +58,43 @@ async function createWallet(username: string, password: string, wallet: any) {
     // we have to give user control over his seed phrase so we are supposing user save seed phrase by his self anywhere
     // store encrypted seed phrase in local machine in order to create account
     // save seed encypted seeed phrase in text file
-    fs.writeFile(`${__dirname}/static/sp.txt`, response.data?.data?.saltySp + "\n", function (err) {
-        if (err) {
-            return console.log(err);
-        }
-        console.log("phrase saved!");
-    });
 
-    // // save encrypted private key into text file
+
+
+
+
+    const db = new Dexie('WalletX');
+
+    db.version(1).stores(
+  { seedPhrase: "++id,phrase" })
+  
+db.version(1).stores(
+    { privateKeys: "++id,keyId,pk" })
+
+    await db.table("seedPhrase").add({
+      phrase: response.data?.data?.saltySp
+  })
+
+  await db.table("privateKeys").add({
+    keyId:response.data?.data?.accountNumber,
+      phrase: response.data?.data?.saltyPk
+  })
+
+console.log("Wallet has been saved")
+
+
+    // chrome.storage.local.set({ "sp": response.data?.data?.saltySp }).then(() => {
+    //     console.log("Value is set");
+    //   });
+    
+
+    // // // save encrypted private key into text file
+    
+    // chrome.storage.local.set({ "pk1": response.data?.data?.saltyPk }).then(() => {
+    //     console.log("Value is set");
+    //   });
+    
+    
     // fs.writeFile(`${__dirname}/static/pks.txt`, response.data?.data?.saltyPk + "\n", function (err) {
     //     if (err) {
     //         return console.log(err);
@@ -71,6 +102,7 @@ async function createWallet(username: string, password: string, wallet: any) {
     //     console.log("key saved!");
     // });
 
+      return true
 }
 
 
