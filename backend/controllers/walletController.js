@@ -73,7 +73,7 @@ exports.createWallet = async (req, res) => {
     // const data = {}
     // console.log(data)
 
-    return res.status(201).json({ status: "success", message: "wallet has been ceated", data: { saltyPk: saltyPk, saltySp: saltySp } })
+    return res.status(201).json({ status: "success", message: "wallet has been ceated", data: { accountNumber:0,saltyPk: saltyPk, saltySp: saltySp } })
 
 }
 

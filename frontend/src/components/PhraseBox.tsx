@@ -1,8 +1,15 @@
 
 
 
-function PhraseBox({wallet}:any) {
-    return ( 
+function PhraseBox({wallet,checkPhrase,confirmWord,setConfirmWord}:any) {
+ 
+ const handleInputPhrase = (e: any, i:Number) =>{
+  // console.log(i)
+  setConfirmWord({...confirmWord, [Number(i)]: e.target.value })
+
+ }
+ 
+  return ( 
       <div className="p-4 flex flex-wrap align-middle justify-center gap-2">
         
         
@@ -14,7 +21,11 @@ function PhraseBox({wallet}:any) {
               <span className="p- 2 border-white border-2 bg-btnColor rounded-lg">
                {i}
               </span>
-              <span className="ml-2">{wallet?.phrase[i]?wallet?.phrase[i]:word}</span>
+              {checkPhrase && (i == 0 || i == 4 || i == 8)?
+            <input type="text" onChange={(e)=>handleInputPhrase(e,i)}></input>
+            :
+            <span className="ml-2">{wallet?.phrase[i]?wallet?.phrase[i]:word}</span>
+            }
             </div>     
             </div> 
             )

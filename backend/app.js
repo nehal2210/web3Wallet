@@ -8,6 +8,8 @@ const networkRouter = require("./routes/networkRouter")
 
 const dotenv = require("dotenv")
 const mongoose = require("mongoose")
+const cors = require('cors')
+
 
 dotenv.config({ path: ".env" })
 
@@ -15,6 +17,7 @@ dotenv.config({ path: ".env" })
 
 
 const app = express()
+app.use(cors())
 app.use(express.json())
 const port = 8080
 
