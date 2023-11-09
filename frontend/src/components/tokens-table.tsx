@@ -1,9 +1,66 @@
+import { useState } from 'react';
 import { BiPlus, BiRevision } from "react-icons/bi";
 import TokenItem from "./token-item";
 import ActivityItem from "./ActivityItem";
 
 
 const TokensTable = ({ tableHeading, date }: any) => {
+
+    const [TokenItemData, setTokenItemData] = useState([
+        {
+            name: 'ETH Mannet',
+            value: '0 ETH',
+            btn: 'send'
+        },
+        {
+            name: 'ETH',
+            value: '284 ETH',
+            btn: 'send'
+        },
+        {
+            name: 'ETHER',
+            value: '453 ETH',
+            btn: 'send'
+        },
+        {
+            name: 'Bit coin',
+            value: '3455 BIT',
+            btn: 'send'
+        }
+    ]);
+
+
+    const [activityItemData, setActivityItemData] = useState([
+        {
+            status: 'Received',
+            isConfirm: true,
+            date: 'Oct 09, 2023',
+            value: '0.2 ETH',
+            valueInDollar: '$ 1220 USD',
+        },
+        {
+            status: 'Sending',
+            isConfirm: false,
+            date: 'Oct 09, 2023',
+            value: '0.2 ETH',
+            valueInDollar: '$ 1220 USD',
+        },
+        {
+            status: 'Sending',
+            isConfirm: false,
+            date: 'Oct 09, 2023',
+            value: '0.2 ETH',
+            valueInDollar: '$ 1220 USD',
+        },
+        {
+            status: 'Received',
+            isConfirm: true,
+            date: 'Oct 09, 2023',
+            value: '0.2 ETH',
+            valueInDollar: '$ 1220 USD',
+        }
+    ])
+
     return (
         <div className="w-[48%] h-[340px] rounded-xl bg-bgColor flex flex-col items-center p-2">
             <div className="flex justify-center">
@@ -17,14 +74,22 @@ const TokensTable = ({ tableHeading, date }: any) => {
                 {
                     tableHeading === 'Tokens' ?
                         <>
-                            <TokenItem />
-                            <TokenItem />
-                            <TokenItem />
-                            <TokenItem />
-                            <TokenItem />
+                            {TokenItemData.map(data => {
+                                return (
+                                    <TokenItem data={data} />
+                                )
+                            })}
                         </>
                         :
-                        <ActivityItem />
+                        <>
+                            {
+                                activityItemData.map(data => {
+                                    return (
+                                        <ActivityItem data={data} />
+                                    )
+                                })
+                            }
+                        </>
 
                 }
 
