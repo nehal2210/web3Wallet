@@ -1,5 +1,5 @@
 
-import EthereumIcon from '../assets/images/ethereum-icon.png'
+import EthereumIcon from '../assets/images/Group 55.png';
 
 
 
