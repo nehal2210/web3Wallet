@@ -1,37 +1,82 @@
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { incrementStep } from "../redux/counter";
 import { AiOutlineEye } from "react-icons/ai";
-import {useState} from "react"
-import { generateWallet } from "../services/blockchain";
+import { useState } from "react"
+import { createWallet, generateWallet } from "../services/blockchain";
 import PhraseBox from "./PhraseBox";
+import {BiSolidCopy} from "react-icons/bi"
+import { RootState } from "../redux/store";
 
 
 
-interface  IWallet{
-  "address":String,
+
+
+
+interface IWallet {
+  "address": String,
   "phrase": Array<String>,
-  "privateKey":String
+  "privateKey": String
 }
 
 
-function Recovery() {
- 
 
+function Recovery() {
+  
+  
   const dispatch = useDispatch();
-  const [wallet,setWallet] = useState<IWallet>({"address":"",
-  "phrase": [],
-  "privateKey":""})
+  const User = useSelector((state: RootState) => state.wallet)
+  const [wallet, setWallet] = useState<IWallet>({
+    "address": "",
+    "phrase": [],
+    "privateKey": ""
+  })
+
+  const [checkPhrase, setCheckPhrase] = useState(false)
+  const [confirmWord, setConfirmWord]: any = useState({})
+  const [warning, setWarning] = useState(false)
+
+
+
   const setSteps = () => {
     dispatch(incrementStep(0));
   };
 
 
-  const revealPhrase = ()=>{
+  const revealPhrase = () => {
 
     const walletObj = generateWallet();
     console.log(walletObj)
-    setWallet (walletObj)
+    setWallet(walletObj)
   }
+
+
+  const ConfirmPhrase = async () =>{
+console.log(confirmWord)
+
+if (confirmWord[0] == wallet.phrase[0] && confirmWord[4] == wallet.phrase[4] && confirmWord[8] == wallet.phrase[8]) {
+  
+  // apply loader here
+  console.log("Confirmed")
+  const iscreated = await createWallet(User.username, User.password, wallet)
+  if (iscreated) {
+    
+  
+    dispatch(incrementStep(3));
+  }
+return
+
+}
+
+setWarning(true)
+
+
+  }
+
+
+const copyPhrase =()=>{
+  navigator.clipboard.writeText(wallet.phrase.join(","))
+}
+
 
   return (
     <>
@@ -108,23 +153,48 @@ function Recovery() {
         <div className="w-3/4 mx-auto rounded-lg  bg-black3 relative">
           {/* parent */}
           
-          <PhraseBox wallet={wallet}/>
-          
+          {!checkPhrase && wallet.phrase.length &&
+<BiSolidCopy className="bg-white" onClick={copyPhrase} />
+}
+          <PhraseBox wallet={wallet} checkPhrase={checkPhrase} confirmWord={confirmWord} setConfirmWord={setConfirmWord} />
+
           {/* Overflow Container */}
           {!wallet.address &&
-          <div className="w-full flex flex-col justify-center items-center h-full top-0 absolute rounded-lg backdrop-blur-sm bg-bg-color/70">
-            <AiOutlineEye className="text-btnColor" />
-            <p className="text-white">Save in a password manager</p>
-          </div>}
+            <div className="w-full flex flex-col justify-center items-center h-full top-0 absolute rounded-lg backdrop-blur-sm bg-bg-color/70">
+              <AiOutlineEye className="text-btnColor" />
+              <p className="text-white">Save in a password manager</p>
+            </div>}
         </div>
         {/* Button */}
         <div className="flex justify-center flex-col items-center">
-          <button
-            onClick={revealPhrase}
-            className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover"
-          >
-            Reveal Recovery Phrase
-          </button>
+
+{warning && <p> Wrong Phrase, Please put the right words</p>}
+
+          {checkPhrase ?
+            <button
+            // disabled={true}
+              onClick={() => { ConfirmPhrase() }}
+              className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover"
+            >
+             Confirm
+            </button>
+
+            : 
+            wallet.phrase.length ?
+             <button
+              onClick={() => { setCheckPhrase(true) }}
+              className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover"
+            >
+              Next
+            </button> 
+            :
+              <button
+                onClick={revealPhrase}
+                className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover"
+              >
+                Reveal Recovery Phrase
+              </button>
+          }
           {/* <button className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover">Import Wallet</button> */}
         </div>
       </div>

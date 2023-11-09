@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import addUser from './counter';
+import wallet from './wallet';
 
 
 export const store = configureStore({
   reducer: {
     user: addUser,
+    wallet:wallet
   },
 })
 

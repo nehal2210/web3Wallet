@@ -1,13 +1,22 @@
 import { Routes, Route } from "react-router-dom";
 import Demo from "../pages/demo";
 import Home from "../pages/Home";
-import WalletApp from "../pages/wallet-app";
+import WalletApp from "../pages/WalletApp";
+import ProtectedRoute from "./ProtectedRoute";
 
 function AppRouter() {
   return (
     <div className="p-4">
       <Routes>
-        <Route path="/" Component={Home} />
+
+        <Route path="/" element=
+        {
+        <ProtectedRoute>
+          <Home/>
+        </ProtectedRoute>
+          
+        } />
+        
         <Route path="/demo" Component={Demo} />
         <Route path="/app" Component={WalletApp} />
         {/* <Route path="/sign-up" Component={SignUp} />
