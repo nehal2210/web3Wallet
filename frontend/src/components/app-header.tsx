@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import NetworkDetails from "./NetworkDetails";
 import OpenAccount from "./OpenAccount";
+import CreateAccount from "./CreateAccount";
 
 
 
@@ -14,6 +15,8 @@ const AppHeader = () => {
     const [openNetwork, setOpenNetwork] = useState(false);
     const [openNetworkDetails, setOpenNetworkDetails] = useState(false);
     const [openAccount, setOpenAccount] = useState(false);
+    const [isNewAccount, setIsNewAccount] = useState(false);
+
 
 
     return (
@@ -85,12 +88,20 @@ const AppHeader = () => {
 
             {
                 openAccount ? 
-                <OpenAccount isAccountOpen={(value: boolean) => setOpenAccount(value)} />
+                <OpenAccount isAccountOpen={(value: boolean) => setOpenAccount(value)} isNewAccount={(value: boolean) => {setIsNewAccount(value); setOpenAccount(false)}} />
                 : 
                 null
 
             }
-            
+
+            {
+                isNewAccount ? 
+                <CreateAccount isNewAccount={(value: boolean) => setIsNewAccount(value)} />
+                : 
+                null
+
+            }
+             
         </div>
 
     );
