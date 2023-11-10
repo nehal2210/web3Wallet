@@ -1,7 +1,7 @@
 import { BsX } from "react-icons/bs";
 import logo from "../assets/images/logo.png";
 import { Input } from "antd";
-import ethIcon from '../assets/images/ethereum-icon.png';
+import ethIcon from '../assets/images/Group 55.png';
 
 const NetworkDetails = ({ openNet }: any) => {
     return (

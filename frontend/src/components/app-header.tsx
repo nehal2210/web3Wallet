@@ -1,5 +1,5 @@
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
-import ethereumIcon from '../assets/images/ethereum-icon.png';
+import ethereumIcon from '../assets/images/Group 55.png';
 import { BsFillPersonFill, BsThreeDotsVertical } from "react-icons/bs";
 import HeaderTokenItem from "./HeaderTokenItem";
 import { useState } from "react";
