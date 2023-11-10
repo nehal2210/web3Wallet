@@ -32,9 +32,9 @@ const WalletApp = () => {
 
 
                 <div className="flex w-full justify-between items-center mt-10">
-                <TokensTable />
+                <TokensTable tableHeading="Tokens" date="" />
 
-                <TokensTable />
+                <TokensTable tableHeading="Activity" date="October, 2023" />
                 </div>
 
 
