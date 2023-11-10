@@ -3,6 +3,7 @@ import Demo from "../pages/demo";
 import Home from "../pages/Home";
 import WalletApp from "../pages/WalletApp";
 import ProtectedRoute from "./ProtectedRoute";
+import Addnetwork from "../pages/AddNetwork";
 
 function AppRouter() {
   return (
@@ -19,6 +20,7 @@ function AppRouter() {
         
         <Route path="/demo" Component={Demo} />
         <Route path="/app" Component={WalletApp} />
+        <Route path="/add-network" Component={Addnetwork} />
         {/* <Route path="/sign-up" Component={SignUp} />
         <Route path="/inbox" Component={Inbox} />
         <Route path="/home" Component={Home} />
