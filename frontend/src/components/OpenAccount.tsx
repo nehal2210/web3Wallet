@@ -5,7 +5,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import AccountProfiles from "./AccountProfiles";
 import { BiPlus } from "react-icons/bi";
 
-const OpenAccount = ({ isAccountOpen, isNewAccount }: any) => {
+const OpenAccount = ({ isAccountOpen, isNewAccount, isOpenAccountDetails }: any) => {
 
     return (
         <div className="fixed z-10 top-0 right-0 bottom-0 left-0 w-full h-[100vh] bg-bgColor2 bg-opacity-50 flex flex-col pt-5 items-center">
@@ -30,13 +30,13 @@ const OpenAccount = ({ isAccountOpen, isNewAccount }: any) => {
                 </div>
 
                 <div className="flex justify-center flex-col items-center mt-2">
-                <button className="bg-btnColor px-8 py-2 hover:bg-btnColorHover border border-white text-white rounded-full"onClick={() => { isNewAccount(true) }}>Add Account</button>
-                <div className="flex items-center cursor-pointer mt-2">
+                <button className="bg-btnColor px-8 py-2 hover:bg-btnColorHover border border-white text-white rounded-full" onClick={() => { isNewAccount('add-account') }}>Add Account</button>
+                <button onClick={() => { isNewAccount('import-account') }} className="flex items-center cursor-pointer mt-2">
                     <div className="w-4 h-4 border border-btnColor flex justify-center items-center">
                         <BiPlus className="text-btnColor" />
                     </div>
                     <p className="text-btnColor ms-2 text-sm">Import Account</p>
-                </div>
+                </button>
                 </div>
 
             </div>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BiPlus, BiRevision } from "react-icons/bi";
 import TokenItem from "./token-item";
 import ActivityItem from "./ActivityItem";
+import { Link } from 'react-router-dom';
 
 
 const TokensTable = ({ tableHeading, date }: any) => {
@@ -100,7 +101,9 @@ const TokensTable = ({ tableHeading, date }: any) => {
                     <div className="w-4 h-4 border border-btnColor flex justify-center items-center">
                         <BiPlus className="text-btnColor" />
                     </div>
+                    <Link to='/import-tokens'>
                     <p className="text-btnColor ms-2 text-sm">Import Token</p>
+                    </Link>
                 </div>
 
                 <div className="flex items-center cursor-pointer">
