@@ -80,7 +80,7 @@ const copyPhrase =()=>{
 
   return (
     <>
-      <div className="w-[50%] relative bg-primary rounded-2xl pb-8">
+      <div className="w-[50%] relative bg-primary rounded-2xl pb-8 card-shadow z-10 bg-opacity-80">
         {/* top step Counter Container */}
         <div className="flex justify-center items-center absolute -top-5 w-full">
           <div className="bg-bg-color rounded-full flex justify-center items-center h-10 w-10 ">
