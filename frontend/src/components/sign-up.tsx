@@ -27,28 +27,28 @@ if (formData.username && formData.password) {
   };
   return (
     <>
-      <div className="w-[50%] h-[60vh]  bg-primary rounded-2xl p-12">
+      <div className="w-[50%] h-[60vh]  bg-primary rounded-2xl p-12 card-shadow z-10 bg-opacity-80">
         <h1 className="text-4xl text-heading font-bold text-center">Sign Up</h1>
-        <p className="mt-6 text-center text-white-1">
+        <p className="mt-6 text-center ">
           Start by signing in with us so you will be directed to your Recovery
           Phase.
         </p>
         <div className="flex justify-center flex-col items-center">
             <form onSubmit={handleSignUp}>
-          <div className="mt-12 w-1/2 ">
+          <div className="mt-12 w-full">
 
-            <p className="text-white-1 pl-1 mb-1 text-sm">Username</p>
+            <p className=" pl-1 mb-1 text-sm">Username</p>
             <input
               type="text"
               name="username"
-              className="rounded-lg bg-black3 w-full  text-white p-1 pl-4"
+              className="rounded-lg text-heading w-full  p-1 pl-4 bg-green"
               onChange={handleChange}
               />
-            <p className="mt-4 pl-1 text-white-1  mb-1 text-sm">Password</p>
+            <p className="mt-4 pl-1   mb-1 text-sm">Password</p>
             <input
               name="password"
               type="password"
-              className="rounded-lg bg-black3 w-full text-white p-1 pl-4"
+              className="rounded-lg text-heading w-full p-1 pl-4 bg-green"
               onChange={handleChange}
               />
           </div>
