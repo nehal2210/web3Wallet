@@ -32,8 +32,8 @@ const CreateAccount = ({ isNewAccount, accountType }: any) => {
 
 
                 <div className=" flex-col justify-center items-center px-5  py-5 " >
-                    <label className="text-white-1 ms-2 ">Enter your private key string</label>
-                    <Input className="bg-transparant placeholder-header-gradient2  px-2  text-white text-lg mt-1" />
+                    <label className="text-black ms-2 ">Enter your private key string</label>
+                    <Input className="bg-green border-none placeholder-header-gradient2  px-2  text-white text-lg mt-1" />
                 </div>
 
                 <div className="flex items-center justify-center ">

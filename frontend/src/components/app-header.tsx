@@ -42,8 +42,8 @@ const AppHeader = () => {
 
             {
                 openNetwork ?
-                    <div className="absolute z-10 top-14 w-[30%] h-[26rem] bg-primary border-white border-2 rounded-lg p-2">
-                        <p className="text-white m-4 ">Add new network</p>
+                    <div className="absolute  top-14 w-[30%] h-[26rem] bg-primary border-white border-2 rounded-lg p-2 card-shadow z-10">
+                        <p className="text-black m-4 font-semibold ">Add new network</p>
                         <div className="px-2 w-full max-h-[300px] h-[270px] overflow-x-auto" id="style-4">
                             {
                                 [1, 2, 3, 4, 5].map(data => {
@@ -67,7 +67,7 @@ const AppHeader = () => {
 
             <div className="flex-1 flex justify-center">
                 <button onClick={() => {setOpenAccount(true)}} className="flex items-center">
-                    <div className="w-8 h-8 bg-btnColor rounded-full flex justify-center items-center cursor-pointer">
+                    <div className="w-8 h-8 bg-bgColor text-white rounded-full flex justify-center items-center cursor-pointer">
                         <BsFillPersonFill />
                     </div>
                     <p className="ms-4 cursor-pointer">Account</p>

@@ -12,6 +12,9 @@ export interface CounterState {
   openCompose: boolean;
   getEmails: boolean;
   step: number;
+  openSendToken: boolean;
+  openConfirmationSendToken: boolean;
+  openSentToken: boolean;
 }
 
 const initialState: CounterState = {
@@ -25,6 +28,9 @@ const initialState: CounterState = {
   openCompose: false,
   getEmails: false,
   step: 0,
+  openSendToken: false,
+  openConfirmationSendToken: false,
+  openSentToken: false,
 };
 
 export const addUser = createSlice({
@@ -39,6 +45,17 @@ export const addUser = createSlice({
     },
     incrementByAmount: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
+    },
+    setsendTokenModal: (state, action: PayloadAction<boolean>) => {
+      state.openSendToken = action.payload;
+    },
+    
+    setConfirmationSendTokenModal: (state, action: PayloadAction<boolean>) => {
+      state.openConfirmationSendToken = action.payload;
+    },
+    // Its a last token slip modal
+    setSentTokenModal: (state, action: PayloadAction<boolean>) => {
+      state.openSentToken = action.payload;
     },
     msgTypeChange: (state, action: PayloadAction<any>) => {
       if (action.payload === "compose-open") {
@@ -75,5 +92,8 @@ export const {
   msgOpenClose,
   msgTypeChange,
   isGetEmails,
+  setsendTokenModal,
+  setConfirmationSendTokenModal,
+  setSentTokenModal
 } = addUser.actions;
 export default addUser.reducer;

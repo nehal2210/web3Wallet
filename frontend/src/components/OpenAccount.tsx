@@ -15,10 +15,10 @@ const OpenAccount = ({ isAccountOpen, isNewAccount, isOpenAccountDetails }: any)
                 <div className="w-full flex justify-end pt-2 pr-2 text-2xl">
                     <BsX onClick={() => isAccountOpen(false)} className="text-btnColor cursor-pointer" />
                 </div>
-                <h1 className="text-white text-2xl text-center">Select An Account</h1>
+                <h1 className="text-black text-2xl text-center font-bold">Select An Account</h1>
 
                 <div className="relative px-4 mt-4 bg-transparant flex">
-                    <Input className="bg-transparant rounded-lg placeholder-header-gradient2 text-white" placeholder="Search Accounts" />
+                    <Input className="bg-green border-none rounded-lg placeholder-text-black text-black" placeholder="Search Accounts" />
                     <AiOutlineSearch className="absolute right-5 top-1 text-2xl text-btnColor" />
                 </div>
 

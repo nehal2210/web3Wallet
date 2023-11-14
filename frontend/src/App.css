@@ -84,8 +84,7 @@ body {
 
 #style-4::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: #FF7D00;
-}
+  background-color: rgb(118 55 214 / var(--tw-bg-opacity));}
 
 /* .quill > .ql-container > .ql-editor.ql-blank::before{
   font-size: 20px;

@@ -63,13 +63,13 @@ const TokensTable = ({ tableHeading, date }: any) => {
     ])
 
     return (
-        <div className="w-[48%] h-[340px] rounded-xl bg-bgColor flex flex-col items-center p-2">
+        <div className="w-[48%] h-[340px] rounded-xl  flex flex-col items-center p-2 card-shadow bg-opacity-80">
             <div className="flex justify-center">
-                <p className="text-heading text-xl">{tableHeading}</p>
+                <p className="text-heading text-2xl font-bold">{tableHeading}</p>
             </div>
             <div className="w-[94%] h-1 my-2 bg-btnColor"></div>
 
-            <p className="text-heading my-1 ms-4 w-full">{date}</p>
+            <p className="text-heading my-1 ms-4 w-full text-lg font-semibold">{date}</p>
 
             <div className="px-2 w-full max-h-[400px] h-[80%] overflow-x-auto" id="style-4">
                 {

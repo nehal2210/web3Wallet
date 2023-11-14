@@ -3,8 +3,8 @@ import { BsFillArrowDownLeftCircleFill, BsFillArrowUpRightCircleFill } from "rea
 
 const ActivityItem = ({ data }: any) => {
     return (
-        <div className="w-full bg-bgColor2 my-2 rounded-lg p-4">
-            <div className="flex justify-between">
+        <div className="w-full  my-2 rounded-lg p-4 card-shadow z-10 bg-opacity-80  bg-green">
+            <div className="flex justify-between ">
                 <div>
                     <div className="flex items-center">
                         {
@@ -15,14 +15,14 @@ const ActivityItem = ({ data }: any) => {
 
                         }
                         <div>
-                            <p className="ms-2 text-white">{data.status}<span className="text-xs text-btnColor">- {data.date}</span></p>
-                            <p className="text-xs text-white ms-2 mt-1">{data.isConfirm ? 'Confirmed' : 'Pending'}</p>
+                            <p className="ms-2 text-black ">{data.status}<span className="text-xs text-btnColor">- {data.date}</span></p>
+                            <p className="text-xs text-black font- ms-2 mt-1">{data.isConfirm ? 'Confirmed' : 'Pending'}</p>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <p className="text-white">{data.value}</p>
-                    <p className="text-white mt-1 text-xs">{data.valueInDollar}</p>
+                    <p className="text-black font-semibold">{data.value}</p>
+                    <p className="text-black mt-1 text-xs font-semibold">{data.valueInDollar}</p>
                 </div>
             </div>
             {

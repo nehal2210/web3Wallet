@@ -22,7 +22,7 @@ const AccountProfiles = () => {
 
     return (
         <div className="w-full h-24 px-3 py-2">
-            <div className="w-full px-2 text-white h-full bg-bgColor rounded-lg flex justify-between items-center">
+            <div className="w-full px-2 text-black h-full bg-green rounded-lg flex justify-between items-center">
                 <div className="flex">
                     <div className="w-[50px] h-[50px] bg-btnColor rounded-full">
                         {/* image */}
@@ -42,7 +42,7 @@ const AccountProfiles = () => {
 
                     <div className="ms-2">
                         <Dropdown menu={{ items }} placement="bottomLeft">
-                            <BsThreeDotsVertical className="hover:text-btnColor cursor-pointer" />
+                            <BsThreeDotsVertical className="text-black cursor-pointer" />
                         </Dropdown>
                     </div>
 
