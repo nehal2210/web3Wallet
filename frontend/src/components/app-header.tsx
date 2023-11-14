@@ -22,19 +22,19 @@ const AppHeader = () => {
 
 
     return (
-        <div className="relative py-2 px-4 flex justify-between items-center w-full bg-bgColor rounded-full shadow-sm shadow-black1">
+        <div className="relative py-2 px-4 flex justify-between items-center w-full bg-white rounded-full shadow-sm shadow-black1 card-shadow z-10 bg-opacity-80">
             <div className="flex-1">
 
-                <button onClick={() => { setOpenNetwork(!openNetwork) }} className="h-[30px] w-fit border border-white flex items-center rounded-md bg-btnColorHover">
-                    <div className="w-5 bg-btnColor h-full border border-white rounded-s-md flex justify-center items-center">
+                <button onClick={() => { setOpenNetwork(!openNetwork) }} className="h-[30px] w-fit border border-white flex items-center rounded-md bg-green">
+                    <div className="w-5 bg-btnColor h-full rounded-md flex justify-center items-center">
                         <img src={ethereumIcon} alt="blockchain icon" />
                     </div>
                     <p className="text-heading ms-2">Ethereum Mainnet</p>
                     {
                         openNetwork ?
-                            <BiSolidUpArrow className="ms-4 mt-1 mr-2 cursor-pointer" size={'12px'} color="white" />
+                            <BiSolidUpArrow className="ms-4 mt-1 mr-2 cursor-pointer" size={'12px'} />
                             :
-                            <BiSolidDownArrow className="ms-4 mt-1 mr-2 cursor-pointer" size={'12px'} color="white" />
+                            <BiSolidDownArrow className="ms-4 mt-1 mr-2 cursor-pointer" size={'12px'} />
                     }
                 </button>
             </div>
@@ -70,14 +70,14 @@ const AppHeader = () => {
                     <div className="w-8 h-8 bg-btnColor rounded-full flex justify-center items-center cursor-pointer">
                         <BsFillPersonFill />
                     </div>
-                    <p className="text-white-1 ms-4 cursor-pointer">Account</p>
-                    <BiSolidDownArrow className="ms-4 cursor-pointer" size={'12px'} color="white" />
+                    <p className="ms-4 cursor-pointer">Account</p>
+                    <BiSolidDownArrow className="ms-4 cursor-pointer" size={'12px'} />
                 </button>
             </div>
 
 
             <div className="flex-1 flex justify-end">
-                <BsThreeDotsVertical className="cursor-pointer" color="white" />
+                <BsThreeDotsVertical className="cursor-pointer" />
             </div>
 
             {

@@ -14,7 +14,7 @@ const WalletApp = () => {
                 <img src={logo} alt='Logo' />
             </div>
 
-            <div className="w-[80%] p-2 h-[82vh] bg-primary mt-3 rounded-2xl flex flex-col items-center">
+            <div className="w-[80%] p-2 h-[82vh] bg-primary mt-3 rounded-2xl flex flex-col items-center card-shadow z-10 bg-opacity-80">
                 
                 <AppHeader />
 

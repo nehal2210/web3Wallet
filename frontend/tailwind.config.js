@@ -12,6 +12,8 @@ module.exports = {
       "my-color": "#1fb6ff",
       primary: "#ffffff",
       bgColor: "#260312",
+      bgShade: "#C2AAE6",
+      gray: "#2322232e",
       bgColor2: "#17030bbf",
       heading: "#000000",
       btnColor: "#7637d6",
