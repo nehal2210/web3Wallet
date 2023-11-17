@@ -14,10 +14,10 @@ import AccountDetails from "./AccountDetails";
 const AppHeader = () => {
 
     const [openNetwork, setOpenNetwork] = useState(false);
-    const [openNetworkDetails, setOpenNetworkDetails] = useState(false);
+    const [openNetworkDetailstype, setOpenNetworkDetailstype] = useState("");
     const [openAccount, setOpenAccount] = useState(false);
     const [isNewAccount, setIsNewAccount] = useState();
-    const [openAccountDetails, setOpenAccountDetails] = useState(true);
+    const [openAccountDetails, setOpenAccountDetails] = useState(false);
 
 
 
@@ -48,16 +48,17 @@ const AppHeader = () => {
                             {
                                 [1, 2, 3, 4, 5].map(data => {
                                     return (
-                                        <HeaderTokenItem openNet={(value: boolean) => setOpenNetworkDetails(value)} />
+                                        <HeaderTokenItem openNet={(value: string) => setOpenNetworkDetailstype(value)} />
                                     )
                                 })
                             }
                         </div>
-                        <Link to='/add-network'>
-                            <button className="bg-btnColor hover:bg-btnColorHover rounded-full w-40 p-2 text-white-1 mt-4 ms-2">
+                        {/* <Link to='/add-network'> */}
+                        
+                            <button onClick={() => setOpenNetworkDetailstype("Add Network")} className="bg-secondary-dark hover:bg-btnColorHover rounded-full w-40 p-2 text-white-1 mt-4 ms-2">
                                 Add Network
                             </button>
-                        </Link>
+                        {/* </Link> */}
 
                     </div>
                     :
@@ -81,8 +82,8 @@ const AppHeader = () => {
             </div>
 
             {
-                openNetworkDetails ? 
-                <NetworkDetails openNet={(value: boolean) => setOpenNetworkDetails(value)} />
+                openNetworkDetailstype ? 
+                <NetworkDetails networkType={openNetworkDetailstype} openNet={(value: string) => setOpenNetworkDetailstype(value)} />
                 : 
                 null
 

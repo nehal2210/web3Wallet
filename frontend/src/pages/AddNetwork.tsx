@@ -20,7 +20,7 @@ const Addnetwork = () => {
                 <AppHeader />
 
 
-                <div className="w-full h-full rounded-lg card-shadow z-10 bg-opacity-80 mt-4 p-4">
+                <div className="w-full h-full rounded-lg  mt-4 p-4">
                     <h2 className="text-heading text-2xl">Add Network</h2>
                     <div className="w-full h-[2px] bg-btnColor mt-2"></div>
                     <div className="">

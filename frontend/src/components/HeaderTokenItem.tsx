@@ -8,7 +8,7 @@ const HeaderTokenItem = ({ openNet }: any) => {
                 <p className="ms-2 text-black font-semibold">Etherum  Mannet</p><p className="text-btnColor ms-2 text-sm">-(selected)</p>
             </div>
             <div>
-                <p onClick={() => openNet(true)} className="text-btnColor cursor-pointer p-3">Details</p>
+                <p onClick={() => openNet("Token Details")} className="text-btnColor cursor-pointer p-3">Details</p>
             </div>
         </div>
     )

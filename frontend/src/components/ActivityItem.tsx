@@ -28,7 +28,7 @@ const ActivityItem = ({ data }: any) => {
             {
                 !data.isConfirm ?
                     <div className="w-full flex justify-end mt-3">
-                        <button className="py-1 text-white px-10 bg-btnColor hover:bg-btnColorHover rounded-full">Cancel</button>
+                        <button className="py-1 text-white px-10 bg-secondary-dark hover:bg-btnColorHover rounded-full">Cancel</button>
                     </div>
                     :
                     null

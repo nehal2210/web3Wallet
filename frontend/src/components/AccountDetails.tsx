@@ -19,7 +19,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
                     <p className="text-heading text-2xl text-center cursor-pointer font-bold ">Show Private key</p>
                 </div>
                 <div className="flex flex-col justify-center items-center ">
-                    <div className="w-[85px] h-[85px] bg-btnColor rounded-full cursor-pointer mt-5">
+                    <div className="w-[85px] h-[85px] bg-secondary-dark rounded-full cursor-pointer mt-5">
                         {/* image */}
                     </div>
                     <div className="flex w-full justify-center py-3 cursor-pointer">
@@ -44,7 +44,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
                             </div>
 
                             <div className="flex items-center justify-center ">
-                                <button onClick={() => isAccountDetails(false)} className="px-12 py-2  rounded-full text-white border border-white bg-btnColor hover:bg-btnColorHover mt-5">Done</button>
+                                <button onClick={() => isAccountDetails(false)} className="px-12 py-2  rounded-full text-white border border-white bg-secondary-dark hover:bg-btnColorHover mt-5">Done</button>
                             </div>
                         </div>
 
@@ -58,7 +58,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
                                 <BiSolidCopy className="text-btnColor mx-2 cursor-pointer" />
                             </div>
                             <div className="flex items-center justify-center ">
-                                <button onClick={() => { setShowPrivateKey(true) }} className="px-6 py-3 rounded-full text-white border border-white bg-btnColor hover:bg-btnColorHover mt-4">Show private key</button>
+                                <button onClick={() => { setShowPrivateKey(true) }} className="px-6 py-3 rounded-full text-white border border-white bg-secondary-dark hover:bg-btnColorHover mt-4">Show private key</button>
                             </div>
                         </div>
 

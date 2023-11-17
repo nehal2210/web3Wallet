@@ -15,6 +15,7 @@ export interface CounterState {
   openSendToken: boolean;
   openConfirmationSendToken: boolean;
   openSentToken: boolean;
+  passwordVerify: boolean;
 }
 
 const initialState: CounterState = {
@@ -31,6 +32,7 @@ const initialState: CounterState = {
   openSendToken: false,
   openConfirmationSendToken: false,
   openSentToken: false,
+  passwordVerify: false,
 };
 
 export const addUser = createSlice({
@@ -80,6 +82,9 @@ export const addUser = createSlice({
     incrementStep: (state, action: PayloadAction<number>) => {
       state.step = action.payload;
     },
+    setPasswordVerify: (state, action: PayloadAction<boolean>) => {
+      state.passwordVerify = action.payload;
+    },
   },
 });
 
@@ -94,6 +99,7 @@ export const {
   isGetEmails,
   setsendTokenModal,
   setConfirmationSendTokenModal,
+  setPasswordVerify,
   setSentTokenModal
 } = addUser.actions;
 export default addUser.reducer;

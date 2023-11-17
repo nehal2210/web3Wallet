@@ -84,7 +84,7 @@ const SendToken = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-full h-[4px] bg-btnColor mt-20"></div>
+                    <div className="w-full h-[4px] bg-secondary-dark mt-20"></div>
                     <button onClick={() => {dispatch(setConfirmationSendTokenModal(true)); dispatch(setsendTokenModal(false))}} className="px-10 py-2 rounded-full text-white bg-btnColor hover:bg-btnColorHover mt-7 text-lg">Send Tokens</button>
                 </div>
             </div>

@@ -94,8 +94,8 @@ const TokenConfirmation = () => {
                 </div>
                 <div className="w-full h-[4px] bg-btnColor mt-20"></div>
                 <div className="flex justify-center mt-3 ">
-                    <button onClick={() => dispatch(setConfirmationSendTokenModal(false))} className="px-16  py-3 text-lg font-semibold rounded-full text-white bg-btnColor hover:bg-btnColorHover mt-4 p">Reject</button>
-                    <button onClick={() => {dispatch(setConfirmationSendTokenModal(false)); dispatch(setSentTokenModal(true))}} className="px-16 py-3 text-lg font-semibold mx-4  rounded-full text-black bg-btnColor hover:bg-btnColorHover text-white mt-4">Confirm</button>
+                    <button onClick={() => dispatch(setConfirmationSendTokenModal(false))} className="px-16  py-3 text-lg font-semibold rounded-full text-white bg-secondary-dark hover:bg-btnColorHover mt-4 p">Reject</button>
+                    <button onClick={() => {dispatch(setConfirmationSendTokenModal(false)); dispatch(setSentTokenModal(true))}} className="px-16 py-3 text-lg font-semibold mx-4  rounded-full text-black bg-primary card-shadow hover:bg-btnColorHover text-black mt-4">Confirm</button>
                 </div>
             </div>
         </div>
