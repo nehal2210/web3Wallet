@@ -91,7 +91,7 @@ const AppHeader = () => {
 
             {
                 openNetworkDetailstype ? 
-                <NetworkDetails exploreNetwork={exploreNetwork} openNet={(value: boolean) => setOpenNetworkDetailstype("")} />
+                <NetworkDetails networkType={openNetworkDetailstype} exploreNetwork={exploreNetwork} openNet={(value: string) => setOpenNetworkDetailstype(value)} />
                 : 
                 null
 
