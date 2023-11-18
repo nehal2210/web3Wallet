@@ -56,7 +56,7 @@ const AppHeader = () => {
                             {
                                 wallet["networks"].map((network:any,i:any) => {
                                     return (
-                                        <HeaderTokenItem   setExploreNetwork={setExploreNetwork}  network={network} openNet={(value: boolean) => setOpenNetworkDetails(value)} />
+                                        <HeaderTokenItem   setExploreNetwork={setExploreNetwork}  network={network} openNet={(value: boolean) => setOpenNetworkDetailstype("")} />
                                     )
                                 })
                             }
@@ -90,8 +90,8 @@ const AppHeader = () => {
             </div>
 
             {
-                openNetworkDetails ? 
-                <NetworkDetails exploreNetwork={exploreNetwork} openNet={(value: boolean) => setOpenNetworkDetails(value)} />
+                openNetworkDetailstype ? 
+                <NetworkDetails exploreNetwork={exploreNetwork} openNet={(value: boolean) => setOpenNetworkDetailstype("")} />
                 : 
                 null
 

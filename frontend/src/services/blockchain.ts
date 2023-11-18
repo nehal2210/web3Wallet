@@ -114,64 +114,64 @@ console.log("Wallet has been saved")
 
 
 
-async function createAccount(walletHash:any,saltySp:any ,password:any, accountName:any, accountNumber:any) {
+// async function createAccount(walletHash:any,saltySp:any ,password:any, accountName:any, accountNumber:any) {
 
-  // fs.readFile(`${__dirname}/static/sp.txt`, async function (err, data) {
-  //     if (err) {
-  //         console.log(err)
-  //         return
-  //     }
-  //     const saltySp = data.toString()
-  //     console.log(saltySp)
-
-
+//   // fs.readFile(`${__dirname}/static/sp.txt`, async function (err, data) {
+//   //     if (err) {
+//   //         console.log(err)
+//   //         return
+//   //     }
+//   //     const saltySp = data.toString()
+//   //     console.log(saltySp)
 
 
-      const decryptResponse = await axios.post(BASE_API_URL + "account/decrypt", {
-          sp: saltySp
-      })
-      // console.log("aaaaaaaaaaaaa")
-      console.log("",decryptResponse.data.data.esp)
-      const esp = decryptResponse.data.data.esp
 
 
-      const sp = AES.decrypt(esp, password).toString(CryptoJS.enc.Utf8)
-
-      console.log(sp)
-      const walletMnemonic = ethers.utils.HDNode.fromMnemonic(sp);
-
-      // we will pass account number on this function letter but right now we are calling api for it
-
-
-      const path = `m/44'/60'/${accountNumber}'/0/0`; // Derivation path for Ethereum accounts
-      const wallet = walletMnemonic.derivePath(path);
-      const address = wallet.address;
-      const pk = wallet.privateKey;
+//       const decryptResponse = await axios.post(BASE_API_URL + "account/decrypt", {
+//           sp: saltySp
+//       })
+//       // console.log("aaaaaaaaaaaaa")
+//       console.log("",decryptResponse.data.data.esp)
+//       const esp = decryptResponse.data.data.esp
 
 
-      const url = baseUrl + `account/${walletId}`
+//       const sp = AES.decrypt(esp, password).toString(CryptoJS.enc.Utf8)
 
-      const response = await axios.post(url, {
-          address: address,
-          name: accountName
-      })
+//       console.log(sp)
+//       const walletMnemonic = ethers.utils.HDNode.fromMnemonic(sp);
 
-      console.log(response.data)
-      console.log(password)
+//       // we will pass account number on this function letter but right now we are calling api for it
 
-      // const pbk = wallet.publicKey;
-      console.log(address)
-      console.log(pk)
 
-      // fs.writeFile(`${__dirname}/static/pks.txt`, response.data?.data?.saltyPk + "\n", function (err) {
-      //     if (err) {
-      //         return console.log(err);
-      //     }
-      //     console.log("key saved!");
-      // });
+//       const path = `m/44'/60'/${accountNumber}'/0/0`; // Derivation path for Ethereum accounts
+//       const wallet = walletMnemonic.derivePath(path);
+//       const address = wallet.address;
+//       const pk = wallet.privateKey;
 
-  })
-}
+
+//       const url = BASE_API_URL + `account/${walletId}`
+
+//       const response = await axios.post(url, {
+//           address: address,
+//           name: accountName
+//       })
+
+//       console.log(response.data)
+//       console.log(password)
+
+//       // const pbk = wallet.publicKey;
+//       console.log(address)
+//       console.log(pk)
+
+//       // fs.writeFile(`${__dirname}/static/pks.txt`, response.data?.data?.saltyPk + "\n", function (err) {
+//       //     if (err) {
+//       //         return console.log(err);
+//       //     }
+//       //     console.log("key saved!");
+//       // });
+
+//   })
+// }
 
 
 
