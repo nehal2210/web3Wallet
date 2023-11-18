@@ -4,9 +4,29 @@ import { BiSolidCopy, BiSolidDownArrow, BiSolidSend } from 'react-icons/bi';
 import ethereumIcon from '../assets/images/ethereum-icon.png';
 import AppHeader from "../components/app-header";
 import TokensTable from "../components/tokens-table";
+import SendToken from "../components/SendToken";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import TokenConfirmation from "../components/TokenConfirmation";
+import SentToken from "../components/SentToken";
+import { useEffect } from "react";
+import { getWallet } from "../redux/wallet";
+
 
 const WalletApp = () => {
 
+  
+    const dispatch = useDispatch()
+    const openSendToken = useSelector((state: RootState) => state.user.openSendToken)
+    const openConfirmationSendToken = useSelector((state: RootState) => state.user.openConfirmationSendToken)
+    const openSentToken = useSelector((state: RootState) => state.user.openSentToken)
+    const currentAccount = useSelector((state:RootState)=>state.wallet.currentAccount)
+
+    useEffect(()=>{
+
+        dispatch(getWallet())
+
+    },[])
 
     return (
         <div className="flex flex-col justify-center items-center">
@@ -18,8 +38,8 @@ const WalletApp = () => {
                 
                 <AppHeader />
 
-                <div className="border border-white p-2 mt-5 flex justify-center rounded-md items-center">
-                    <p className="text-white">dfseudfiey78fy7f78sdyc78tzxc</p>
+                <div className=" p-2 mt-5 flex justify-center rounded-md items-center  bg-green">
+                    <p className="text-black">{currentAccount.address}</p>
                     <BiSolidCopy className="text-btnColor mx-2 cursor-pointer" />
                 </div>
 
@@ -41,7 +61,7 @@ const WalletApp = () => {
             </div>
         </div>
     )
-}
 
+            }
 
 export default WalletApp;

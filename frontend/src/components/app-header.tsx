@@ -8,6 +8,8 @@ import NetworkDetails from "./NetworkDetails";
 import OpenAccount from "./OpenAccount";
 import CreateAccount from "./CreateAccount";
 import AccountDetails from "./AccountDetails";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 
 
@@ -17,8 +19,14 @@ const AppHeader = () => {
     const [openNetworkDetails, setOpenNetworkDetails] = useState(false);
     const [openAccount, setOpenAccount] = useState(false);
     const [isNewAccount, setIsNewAccount] = useState();
-    const [openAccountDetails, setOpenAccountDetails] = useState(true);
+    const [openAccountDetails, setOpenAccountDetails] = useState(false);
+    const [exploreNetwork, setExploreNetwork] = useState(true);
 
+    const currentAccount = useSelector((state:RootState)=>state.wallet.currentAccount)
+    const currentNetwork = useSelector((state:RootState)=>state.wallet.currentNetwork)
+
+    const wallet:any = useSelector((state:RootState)=>state.wallet.data)
+    
 
 
     return (
@@ -29,7 +37,7 @@ const AppHeader = () => {
                     <div className="w-5 bg-btnColor h-full border border-white rounded-s-md flex justify-center items-center">
                         <img src={ethereumIcon} alt="blockchain icon" />
                     </div>
-                    <p className="text-heading ms-2">Ethereum Mainnet</p>
+                    <p className="text-heading ms-2">{currentNetwork.name}</p>
                     {
                         openNetwork ?
                             <BiSolidUpArrow className="ms-4 mt-1 mr-2 cursor-pointer" size={'12px'} color="white" />
@@ -46,9 +54,9 @@ const AppHeader = () => {
                         <p className="text-white m-4 ">Add new network</p>
                         <div className="px-2 w-full max-h-[300px] h-[270px] overflow-x-auto" id="style-4">
                             {
-                                [1, 2, 3, 4, 5].map(data => {
+                                wallet["networks"].map((network:any,i:any) => {
                                     return (
-                                        <HeaderTokenItem openNet={(value: boolean) => setOpenNetworkDetails(value)} />
+                                        <HeaderTokenItem   setExploreNetwork={setExploreNetwork}  network={network} openNet={(value: boolean) => setOpenNetworkDetails(value)} />
                                     )
                                 })
                             }
@@ -70,8 +78,8 @@ const AppHeader = () => {
                     <div className="w-8 h-8 bg-btnColor rounded-full flex justify-center items-center cursor-pointer">
                         <BsFillPersonFill />
                     </div>
-                    <p className="text-white-1 ms-4 cursor-pointer">Account</p>
-                    <BiSolidDownArrow className="ms-4 cursor-pointer" size={'12px'} color="white" />
+                    <p className="ms-4 cursor-pointer">{currentAccount.name}</p>
+                    <BiSolidDownArrow className="ms-4 cursor-pointer" size={'12px'} />
                 </button>
             </div>
 
@@ -82,7 +90,7 @@ const AppHeader = () => {
 
             {
                 openNetworkDetails ? 
-                <NetworkDetails openNet={(value: boolean) => setOpenNetworkDetails(value)} />
+                <NetworkDetails exploreNetwork={exploreNetwork} openNet={(value: boolean) => setOpenNetworkDetails(value)} />
                 : 
                 null
 

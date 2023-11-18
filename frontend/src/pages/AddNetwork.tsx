@@ -19,8 +19,8 @@ const Addnetwork = () => {
             <div className="w-[80%] p-4 bg-primary mt-3 rounded-2xl flex flex-col items-center">
                 <AppHeader />
 
-                {/* 
-                <div className="w-full h-full rounded-lg bg-bgColor mt-4 p-4">
+
+                <div className="w-full h-full rounded-lg mt-4 p-4">
                     <h2 className="text-heading text-2xl">Add Network</h2>
                     <div className="w-full h-[2px] bg-btnColor mt-2"></div>
 
@@ -67,7 +67,7 @@ const Addnetwork = () => {
                                 <button className="px-10 py-1 rounded-full text-white bg-btnColor hover:bg-btnColorHover mt-4">Save</button>
                     </div>
 
-                </div>  */}
+                </div> 
 
 
 

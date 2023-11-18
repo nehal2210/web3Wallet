@@ -26,7 +26,7 @@ exports.addAccount = async (req, res) => {
     console.log("asaaaasdasfdfsdgsdga")
     console.log(req.params.walletId)
     // chek wallet exist
-    const wallet = await Wallet.findById(req.params.walletId)
+    const wallet = await Wallet.findOne( {seedHash: {$eq:req.body.walletHash} })
     if (!wallet) {
         return res.status(404).json({ status: "fail", message: "wallet not found" })
 
