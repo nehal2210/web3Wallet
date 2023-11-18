@@ -10,29 +10,34 @@ function PhraseBox({wallet,checkPhrase,confirmWord,setConfirmWord}:any) {
  }
  
   return ( 
-      <div className="p-4 flex flex-wrap align-middle justify-center gap-2">
+      <div className="p-4 pt-2 flex flex-wrap align-middle justify-center gap-2">
         
         
         {  
          ["abc","abc","abc","abc","abc","abc","abc","abc","abc","abc","abc","abc"].map((word:string, i:any)=>{
-          return(
-              <div key={i} className="w-[150px]">
-              <div  className="text-heading bg-btnColorHover w-[150px] border-white border-2 py-2 pr-2 rounded-lg">
-              <span className="p- 2 border-white border-2 bg-btnColor rounded-lg">
-               {i}
-              </span>
-              {checkPhrase && (i == 0 || i == 4 || i == 8)?
-            <input type="text" onChange={(e)=>handleInputPhrase(e,i)}></input>
-            :
-            <span className="ml-2">{wallet?.phrase[i]?wallet?.phrase[i]:word}</span>
-            }
-            </div>     
-            </div> 
-            )
-          }) 
-      
-        }
-    </div> );
+           return (
+             <div key={i} className="w-[150px]">
+               <div className="text-heading bg-white w-[150px] border-white border-2 pr-2 rounded-lg">
+
+                 <div className="flex items-center">
+                   <div className="flex justify-center items-center py-2 w-[25%] border-white border-2 bg-btnColor rounded-lg text-white">
+                     {i}
+                   </div>
+                   <div className="w-[75%] ms-1">
+                     {checkPhrase && (i === 0 || i === 4 || i === 8) ?
+                       <input className="w-full h-[30px] border border-btnColor p-2 rounded-md items-center bg-green" type="text" onChange={(e) => handleInputPhrase(e, i)}></input>
+                       :
+                       <span className="ml-2 text-center w-full">{wallet?.phrase[i] ? wallet?.phrase[i] : word}</span>
+                     }
+                   </div>
+                 </div>
+               </div>
+             </div>
+           )
+         })
+
+      }
+    </div>);
 }
 
 export default PhraseBox;

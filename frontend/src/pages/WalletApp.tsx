@@ -34,7 +34,7 @@ const WalletApp = () => {
                 <img src={logo} alt='Logo' />
             </div>
 
-            <div className="w-[80%] p-2 h-[82vh] bg-primary mt-3 rounded-2xl flex flex-col items-center">
+            <div className="w-[80%] p-2 h-[82vh] bg-primary mt-3 rounded-2xl flex flex-col items-center card-shadow z-10 bg-opacity-80">
                 
                 <AppHeader />
 
@@ -44,9 +44,9 @@ const WalletApp = () => {
                 </div>
 
                 <div className="mt-4 flex justify-center items-center'">
-                    <p className="text-heading text-xl">0 ETH</p>
-                    <div className="bg-btnColor ms-2 p-2 rounded-full flex justify-center items-center">
-                        <BiSolidSend className="text-heading -rotate-45" />
+                    <p className="text-heading text-xl font-bold">0 ETH</p>
+                    <div className="bg-bgColor ms-2 p-2 rounded-full flex justify-center items-center">
+                        <BiSolidSend className="text-white -rotate-45" />
                     </div>
                 </div>
 
@@ -57,6 +57,26 @@ const WalletApp = () => {
                 <TokensTable tableHeading="Activity" date="October, 2023" />
                 </div>
 
+                {
+                    openSendToken ?
+                    <SendToken />
+                    :
+                    null
+                }
+
+                {
+                    openConfirmationSendToken ?
+                    <TokenConfirmation />
+                    :
+                    null
+                }
+                
+                {
+                    openSentToken ?
+                    <SentToken />
+                    :
+                    null
+                }
 
             </div>
         </div>

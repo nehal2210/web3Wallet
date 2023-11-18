@@ -1,7 +1,7 @@
 import React from "react";
 import type { RootState } from '../redux/store';
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment, incrementByAmount } from "../redux/counter";
+import { decrement, increment, incrementByAmount, setPasswordVerify } from "../redux/counter";
 import { AiFillAlert } from "react-icons/ai";
 import { BallTriangle } from 'react-loader-spinner'
 import { ToastContainer, toast } from 'react-toastify';
@@ -56,6 +56,8 @@ function Demo() {
 
                 <DatePicker />
             </div>
+
+            <button onClick={() => dispatch(setPasswordVerify(true))} className="bg-green">Password Verify</button>
 
 
         </>

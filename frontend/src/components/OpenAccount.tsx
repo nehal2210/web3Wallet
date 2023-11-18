@@ -20,10 +20,10 @@ const OpenAccount = ({ isAccountOpen, isNewAccount, isOpenAccountDetails }: any)
                 <div className="w-full flex justify-end pt-2 pr-2 text-2xl">
                     <BsX onClick={() => isAccountOpen(false)} className="text-btnColor cursor-pointer" />
                 </div>
-                <h1 className="text-white text-2xl text-center">Select An Account</h1>
+                <h1 className="text-black text-2xl text-center font-bold">Select An Account</h1>
 
                 <div className="relative px-4 mt-4 bg-transparant flex">
-                    <Input className="bg-transparant rounded-lg placeholder-header-gradient2 text-white" placeholder="Search Accounts" />
+                    <Input className="bg-green border-none rounded-lg placeholder-text-black text-black" placeholder="Search Accounts" />
                     <AiOutlineSearch className="absolute right-5 top-1 text-2xl text-btnColor" />
                 </div>
 
@@ -42,7 +42,7 @@ wallet["accounts"].map((account:any,i:any)=>{
                 </div>
 
                 <div className="flex justify-center flex-col items-center mt-2">
-                <button className="bg-btnColor px-8 py-2 hover:bg-btnColorHover border border-white text-white rounded-full" onClick={() => { isNewAccount('add-account') }}>Add Account</button>
+                <button className="bg-secondary-dark px-8 py-2 hover:bg-btnColorHover border border-white text-white rounded-full" onClick={() => { isNewAccount('add-account') }}>Add Account</button>
                 <button onClick={() => { isNewAccount('import-account') }} className="flex items-center cursor-pointer mt-2">
                     <div className="w-4 h-4 border border-btnColor flex justify-center items-center">
                         <BiPlus className="text-btnColor" />

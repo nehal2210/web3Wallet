@@ -1,6 +1,6 @@
 import AppHeader from "../components/app-header";
 import logo from "../assets/images/logo.png";
-import {  BsInfoLg, BsX } from "react-icons/bs";
+import { BsFillForwardFill, BsInfoLg, BsX } from "react-icons/bs";
 import { Input } from 'antd';
 import EthereumIcon from '../assets/images/Group 55.png';
 import { AiFillEdit } from "react-icons/ai";
@@ -16,17 +16,14 @@ const Addnetwork = () => {
                 <img src={logo} alt='Logo' />
             </div>
 
-            <div className="w-[80%] p-4 bg-primary mt-3 rounded-2xl flex flex-col items-center">
+            <div className="w-[80%] p-4 bg-primary mt-3 rounded-2xl flex flex-col items-center card-shadow z-10 bg-opacity-80">
                 <AppHeader />
 
 
                 <div className="w-full h-full rounded-lg mt-4 p-4">
                     <h2 className="text-heading text-2xl">Add Network</h2>
                     <div className="w-full h-[2px] bg-btnColor mt-2"></div>
-
-
                     <div className="">
-
                         <div className="flex justify-between p-4 pt-5 w-full">
                         <div>
                                 <div className="w-[70%]">
@@ -251,129 +248,38 @@ const Addnetwork = () => {
                     <div className="flex justify-between w-full px-4 pt-6">
                         <div className="flex flex-col justify-between">
                             <div>
-                                <p className="text-white text-2xl">Total</p>
-                            </div>
-                            <p className="text-white text-sm">Amount gas fee</p>
-                        </div>
-                        <div>
-                            <p className="text-white text-xs ps-16">$ 1220 USD</p>
-                            <p className="text-white text-2xl ps-12 py-2">0.2 ETH</p>
-                            <div className="flex ">
-                                <p className="text-btnColor  ">Max Amount:</p>
-                                <p className="text-white text-xs pt-1 ps-2">0.4 ETH</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-full h-[4px] bg-btnColor mt-20"></div>
-                    <div className="flex justify-center mt-3 ">
-                        <button className="px-16  py-3 text-lg font-semibold rounded-full text-white bg-btnColor hover:bg-btnColorHover mt-4 p">Reject</button>
-                        <button className="px-16 py-3 text-lg font-semibold mx-4  rounded-full text-white bg-btnColor hover:bg-btnColorHover mt-4">Confirm</button>
-                    </div>
-                </div> */}
-
-
-
-
-
-
-                {/* <div className="  rounded-3xl bg-bgColor mt-4 p-4 w-[50%] px-8">
-                    <div className="w-full flex justify-end pt-2 pr-2 text-2xl ">
-                        <AiFillEdit className="text-btnColor cursor-pointer" />
-                    </div>
-                    <div className="  w-full pb-4 ">
-                        <p className="text-heading text-3xl text-start cursor-pointer font-semibold">Send</p>
-                    </div>
-                    <div className="w-full h-[4px] bg-btnColor mt-4"></div>
-                    <div className="flex justify-between mt-8">
-                        <div>
-                            <div className="flex flex-col justify-between text-white text-2xl">
-                                <p>Status</p>
-                                <p className="pt-4 ">Confirmed</p>
-                            </div>
-                        </div>
-                        <div>
-                            <div className="flex flex-col justify-between">
-                                <p className="text-white"> View on block explorer</p>
-                                <p className="pt-4 text-btnColor ps-4">Copy Transaction ID</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex justify-between text-white text-3xl w-full pt-5">
-                        <div><p>From</p></div>
-                        <div className="pr-60"><p>To</p></div>
-                    </div>
-                    <div className="flex  justify-between  items-center mt-3">
-                        <div className="flex bg-bgColor2 w-[260px] py-4 rounded-xl ">
-                            <div className="flex justify-center  items-center w-full ">
-                                <p className="h-10 w-10 rounded-full bg-btnColor "></p>
-                                <p className="ps-5 text-white">Account 1</p>
-                            </div>
-                        </div>
-                        <div className="h-12 w-12 rounded-full bg-btnColor">
-                            <p className=" text-white  py-2 ps-2 text-3xl "> <BiSolidRightArrowAlt /></p>
-                        </div>
-                        <div>
-                            <div className="flex bg-bgColor2 w-[260px] py-4 rounded-xl ">
-                                <div className="flex justify-center  items-center w-full ">
-                                    <p className="h-10 w-10 rounded-full bg-btnColor "></p>
-                                    <p className="ps-5 text-white">Account 2</p>
+                                <div className="w-[70%]">
+                                    <label className="text-black ms-2 font-semibold">Network Name</label>
+                                    <Input className="bg-green text-black border-none px-2 text-lg mt-1" />
+                                </div>
+                                <div className="w-[70%] mt-4">
+                                    <label className="text-black ms-2 font-semibold">New RPC URL</label>
+                                    <Input className="bg-green text-black border-none px-2 text-lg mt-1" />
+                                </div>
+                                <div className="w-[70%] mt-4">
+                                    <label className="text-black ms-2 font-semibold">Chain ID</label>
+                                    <Input className="bg-green text-black border-none px-2 text-lg mt-1" />
+                                </div>
+                                <div className="w-[70%] mt-4">
+                                    <label className="text-black ms-2 font-semibold">Currency symbol</label>
+                                    <Input className="bg-green text-black border-none px-2 text-lg mt-1" />
+                                </div>
+                                <div className="w-[70%] mt-4">
+                                    <label className="text-black ms-2 font-semibold">Block explorer URL <span className="text-btnColor text-sm">(Optional)</span></label>
+                                    <Input className="bg-green text-black border-none px-2 text-lg mt-1" />
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div>
-                        <p className="text-white text-3xl pt-3">Transaction</p>
-                    </div>
-                    <div className="flex justify-between">
-                        <div className="flex flex-col text-white text-2xl  pt-3">
-                            <p className="py-2">Nonce</p>
-                            <p className="py-2">Amount</p>
-                            <div className="flex">
-                                <p className="py-2">Gas limits</p><p className="text-btnColor text-sm py-4 px-2">(Units)</p>
-                            </div>
-                            <div className="flex">
-                                <p className="py-2">Gas Used</p><p className="text-btnColor text-sm py-4 px-2">(Units)</p>
-                            </div>
-                            <div className="flex">
-                                <p className="py-2">Bas Fee</p><p className="text-btnColor text-sm py-4 px-2">(GWEI)</p>
-                            </div>
-                            <div className="flex">
-                                <p className="py-2">Priority Fee</p><p className="text-btnColor text-sm py-4 px-2">(GWEI)</p>
+                            <div className="bg-secondary-dark border-none  rounded-xl w-[45%] h-[200px] flex justify-center items-center flex-col">
+                                <div className="w-[60px] h-[60px] rounded-full bg-bgColor flex justify-center items-center">
+                                    <BsInfoLg className=" text-5xl" />
+                                </div>
+                                <p className="w-[95%] mt-4 text-black leading-5">A malicious network provider can lie about the state of the blockchain and record your network activity. Only add custom networks you trust.</p>
                             </div>
                         </div>
-                        <div className="flex flex-col text-white text-xl pt-3 ">
-                            <p className="py-2 ps-20">260</p>
-                            <p className="py-2 ps-10 text-btnColor text-2xl">0.2 ETH</p>
-                            <p className="py-2 ps-20">2100</p>
-                            <p className="py-2 ps-20">2100</p>
-                            <p className="py-2 ps-5">0.00000015</p>
-                            <p className="py-2 ps-24">1.5</p>
-                        </div>
+                        <div className="w-full h-[2px] bg-btnColor mt-2"></div>
+                        <button className="px-10 py-1 rounded-full text-white bg-btnColor hover:bg-btnColorHover mt-4">Save</button>
                     </div>
-                    <div className="flex justify-between">
-                        <div>
-                            <p className="text-white text-2xl  pt-3">Total Gas Fee</p>
-                        </div>
-                        <div className="flex flex-col text-white   pt-3">
-                            <p className="ps-7 pb-2">0.2 ETH</p>
-                            <p>$ 1220 USD</p>
-                        </div>
-                    </div>
-                    <div className="flex justify-between pt-3">
-                        <div>
-                            <p className="text-white text-2xl  pt-3">Max Fee Per Gas</p>
-                        </div>
-                        <div className="flex flex-col text-white  pt-3">
-                            <p className="ps-7 pb-2">0.2 ETH</p>
-                            <p>$ 1220 USD</p>
-                        </div>
-                    </div>
-                </div> */}
-
-
-
-
-
+                </div>
             </div>
         </div>
 
