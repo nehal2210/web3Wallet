@@ -102,9 +102,9 @@ exports.getWallets = async (req, res) => {
 exports.getWallet = async (req, res) => {
 
     console.log("aaaaaaaaaa")
-    console.log(req.params.walletId)
-    const data = await Wallet.findById(req.params.walletId).populate("accounts").populate("networks")
-    return res.status(200).json({ status: "success", data: data })
+    console.log(req.body.walletHash)
+    const data = await Wallet.findOne( {seedHash: {$eq:req.body.walletHash} }).populate("accounts").populate("networks")
+    return res.status(200).json({ status: "success", wallet: data })
 }
 
 

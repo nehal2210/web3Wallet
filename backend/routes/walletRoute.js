@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.route("/").post(walletController.createWallet).get(walletController.getWallets)
 router.route("/import").post(walletController.importWallet)
-router.route("/:walletId").get(walletController.getWallet)
+router.route("/get").post(walletController.getWallet)
 
 
 module.exports = router

@@ -3,7 +3,7 @@ import { BsGrid, BsThreeDotsVertical } from "react-icons/bs";
 
 
 
-const AccountProfiles = () => {
+const AccountProfiles = ({address,name}:any) => {
 
     const items: MenuProps['items'] = [
         {
@@ -29,8 +29,8 @@ const AccountProfiles = () => {
                     </div>
 
                     <div className="ms-2">
-                        <p>Account</p>
-                        <p>bj3hr3jrbjhweriweof..... </p>
+                        <p>{name}</p>
+                        <p>{address}</p>
                     </div>
                 </div>
 

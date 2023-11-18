@@ -4,8 +4,13 @@ import { Input } from "antd";
 import { AiOutlineSearch } from "react-icons/ai";
 import AccountProfiles from "./AccountProfiles";
 import { BiPlus } from "react-icons/bi";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+
 
 const OpenAccount = ({ isAccountOpen, isNewAccount, isOpenAccountDetails }: any) => {
+
+    const wallet: any = useSelector((state:RootState)=>state.wallet.data)
 
     return (
         <div className="fixed z-10 top-0 right-0 bottom-0 left-0 w-full h-[100vh] bg-bgColor2 bg-opacity-50 flex flex-col pt-5 items-center">
@@ -23,10 +28,17 @@ const OpenAccount = ({ isAccountOpen, isNewAccount, isOpenAccountDetails }: any)
                 </div>
 
                 <div className="max-h-[300px] overflow-y-auto mr-2 mt-2" id="style-4">
-                    <AccountProfiles />
-                    <AccountProfiles />
-                    <AccountProfiles />
-                    <AccountProfiles />
+                   {
+wallet["accounts"].map((account:any,i:any)=>{
+
+    return (
+
+        <AccountProfiles name={account.name} address={account.address}/>
+    )
+})
+}
+                   
+         
                 </div>
 
                 <div className="flex justify-center flex-col items-center mt-2">
