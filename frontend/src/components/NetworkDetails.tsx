@@ -19,7 +19,7 @@ const NetworkDetails = ({ openNet,exploreNetwork }: any) => {
                 <div className="w-full flex justify-end pt-2 pr-2 text-2xl">
                     <BsX onClick={() => openNet("")} className="text-btnColor cursor-pointer" />
                 </div>
-                <h1 className="text-black text-2xl text-center font-bold">{networkType}</h1>
+                <h1 className="text-black text-2xl text-center font-bold">{"ANC"}</h1>
 
                 <div className="flex justify-center flex-col mt-4 items-center">
                     {/* <div className="flex justify-center items-center">
@@ -52,7 +52,7 @@ const NetworkDetails = ({ openNet,exploreNetwork }: any) => {
                             <label className="text-black ms-2 font-semibold">Block explorer URL <span className="text-btnColor text-sm">(Optional)</span></label>
                             <Input className="bg-green border-none text-black px-2 text-lg mt-1" disabled={!isEditable} value={exploreNetwork.scanURL} />
                         </div>
-                        {
+                        {/* {
                             networkType == 'Add Network'
                                 ?
                                 <div className="flex justify-evenly items-center mt-4">
@@ -62,7 +62,7 @@ const NetworkDetails = ({ openNet,exploreNetwork }: any) => {
                                 </div>
                                 :
                                 null
-                        }
+                        } */}
 
                     </div>
                 </div>

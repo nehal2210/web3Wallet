@@ -178,12 +178,7 @@ const Addnetwork = () => {
 
 
 
-
-
-
-
-
-                {/* <div className="  rounded-3xl bg-bgColor mt-4 p-4 w-[50%]">
+            <div className="  rounded-3xl bg-bgColor mt-4 p-4 w-[50%]">
                     <div className="w-full flex justify-end pt-2 pr-2 text-2xl ">
                         <AiFillEdit className="text-btnColor cursor-pointer" />
                     </div>
