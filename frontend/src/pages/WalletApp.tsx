@@ -10,7 +10,7 @@ import { RootState } from "../redux/store";
 import TokenConfirmation from "../components/TokenConfirmation";
 import SentToken from "../components/SentToken";
 import { useEffect } from "react";
-import { getWallet } from "../redux/wallet";
+import { getWallet, walletGetBalance } from "../redux/wallet";
 
 
 const WalletApp = () => {
@@ -21,12 +21,26 @@ const WalletApp = () => {
     const openConfirmationSendToken = useSelector((state: RootState) => state.user.openConfirmationSendToken)
     const openSentToken = useSelector((state: RootState) => state.user.openSentToken)
     const currentAccount = useSelector((state:RootState)=>state.wallet.currentAccount)
+    const currentNetwork = useSelector((state:RootState)=>state.wallet.currentNetwork)
+    const balance = useSelector((state:RootState)=>state.wallet.balance)
+
+
 
     useEffect(()=>{
 
-        dispatch(getWallet())
+        if (!currentAccount.address) {
+            
+            dispatch(getWallet())
+        }
+        else{
 
-    },[])
+            console.log(currentAccount.address)
+            console.log(currentNetwork.providerURL)
+            dispatch(walletGetBalance({address:currentAccount.address,rpcUrl:currentNetwork.providerURL}))
+        }
+
+
+    },[currentAccount.address])
 
     return (
         <div className="flex flex-col justify-center items-center">
@@ -44,7 +58,7 @@ const WalletApp = () => {
                 </div>
 
                 <div className="mt-4 flex justify-center items-center'">
-                    <p className="text-heading text-xl font-bold">0 ETH</p>
+                    <p className="text-heading text-xl font-bold">{`${balance} ${currentNetwork.coinName}`}</p>
                     <div className="bg-bgColor ms-2 p-2 rounded-full flex justify-center items-center">
                         <BiSolidSend className="text-white -rotate-45" />
                     </div>

@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import Dexie from 'dexie'
 import { API, BASE_API_URL, DATABASE, DB_TABLE } from "../constants";
 import axios from "axios";
-import { addNetwork, createAccount, decryptSeedPhrase } from "../services/blockchain";
+import { addNetwork, createAccount, decryptSeedPhrase, getBalanceOfNative } from "../services/blockchain";
 
 
 export interface WalletState {
@@ -14,6 +14,7 @@ export interface WalletState {
   loading : boolean
   currentAccount: any
   currentNetwork: any
+  balance: string
 
 
 }
@@ -25,8 +26,8 @@ esp:"",
 loading : false,
 data: {},
 currentAccount:{},
-currentNetwork:{}
-
+currentNetwork:{},
+balance:"0.0"
 
 };
 
@@ -76,6 +77,15 @@ export const walletAddAccount: any = createAsyncThunk("walletAddAccount", async(
 
 })
 
+
+export const walletGetBalance: any = createAsyncThunk("walletGetBalance", async(data:any)=>{
+
+  const  {address,rpcUrl} = data
+   const res = await getBalanceOfNative(address,rpcUrl)
+   console.log(res)
+   return res
+ 
+ })
 
 
 
@@ -176,10 +186,26 @@ export const wallet = createSlice({
                     state.loading = false;
                     // state.error = action.error.message;
                 })
+
+                // get balnce
             
-        
-
-
+                  .addCase(walletGetBalance.pending, (state, action) => {
+                  console.log('pending', action);
+                  state.loading = true;
+                  // state.error = null;
+              })
+              .addCase(walletGetBalance.fulfilled, (state, action) => {
+                  console.log('fulfilled', action);
+                  state.balance = action.payload
+                  state.loading = false;
+              })
+              .addCase(walletGetBalance.rejected, (state, action) => {
+                  console.log('rejected', action);
+                  state.loading = false;
+                  // state.error = action.error.message;
+              })
+          
+      
         
         
         

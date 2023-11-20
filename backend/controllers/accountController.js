@@ -1,3 +1,4 @@
+
 const Account = require("../models/accountModel")
 const Wallet = require("../models/walletModel")
 const CryptoJS = require("crypto-js")
@@ -56,4 +57,5 @@ const saltyEpk = CryptoJS.AES.encrypt(req.body.epk, process.env.SALT).toString()
 
 
 }
+
 

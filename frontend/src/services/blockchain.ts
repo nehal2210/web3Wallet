@@ -208,7 +208,16 @@ async function createAccount(esp:any, password:any, accountName:any, accountNumb
 }
 
 
+const getBalanceOfNative = async (address:string,rpcUrl:string)=>{
 
+    const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+
+    const balance = ethers.utils.formatEther(await provider.getBalance(address))
+
+    return balance
+
+
+}
 
 
 export {
@@ -216,5 +225,6 @@ export {
     createWallet,
     addNetwork,
     createAccount,
-    decryptSeedPhrase
+    decryptSeedPhrase,
+    getBalanceOfNative
 }
