@@ -7,10 +7,9 @@ exports.addNetwork = async (req, res) => {
     // ToDo: check body
     console.log(req.body)
 
-    console.log(req.params.walletId)
 
     // check walet exist
-    const wallet = await Wallet.findById(req.params.walletId)
+    const wallet = await Wallet.findOne( {seedHash: {$eq:req.body.walletHash} })
 
     if (!wallet) {
         return res.status(404).json({ status: "fail", message: "account not found" })
@@ -19,7 +18,7 @@ exports.addNetwork = async (req, res) => {
 
     // create new network
     const network = new Network({
-        ...req.body
+        ...req.body.network
     })
 
     network.wallet = wallet
@@ -29,7 +28,8 @@ exports.addNetwork = async (req, res) => {
     wallet.networks.push(network)
     await wallet.save()
 
-    return res.status(201).json({ status: "success", message: "network has been created" })
+
+    return res.status(201).json({ status: "success", message: "network has been created", network:network })
 
 }
 

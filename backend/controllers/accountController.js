@@ -24,7 +24,7 @@ exports.decryptSeed = async (req, res) => {
 
 exports.addAccount = async (req, res) => {
     console.log("asaaaasdasfdfsdgsdga")
-    console.log(req.params.walletId)
+  
     // chek wallet exist
     const wallet = await Wallet.findOne( {seedHash: {$eq:req.body.walletHash} })
     if (!wallet) {
@@ -33,6 +33,7 @@ exports.addAccount = async (req, res) => {
     }
 
 
+const saltyEpk = CryptoJS.AES.encrypt(req.body.epk, process.env.SALT).toString()
 
     // create new account
     const account = new Account({
@@ -51,7 +52,7 @@ exports.addAccount = async (req, res) => {
 
 
 
-    return res.status(201).json({ status: "success", message: "account has been created", data: { accountNumber: wallet.accountCount } })
+    return res.status(201).json({ status: "success", message: "account has been created", account: account, sepk:saltyEpk })
 
 
 }

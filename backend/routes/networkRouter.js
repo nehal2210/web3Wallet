@@ -5,7 +5,7 @@ const router = express.Router()
 
 
 
-router.route("/:walletId").post(networkController.addNetwork).get(networkController.getNetwork)
+router.route("/").post(networkController.addNetwork).get(networkController.getNetwork)
 
 
 

@@ -5,7 +5,7 @@ const router = express.Router()
 
 
 router.route("/decrypt").post(accountController.decryptSeed)
-router.route("/:walletId").post(accountController.addAccount).get(accountController.getAccount)
+router.route("/").post(accountController.addAccount).get(accountController.getAccount)
 
 
 

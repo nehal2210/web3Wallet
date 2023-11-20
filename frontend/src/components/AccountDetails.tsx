@@ -7,6 +7,8 @@ import { useState } from "react";
 
 const AccountDetails = ({ isAccountDetails }: any) => {
     const [showPrivateKey, setShowPrivateKey] = useState(false);
+
+    
     return (
         <div className="fixed z-10 top-0 right-0 bottom-0 left-0 w-full h-[100vh] bg-bgColor2 bg-opacity-50 flex flex-col pt-5 items-center">
 

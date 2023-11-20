@@ -10,13 +10,17 @@ import CreateAccount from "./CreateAccount";
 import AccountDetails from "./AccountDetails";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import { truncate } from "fs/promises";
 
 
 
 const AppHeader = () => {
 
-    const [openNetwork, setOpenNetwork] = useState(false);
-    const [openNetworkDetailstype, setOpenNetworkDetailstype] = useState("");
+    const [openNetworkMenu, setOpenNetworkMenu] = useState(false);
+    const [openNetworkModal, setOpenNetworkModal] = useState(false);
+
+    // const [openNetworkDetailstype, setOpenNetworkDetailstype] = useState("");
+
     const [openAccount, setOpenAccount] = useState(false);
     const [isNewAccount, setIsNewAccount] = useState();
     const [openAccountDetails, setOpenAccountDetails] = useState(false);
@@ -26,20 +30,28 @@ const AppHeader = () => {
     const currentNetwork = useSelector((state:RootState)=>state.wallet.currentNetwork)
 
     const wallet:any = useSelector((state:RootState)=>state.wallet.data)
-    
+    const [isEditable, SetIsEditable] = useState(false)
+
+
+
+const handleAddNetwork=()=>{
+    SetIsEditable(true)
+    setOpenNetworkModal(true)
+
+}
 
 
     return (
         <div className="relative py-2 px-4 flex justify-between items-center w-full bg-white rounded-full shadow-sm shadow-black1 card-shadow z-10 bg-opacity-80">
             <div className="flex-1">
 
-                <button onClick={() => { setOpenNetwork(!openNetwork) }} className="h-[30px] w-fit border border-white flex items-center rounded-md bg-green">
+                <button onClick={() => { setOpenNetworkMenu(!openNetworkMenu) }} className="h-[30px] w-fit border border-white flex items-center rounded-md bg-green">
                     <div className="w-5 bg-btnColor h-full rounded-md flex justify-center items-center">
                         <img src={ethereumIcon} alt="blockchain icon" />
                     </div>
                     <p className="text-heading ms-2">{currentNetwork.name}</p>
                     {
-                        openNetwork ?
+                        openNetworkMenu ?
                             <BiSolidUpArrow className="ms-4 mt-1 mr-2 cursor-pointer" size={'12px'} />
                             :
                             <BiSolidDownArrow className="ms-4 mt-1 mr-2 cursor-pointer" size={'12px'} />
@@ -49,24 +61,24 @@ const AppHeader = () => {
 
 
             {
-                openNetwork ?
+                openNetworkMenu ?
                     <div className="absolute  top-14 w-[30%] h-[26rem] bg-primary border-white border-2 rounded-lg p-2 card-shadow z-10">
                         <p className="text-black m-4 font-semibold ">Add new network</p>
                         <div className="px-2 w-full max-h-[300px] h-[270px] overflow-x-auto" id="style-4">
                             {
                                 wallet["networks"].map((network:any,i:any) => {
                                     return (
-                                        <HeaderTokenItem   setExploreNetwork={setExploreNetwork}  network={network} openNet={(value: boolean) => setOpenNetworkDetailstype("")} />
+                                        <HeaderTokenItem  setOpenNetworkModal={setOpenNetworkModal}  setExploreNetwork={setExploreNetwork}  network={network} SetIsEditable={ SetIsEditable} />
                                     )
                                 })
                             }
                         </div>
-                        {/* <Link to='/add-network'> */}
+    
                         
-                            <button onClick={() => setOpenNetworkDetailstype("Add Network")} className="bg-secondary-dark hover:bg-btnColorHover rounded-full w-40 p-2 text-white-1 mt-4 ms-2">
+                            <button onClick={() =>handleAddNetwork() } className="bg-secondary-dark hover:bg-btnColorHover rounded-full w-40 p-2 text-white-1 mt-4 ms-2">
                                 Add Network
                             </button>
-                        {/* </Link> */}
+              
 
                     </div>
                     :
@@ -90,8 +102,8 @@ const AppHeader = () => {
             </div>
 
             {
-                openNetworkDetailstype ? 
-                <NetworkDetails networkType={openNetworkDetailstype} exploreNetwork={exploreNetwork} openNet={(value: string) => setOpenNetworkDetailstype(value)} />
+                openNetworkModal ? 
+                <NetworkDetails isEditable={isEditable} exploreNetwork={exploreNetwork} openNet={(value: boolean) => setOpenNetworkModal(value)} />
                 : 
                 null
 

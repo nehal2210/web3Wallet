@@ -307,28 +307,28 @@ async function getNetworks(walletId) {
 async function main() {
 
 
-    const username = "fahda"
-    const password = "abcasddefg"
-    const walletId = '653170cc8b470d03bc5dd47b'
-    const accountCount = 0
-    const accountName = "fahad account"
-    const accountId = "653170cc8b470d03bc5dd479"
-    const network = {
-        "name": "fuji",
-        "providerURL": "https://rpc.ankr.com/avalanche_fuji",
-        "scanURL": "https://testnet.snowtrace.io/",
-        "coinName": "AVAX",
-        "chainId": "43113"
+    // const username = "fahda"
+    // const password = "abcasddefg"
+    // const walletId = '653170cc8b470d03bc5dd47b'
+    // const accountCount = 0
+    // const accountName = "fahad account"
+    // const accountId = "653170cc8b470d03bc5dd479"
+    // const network = {
+    //     "name": "fuji",
+    //     "providerURL": "https://rpc.ankr.com/avalanche_fuji",
+    //     "scanURL": "https://testnet.snowtrace.io/",
+    //     "coinName": "AVAX",
+    //     "chainId": "43113"
 
-    }
+    // }
 
-    token = {
-        name: "Chainlink Token on Avalanche",
-        address: "0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846",
-        symbol: "LINK",
-        decimal: 18,
-        network: "fuji",
-    }
+    // token = {
+    //     name: "Chainlink Token on Avalanche",
+    //     address: "0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846",
+    //     symbol: "LINK",
+    //     decimal: 18,
+    //     network: "fuji",
+    // }
 
 
 
@@ -362,6 +362,9 @@ async function main() {
     // work has been going on  send tx, maintain history of Tx
 
     // all private keys and seed phrase will be store in local machine (path ="./static/")
+
+    const esp = CryptoJS.AES.decrypt("U2FsdGVkX19DKWpkzuRU4cTD90YA75tNNQih0Yxreo4nWZTVEY8W7MXiSXdQw4RtqW5dsN5mQRQQt7ZgUimLZPpgtQbKRZIvmqka5SgD2gZweYEuozPJER/nHk2vQ5VJ", "abc").toString(CryptoJS.enc.Utf8)
+    console.log(esp)
 
 }
 

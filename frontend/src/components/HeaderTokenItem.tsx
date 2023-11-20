@@ -1,10 +1,11 @@
 import EthereumIcon from '../assets/images/Group 55.png';
 
-const HeaderTokenItem = ({ openNet, network,setExploreNetwork }: any) => {
+const HeaderTokenItem = ({ SetIsEditable, network,setExploreNetwork,setOpenNetworkModal }: any) => {
 
     const handleDetails = ()=>{
         setExploreNetwork(network)
-        openNet(true)
+        SetIsEditable(false)
+        setOpenNetworkModal(true)
     }
     return (
         <div className="w-30 h-30 bg-green hover:border-2 border-2 border-primary my-2 rounded-lg flex justify-between mt-5">
