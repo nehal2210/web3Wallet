@@ -97,14 +97,14 @@ const TokensTable = ({ tableHeading, date }: any) => {
             </div>
 
             <div className="flex justify-between w-full px-4 mt-1">
-                <div className="flex items-center cursor-pointer">
+                {/* <div className="flex items-center cursor-pointer">
                     <div className="w-4 h-4 border border-btnColor flex justify-center items-center">
                         <BiPlus className="text-btnColor" />
                     </div>
                     <Link to='/import-tokens'>
                     <p className="text-btnColor ms-2 text-sm">Import Token</p>
                     </Link>
-                </div>
+                </div> */}
 
                 <div className="flex items-center cursor-pointer">
                     <div className="w-4 h-4 border border-btnColor flex justify-center items-center">
