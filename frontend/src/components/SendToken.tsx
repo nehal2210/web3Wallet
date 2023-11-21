@@ -49,16 +49,8 @@ const SendToken = () => {
                 <div className="flex justify-between mt-6">
                     <p>Amount</p>
                     <div className="w-[70%] p-4 bg-green rounded-xl">
-                        <div>
-                            <div className="flex justify-between">
-                                <p>0.76329</p>
-                                <div className="flex items-center">
-                                    <img className="h-6" src={EthereumIcon} alt="Ethereum Icon" />
-                                    <p className="ms-3 font-semibold">ETH</p>
-                                </div>
-                            </div>
-                            <p className="text-xs text-gray/75">$1.729</p>
-                        </div>
+                    <Input className="text-black  border-btnColor bg-green " suffix={<span className="flex"><img  src={EthereumIcon} alt="Ethereum Icon" /> <p className="ms-2">ETH</p></span>}   />
+                      
 
                     </div>
                 </div>
