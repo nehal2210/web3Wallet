@@ -11,6 +11,7 @@ import TokenConfirmation from "../components/TokenConfirmation";
 import SentToken from "../components/SentToken";
 import { useEffect } from "react";
 import { getWallet, walletGetBalance } from "../redux/wallet";
+import { setsendTokenModal } from "../redux/counter";
 
 
 const WalletApp = () => {
@@ -59,7 +60,7 @@ const WalletApp = () => {
 
                 <div className="mt-4 flex justify-center items-center'">
                     <p className="text-heading text-xl font-bold">{`${balance} ${currentNetwork.coinName}`}</p>
-                    <div className="bg-bgColor ms-2 p-2 rounded-full flex justify-center items-center">
+                    <div  onClick={() => dispatch(setsendTokenModal(true))} className="bg-bgColor ms-2 p-2 rounded-full flex justify-center items-center">
                         <BiSolidSend className="text-white -rotate-45" />
                     </div>
                 </div>
