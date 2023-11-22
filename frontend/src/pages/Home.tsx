@@ -29,7 +29,7 @@ function Home() {
 
   return (
     <>
-      <div className="flex justify-center items-center h-[90vh]">
+      <div className="flex justify-center items-center h-[90vh] m-4">
         {showComponent()}
       </div>
     </>
