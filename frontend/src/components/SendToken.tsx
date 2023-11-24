@@ -3,13 +3,44 @@ import logo from "../assets/images/logo.png";
 import EthereumIcon from '../assets/images/Group 55.png';
 import { Input } from "antd";
 import { setConfirmationSendTokenModal, setsendTokenModal } from "../redux/counter";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { saveReciverDetails, setOperation } from "../redux/wallet";
+import { RootState } from "../redux/store";
 
 
 
 const SendToken = () => {
 
+
+    const [sendTokenData,SetSendTokenData] = useState({address:"",amount:""})
+    const token : any = useSelector((state:RootState)=>state.wallet.currentToken)
+    const operation  = useSelector((state:RootState)=>state.wallet.operation)
+
+
+
     const dispatch = useDispatch();
+
+
+    const handleChange = (e:any)=>{
+
+        SetSendTokenData((prevData:any)=>({...prevData,[e.target.name]:e.target.value}))
+        
+    }
+
+
+    const hanndleSendToken = ()=>{
+
+        // saving reciever account
+        dispatch(saveReciverDetails(sendTokenData))
+       
+
+
+        dispatch(setConfirmationSendTokenModal(true))
+        dispatch(setsendTokenModal(false))
+    }
+
+    console.log(sendTokenData)
 
     return (
         <div className="fixed z-10 top-0 right-0 bottom-0 left-0 w-full h-[100vh] bg-bgColor2 bg-opacity-50 flex flex-col pt-5 items-center">
@@ -28,7 +59,7 @@ const SendToken = () => {
                 <div className="flex justify-between mt-2">
                     <p>Wallet Address</p>
                     <div className="w-[70%]">
-                        <Input placeholder="Wallet Address" className="text-black border border-btnColor bg-green text-lg mt-1" />
+                        <Input  name="address" value={sendTokenData.address} onChange={handleChange}   placeholder="Wallet Address" className="text-black border border-btnColor bg-green text-lg mt-1" />
                     </div>
                 </div>
 
@@ -38,9 +69,9 @@ const SendToken = () => {
                         <div className="flex justify-between items-center">
                             <div className="flex items-center">
                                 <img src={EthereumIcon} alt="Ethereum Icon" />
-                                <p className="ms-3 font-semibold">ETH</p>
+                                <p className="ms-3 font-semibold">{operation === "sendToken" ? token.symbol:token.name}</p>
                             </div>
-                            <p>Balance 0.2 ETH</p>
+                            <p>Balance {token.balance} {operation === "sendToken" ? token.symbol:token.name}</p>
                         </div>
 
                     </div>
@@ -49,16 +80,8 @@ const SendToken = () => {
                 <div className="flex justify-between mt-6">
                     <p>Amount</p>
                     <div className="w-[70%] p-4 bg-green rounded-xl">
-                        <div>
-                            <div className="flex justify-between">
-                                <p>0.76329</p>
-                                <div className="flex items-center">
-                                    <img className="h-6" src={EthereumIcon} alt="Ethereum Icon" />
-                                    <p className="ms-3 font-semibold">ETH</p>
-                                </div>
-                            </div>
-                            <p className="text-xs text-gray/75">$1.729</p>
-                        </div>
+                    <Input name="amount" value={sendTokenData.amount} onChange={handleChange} className="text-black  border-btnColor bg-green " suffix={<span className="flex"><img  src={EthereumIcon} alt="Ethereum Icon" /> <p className="ms-2">{operation === "sendToken" ? token.symbol:token.name}</p></span>}   />
+                      
 
                     </div>
                 </div>
@@ -85,7 +108,7 @@ const SendToken = () => {
                         </div>
                     </div>
                     <div className="w-full h-[4px] bg-secondary-dark mt-20"></div>
-                    <button onClick={() => {dispatch(setConfirmationSendTokenModal(true)); dispatch(setsendTokenModal(false))}} className="px-10 py-2 rounded-full text-white bg-btnColor hover:bg-btnColorHover mt-7 text-lg">Send Tokens</button>
+                    <button onClick={hanndleSendToken} className="px-10 py-2 rounded-full text-white bg-btnColor hover:bg-btnColorHover mt-7 text-lg">Send Tokens</button>
                 </div>
             </div>
         </div>

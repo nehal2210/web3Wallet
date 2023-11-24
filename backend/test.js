@@ -216,10 +216,10 @@ async function importToken(walletId, accountId, token) {
 
 }
 
-async function sendNativeToken() {
+// async function sendNativeToken() {
 
 
-}
+// }
 
 
 
@@ -293,6 +293,28 @@ async function getNetworks(walletId) {
 
 }
 
+
+const sendNativeToken = async ()=>{
+
+    const provider = new ethers.providers.JsonRpcProvider("https://ethereum-sepolia.publicnode.com/")
+
+    const pk = "0xf56ed0bb1a9c9db774b285c26dd58bd562cd779936e3d0000cf55fa6d9f67b5d"
+    
+    const wallet = new ethers.Wallet(pk,provider)
+    const tx = {
+        from:"0xa3050aE9cb69Dfd04784Eb24b732bedf1797347b",
+        to: "0xafD453221E49748358d4AA086C17ee9E6e241c46",
+        value: ethers.utils.parseEther("0.1"),
+      };
+    console.log(tx)
+      const createReceipt = await wallet.sendTransaction(tx);
+  await createReceipt.wait();
+  console.log(`Transaction successful with hash: ${createReceipt}`);
+
+  return createReceipt
+};
+
+
 // Replace 'yourMnemonic' with your actual mnemonic phrase and specify the number of accounts you want to generate.
 // generateAccounts('judge fortune repeat angle series umbrella suspect chronic infant airport lens lesson', 5).then((accounts) => {
 //     console.log(accounts);
@@ -303,6 +325,18 @@ async function getNetworks(walletId) {
 // importWallet("sauce open stem stairs nephew fork eye economy pencil clean guide frost", password)
 // createWallet(username, password)
 // generateAccounts()
+
+
+function timeConverter(UNIX_timestamp){
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+
+    var time = date + ' ' + month + ' ' + year;
+    return time;
+  }
 
 async function main() {
 
@@ -363,8 +397,29 @@ async function main() {
 
     // all private keys and seed phrase will be store in local machine (path ="./static/")
 
-    const esp = CryptoJS.AES.decrypt("U2FsdGVkX19DKWpkzuRU4cTD90YA75tNNQih0Yxreo4nWZTVEY8W7MXiSXdQw4RtqW5dsN5mQRQQt7ZgUimLZPpgtQbKRZIvmqka5SgD2gZweYEuozPJER/nHk2vQ5VJ", "abc").toString(CryptoJS.enc.Utf8)
-    console.log(esp)
+    // const esp = CryptoJS.AES.decrypt("U2FsdGVkX19DKWpkzuRU4cTD90YA75tNNQih0Yxreo4nWZTVEY8W7MXiSXdQw4RtqW5dsN5mQRQQt7ZgUimLZPpgtQbKRZIvmqka5SgD2gZweYEuozPJER/nHk2vQ5VJ", "abc").toString(CryptoJS.enc.Utf8)
+    // console.log(esp)
+    // sendNativeToken()
+
+    let address = "0xa3050aE9cb69Dfd04784Eb24b732bedf1797347b";
+let etherscanProvider = new ethers.providers.EtherscanProvider("sepolia");
+
+const h = await etherscanProvider.getHistory(address)
+
+const sh = h.sort(function(a, b){return b.timestamp - a.timestamp});
+console.log(sh)
+let arr = []
+for (let index = 0; index < sh.length; index++) {
+    arr.push({
+hash:sh[index].hash,
+action: sh[index].from === address ? "Sent":"Recieved",
+date: timeConverter(sh[index].timestamp),
+amount: ethers.utils.formatEther(sh[index].value)
+    })
+    
+}
+
+console.log(arr)
 
 }
 

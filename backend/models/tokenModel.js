@@ -5,23 +5,23 @@ const TokenScehma = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: [true, "username must be given"]
+            required: [true, "name must be given"]
         },
         address: {
             type: String,
-            required: [true, "username must be given"]
+            required: [true, "address must be given"]
         },
         symbol: {
             type: String,
-            required: [true, "username must be given"]
+            required: [true, "symbol must be given"]
         },
         decimal: {
             type: Number,
-            required: [true, "username must be given"]
+            required: [true, "decimal must be given"]
         },
         network: {
             type: String,
-            required: [true, "username must be given"]
+            required: [true, "network name must be given"]
         },
         account:
         {

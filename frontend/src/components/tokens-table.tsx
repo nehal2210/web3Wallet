@@ -3,64 +3,15 @@ import { BiPlus, BiRevision } from "react-icons/bi";
 import TokenItem from "./token-item";
 import ActivityItem from "./ActivityItem";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 
-const TokensTable = ({ tableHeading, date }: any) => {
-
-    const [TokenItemData, setTokenItemData] = useState([
-        {
-            name: 'ETH Mannet',
-            value: '0 ETH',
-            btn: 'send'
-        },
-        {
-            name: 'ETH',
-            value: '284 ETH',
-            btn: 'send'
-        },
-        {
-            name: 'ETHER',
-            value: '453 ETH',
-            btn: 'send'
-        },
-        {
-            name: 'Bit coin',
-            value: '3455 BIT',
-            btn: 'send'
-        }
-    ]);
+const TokensTable = ({ tableHeading }: any) => {
 
 
-    const [activityItemData, setActivityItemData] = useState([
-        {
-            status: 'Received',
-            isConfirm: true,
-            date: 'Oct 09, 2023',
-            value: '0.2 ETH',
-            valueInDollar: '$ 1220 USD',
-        },
-        {
-            status: 'Sending',
-            isConfirm: false,
-            date: 'Oct 09, 2023',
-            value: '0.2 ETH',
-            valueInDollar: '$ 1220 USD',
-        },
-        {
-            status: 'Sending',
-            isConfirm: false,
-            date: 'Oct 09, 2023',
-            value: '0.2 ETH',
-            valueInDollar: '$ 1220 USD',
-        },
-        {
-            status: 'Received',
-            isConfirm: true,
-            date: 'Oct 09, 2023',
-            value: '0.2 ETH',
-            valueInDollar: '$ 1220 USD',
-        }
-    ])
+    const currentTokens = useSelector((state:RootState)=>state.wallet.currentTokens)
+    const activityHistoryData = useSelector((state:RootState)=>state.wallet.txHistory)
 
     return (
         <div className="w-[48%] h-[340px] rounded-xl  flex flex-col items-center p-2 card-shadow bg-opacity-80">
@@ -69,13 +20,13 @@ const TokensTable = ({ tableHeading, date }: any) => {
             </div>
             <div className="w-[94%] h-1 my-2 bg-btnColor"></div>
 
-            <p className="text-heading my-1 ms-4 w-full text-lg font-semibold">{date}</p>
+            <p className="text-heading my-1 ms-4 w-full text-lg font-semibold">{tableHeading=="Tokens" ? "" : activityHistoryData[0]?.date }</p>
 
             <div className="px-2 w-full max-h-[400px] h-[80%] overflow-x-auto" id="style-4">
                 {
                     tableHeading === 'Tokens' ?
                         <>
-                            {TokenItemData.map(data => {
+                            {currentTokens.map((data:any) => {
                                 return (
                                     <TokenItem data={data} />
                                 )
@@ -84,7 +35,7 @@ const TokensTable = ({ tableHeading, date }: any) => {
                         :
                         <>
                             {
-                                activityItemData.map(data => {
+                                activityHistoryData.map((data:any) => {
                                     return (
                                         <ActivityItem data={data} />
                                     )
@@ -97,14 +48,14 @@ const TokensTable = ({ tableHeading, date }: any) => {
             </div>
 
             <div className="flex justify-between w-full px-4 mt-1">
-                {/* <div className="flex items-center cursor-pointer">
+                <div className="flex items-center cursor-pointer">
                     <div className="w-4 h-4 border border-btnColor flex justify-center items-center">
                         <BiPlus className="text-btnColor" />
                     </div>
                     <Link to='/import-tokens'>
                     <p className="text-btnColor ms-2 text-sm">Import Token</p>
                     </Link>
-                </div> */}
+                </div>
 
                 <div className="flex items-center cursor-pointer">
                     <div className="w-4 h-4 border border-btnColor flex justify-center items-center">

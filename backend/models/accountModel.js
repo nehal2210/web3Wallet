@@ -9,12 +9,12 @@ const AccountScehma = new mongoose.Schema(
         },
         name: {
             type: String,
-            required: [true, "username must be given"]
+            required: [true, "name must be given"]
         },
 
         address: {
             type: String,
-            required: [true, "username must be given"]
+            required: [true, "address must be given"]
         },
         tokens:
             [{

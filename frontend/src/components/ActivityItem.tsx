@@ -8,31 +8,24 @@ const ActivityItem = ({ data }: any) => {
                 <div>
                     <div className="flex items-center">
                         {
-                            data.status === 'Received' ?
+                            data.action === 'Received' ?
                                 <BsFillArrowDownLeftCircleFill className="text-btnColor text-3xl" />
                                 :
                                 <BsFillArrowUpRightCircleFill className="text-btnColor text-3xl" />
 
                         }
                         <div>
-                            <p className="ms-2 text-black ">{data.status}<span className="text-xs text-btnColor">- {data.date}</span></p>
-                            <p className="text-xs text-black font- ms-2 mt-1">{data.isConfirm ? 'Confirmed' : 'Pending'}</p>
+                            <p className="ms-2 text-black ">{data.action}<span className="text-xs text-btnColor">- {data.date}</span></p>
+                            <p className="text-xs text-black font- ms-2 mt-1">{data.status}</p>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <p className="text-black font-semibold">{data.value}</p>
-                    <p className="text-black mt-1 text-xs font-semibold">{data.valueInDollar}</p>
+                    <p className="text-black font-semibold">{data.amount}</p>
+                    {/* <p className="text-black mt-1 text-xs font-semibold">120</p> */}
                 </div>
             </div>
-            {
-                !data.isConfirm ?
-                    <div className="w-full flex justify-end mt-3">
-                        <button className="py-1 text-white px-10 bg-secondary-dark hover:bg-btnColorHover rounded-full">Cancel</button>
-                    </div>
-                    :
-                    null
-            }
+
 
         </div>
     )

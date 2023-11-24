@@ -13,15 +13,20 @@ exports.getAccount = async (req, res) => {
 }
 
 
-exports.decryptSeed = async (req, res) => {
+exports.decrypt = async (req, res) => {
 
     console.log(req.body)
-    const esp = CryptoJS.AES.decrypt(req.body.sp, process.env.SALT).toString(CryptoJS.enc.Utf8)
-    console.log(esp)
+    const ed = CryptoJS.AES.decrypt(req.body.sd, process.env.SALT).toString(CryptoJS.enc.Utf8)
+    console.log(ed)
 
-    return res.status(200).json({ status: "success", message: "data decrypted", data: { esp: esp } })
+    return res.status(200).json({ status: "success", message: "data decrypted", data: { ed: ed } })
 
 }
+
+
+
+
+
 
 exports.addAccount = async (req, res) => {
     console.log("asaaaasdasfdfsdgsdga")
