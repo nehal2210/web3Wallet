@@ -67,7 +67,7 @@ const handleChange = async (e:any) =>{
 
 console.log(token)
     return (
-        <div className="flex flex-col justify-center items-center  ">
+        <div className="flex flex-col justify-center items-center m-4 ">
             <div className="w-16">
                 <img src={logo} alt='Logo' />
             </div>
