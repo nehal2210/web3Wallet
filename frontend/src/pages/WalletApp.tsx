@@ -10,7 +10,7 @@ import { RootState } from "../redux/store";
 import TokenConfirmation from "../components/TokenConfirmation";
 import SentToken from "../components/SentToken";
 import { useEffect } from "react";
-import { getWallet, walletGetBalance } from "../redux/wallet";
+import { getWallet, setCurrentTokenForSend, setOperation, walletGetBalance, walletGetToken, walletTxHistory } from "../redux/wallet";
 import { setsendTokenModal } from "../redux/counter";
 
 
@@ -38,10 +38,25 @@ const WalletApp = () => {
             console.log(currentAccount.address)
             console.log(currentNetwork.providerURL)
             dispatch(walletGetBalance({address:currentAccount.address,rpcUrl:currentNetwork.providerURL}))
+            dispatch(walletGetToken({tokens:currentAccount.tokens,rpcUrl:currentNetwork.providerURL, address:currentAccount.address,network:currentNetwork.name}))
+            dispatch(walletTxHistory({address:currentAccount.address,network:currentNetwork.name}))
         }
 
 
     },[currentAccount.address])
+
+
+
+
+    const hanndleSendToken = ()=>{
+
+        dispatch(setOperation("sendNativeToken"))
+        dispatch(setCurrentTokenForSend({balance:balance,name:currentNetwork.coinName}))
+        dispatch(setsendTokenModal(true))
+
+
+    }
+
 
     return (
         <div className="flex flex-col justify-center items-center">
@@ -60,21 +75,21 @@ const WalletApp = () => {
 
                 <div className="mt-4 flex justify-center items-center'">
                     <p className="text-heading text-xl font-bold">{`${balance} ${currentNetwork.coinName}`}</p>
-                    <div  onClick={() => dispatch(setsendTokenModal(true))} className="bg-bgColor ms-2 p-2 rounded-full flex justify-center items-center">
+                    <div  onClick={hanndleSendToken} className="bg-bgColor ms-2 p-2 rounded-full flex justify-center items-center">
                         <BiSolidSend className="text-white -rotate-45" />
                     </div>
                 </div>
 
 
                 <div className="flex w-full justify-between items-center mt-10">
-                <TokensTable tableHeading="Tokens" date="" />
+                <TokensTable tableHeading="Tokens"/>
 
-                <TokensTable tableHeading="Activity" date="October, 2023" />
+                <TokensTable tableHeading="Activity"/>
                 </div>
 
                 {
                     openSendToken ?
-                    <SendToken />
+                    <SendToken  />
                     :
                     null
                 }

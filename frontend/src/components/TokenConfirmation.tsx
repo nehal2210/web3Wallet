@@ -1,13 +1,34 @@
 import { AiFillEdit } from "react-icons/ai";
 import { BiSolidRightArrowAlt } from "react-icons/bi";
 import EthereumIcon from '../assets/images/Group 55.png';
-import { useDispatch } from "react-redux";
-import { setConfirmationSendTokenModal, setSentTokenModal } from "../redux/counter";
+import { useDispatch, useSelector } from "react-redux";
+import { setConfirmationSendTokenModal, setPasswordVerify, setSentTokenModal } from "../redux/counter";
+import { RootState } from "../redux/store";
+import { formateAddress } from "../services/utils";
+import { setOperation } from "../redux/wallet";
 
 
 const TokenConfirmation = () => {
     
     const dispatch = useDispatch();
+    const currentAccount = useSelector((state:RootState)=>state.wallet.currentAccount)
+    const currentNetwork = useSelector((state:RootState)=>state.wallet.currentNetwork)
+    const recieverAccount = useSelector((state:RootState)=>state.wallet.reciever)
+    const operation = useSelector((state:RootState)=>state.wallet.operation)
+    const token = useSelector((state:RootState)=>state.wallet.currentToken)
+
+
+    const handleConfirmation = ()=>{
+
+        
+        dispatch(setPasswordVerify(true))
+        // dispatch(setSendTokenFields({aountName:accName,accountNumber:wallet.accountCount + 1}))
+
+        dispatch(setConfirmationSendTokenModal(false))
+
+        // dispatch(setSentTokenModal(true))
+    }
+    
 
     return (
         <div className="fixed z-10 top-0 right-0 bottom-0 left-0 w-full h-[100vh] bg-bgColor2 bg-opacity-50 flex flex-col pt-5 items-center">
@@ -25,7 +46,7 @@ const TokenConfirmation = () => {
                     <div className="flex bg-green w-[275px] py-4 rounded-xl ">
                         <div className="flex justify-center  items-center w-full ">
                             <p className="h-10 w-10 rounded-full bg-btnColor "></p>
-                            <p className="ps-5 text-black">Account 1</p>
+                            <p className="ps-5 text-black">{formateAddress(currentAccount.address)}</p>
                         </div>
                     </div>
                     <div className="h-10 w-10 rounded-full bg-bgColor">
@@ -35,7 +56,7 @@ const TokenConfirmation = () => {
                         <div className="flex bg-green w-[275px] py-4 rounded-xl ">
                             <div className="flex justify-center  items-center w-full ">
                                 <p className="h-10 w-10 rounded-full bg-btnColor "></p>
-                                <p className="ps-5 text-black">Account 2</p>
+                                <p className="ps-5 text-black">{formateAddress(recieverAccount.address)}</p>
                             </div>
                         </div>
                     </div>
@@ -45,13 +66,13 @@ const TokenConfirmation = () => {
                         <div className=" flex  flex-col ">
                             <div className="flex ">
                                 <img className="h-6 pt-1" src={EthereumIcon} alt="Ethereum Icon" />
-                                <p className="text-black ps-2 text-lg">Etherium</p><p className=" text-black ps-3 text-lg" >Mannet</p>
+                                <p className="text-black ps-2 text-lg">{operation === "sendToken"? token.symbol : currentNetwork.name}</p>
                             </div>
                             <p className="text-btnColor ps-4 pt-2">Sending </p>
                         </div>
                         <div className=" flex flex-col ">
                             <div className="flex pb-2">
-                                <p className="text-black ps-20 text-lg">0.2 ETH</p>
+                                <p className="text-black ps-20 text-lg">{recieverAccount.amount} {operation === "sendToken"? token.symbol : currentNetwork.name}</p>
                             </div>
                             <div >
                                 <p className="text-balck text-sm ps-20">$ 1220 USD</p>
@@ -94,8 +115,8 @@ const TokenConfirmation = () => {
                 </div>
                 <div className="w-full h-[4px] bg-btnColor mt-20"></div>
                 <div className="flex justify-center mt-3 ">
-                    <button onClick={() => dispatch(setConfirmationSendTokenModal(false))} className="px-16  py-3 text-lg font-semibold rounded-full text-white bg-secondary-dark hover:bg-btnColorHover mt-4 p">Reject</button>
-                    <button onClick={() => {dispatch(setConfirmationSendTokenModal(false)); dispatch(setSentTokenModal(true))}} className="px-16 py-3 text-lg font-semibold mx-4  rounded-full text-black bg-primary card-shadow hover:bg-btnColorHover text-black mt-4">Confirm</button>
+                    <button onClick={() => handleConfirmation()} className="px-16  py-3 text-lg font-semibold rounded-full text-white bg-secondary-dark hover:bg-btnColorHover mt-4 p">Confirm</button>
+                    <button onClick={() => dispatch(setConfirmationSendTokenModal(false))} className="px-16 py-3 text-lg font-semibold mx-4  rounded-full text-black bg-primary card-shadow hover:bg-btnColorHover text-black mt-4">Reject</button>
                 </div>
             </div>
         </div>

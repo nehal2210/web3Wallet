@@ -2,8 +2,7 @@ import { ethers } from "ethers"
 
 import {AES,SHA256,enc} from "crypto-js"
 import axios from "axios"
-import { API, BASE_API_URL,DATABASE,DB_TABLE } from "../constants"
-
+import { API, BASE_API_URL,DATABASE,DB_TABLE, ERC20_ABI } from "../constants"
 
 
 const generateWallet = () =>{
@@ -23,9 +22,6 @@ const generateWallet = () =>{
 
 
 async function createWallet(username: string, password: string, wallet: any) {
-
-
-
 
     const hashOfSeedPhrase = SHA256(wallet.phrase.join(",")+ password).toString()
     const hashOfPassword = SHA256(password).toString()
@@ -100,30 +96,39 @@ async function addNetwork(network:any) {
 
 
 
-async function decryptSeedPhrase(password:any) {
+async function decrypt(password:any,type:string,address:string="") {
 
 
 
     console.log("p",password)
+    console.log("t",type)
+    console.log("a",address)
+    
 
-
-    const ph = window.localStorage.getItem("phraseHash")
-    const saltySp = window.localStorage.getItem("saltyPhrase")
-
-
-
+    if (type==="seedPhrase") {
+    
+        const saltySp = window.localStorage.getItem("saltyPhrase")
       const decryptResponse = await axios.post(BASE_API_URL + "/account/decrypt", {
-          sp: saltySp
+          sd: saltySp
       })
-
-
       console.log("decrypt",decryptResponse.data.data.esp)
-      const esp = decryptResponse.data.data.esp
-
-     
-
-
+      const esp = decryptResponse.data.data.ed
       return esp
+    }
+    else  if (type==="privateKey"){
+
+    const spk = window.localStorage.getItem(address)
+    const decryptResponse = await axios.post(BASE_API_URL + "/account/decrypt", {
+          sd: spk
+      })
+      console.log("decrypt",decryptResponse.data.data.esp)
+      const esp = decryptResponse.data.data.ed
+      return esp
+    }
+
+
+    
+    
 }
 
 
@@ -212,7 +217,7 @@ const getBalanceOfNative = async (address:string,rpcUrl:string)=>{
 
     const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
 
-    const balance = ethers.utils.formatEther(await provider.getBalance(address))
+    const balance = parseFloat(Number(ethers.utils.formatEther(await provider.getBalance(address))).toFixed(4))
 
     return balance
 
@@ -220,11 +225,159 @@ const getBalanceOfNative = async (address:string,rpcUrl:string)=>{
 }
 
 
+const getBalanceOfTokens = async(tokens:any,rpcUrl:string,address:string,currentNetwork:string)=>{
+    // balances =
+    const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+    let arr = []
+    for (let index = 0; index < tokens.length; index++) {
+
+      // todo: error handle
+      if (currentNetwork===tokens[index].network){
+
+        const contract = new ethers.Contract(tokens[index].address,ERC20_ABI,provider)
+        const balance = await contract.balanceOf(address)
+        arr.push({...tokens[index],balance:ethers.utils.formatEther(balance)})
+      }
+      
+    }
+
+    return arr
+
+}
+
+
+
+const getTokenDetail = async(address:string,rpcUrl:string)=>{
+
+    const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+
+    const contract = new  ethers.Contract(address,ERC20_ABI,provider)
+
+  
+    const res = await  Promise.all([contract.name(),contract.symbol(),contract.decimals()])
+    return res
+
+}
+
+
+const addToken = async(accountId:string,data:any)=>{
+   
+   const url = BASE_API_URL+"/token/"+accountId
+
+   const ph = window.localStorage.getItem("phraseHash")
+
+    const response = await axios.post(url, {
+    ...data,
+    walletHash:ph
+      })
+
+      return response.data
+}
+
+
+
+const sendNativeToken = async (rpcUrl:string,epk:string,password:string,addressTo:string,addressFrom:string,amount:string)=>{
+
+    const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+    console.log("native")
+    console.log(password)
+    console.log(epk)
+    console.log(amount)
+    console.log(addressTo)
+    const pk = AES.decrypt(epk, password).toString(enc.Utf8)
+    console.log(pk)
+    
+    const wallet = new ethers.Wallet(pk,provider)
+    const tx = {
+        from:addressFrom,
+        to: addressTo,
+        value: ethers.utils.parseEther(amount),
+      };
+    console.log(tx)
+      const createReceipt = await wallet.sendTransaction(tx);
+  await createReceipt.wait();
+  console.log(`Transaction successful with hash: ${createReceipt}`);
+
+
+//    Todo : error handle when TX Fails
+  return createReceipt
+};
+
+
+const sendToken = async (rpcUrl:string,epk:string,password:string,addressTo:string,amount:string,tokenAddress:string)=>{
+
+  const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+  console.log("native")
+  console.log(password)
+  console.log(epk)
+  console.log(amount)
+  console.log(addressTo)
+  const pk = AES.decrypt(epk, password).toString(enc.Utf8)
+  console.log(pk)
+  
+  const wallet = new ethers.Wallet(pk,provider)
+  const contract = new ethers.Contract(tokenAddress,ERC20_ABI,wallet)
+    const createReceipt = await contract.transfer(addressTo,ethers.utils.parseEther(amount));
+await createReceipt.wait();
+console.log(`Transaction successful with hash: ${createReceipt}`);
+
+
+//    Todo : error handle when TX Fails
+return createReceipt
+};
+
+
+function timeConverter(UNIX_timestamp:any){
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+
+  var time = date + ' ' + month + ' ' + year;
+  return time;
+}
+
+const getTxHistory = async (network:string,address:string) =>{
+
+  console.log()
+  const  etherscanProvider = new ethers.providers.EtherscanProvider(network.toLowerCase());
+
+ const h = await etherscanProvider.getHistory(address)
+
+ const sh = h.sort(function(a:any, b:any){return b.timestamp - a.timestamp});
+
+ let arr = []
+ for (let index = 0; index < sh.length; index++) {
+     arr.push({
+ hash:sh[index].hash,
+ action: sh[index].from === address ? "Sent":"Received",
+ date: timeConverter(sh[index].timestamp),
+ amount: ethers.utils.formatEther(sh[index].value),
+ status:"confirmed"
+     })
+     
+ }
+ 
+ console.log(arr)
+
+ return arr
+
+}
+
+
+
 export {
     generateWallet,
     createWallet,
     addNetwork,
     createAccount,
-    decryptSeedPhrase,
-    getBalanceOfNative
+    decrypt,
+    getBalanceOfNative,
+    getBalanceOfTokens,
+    getTokenDetail,
+    addToken,
+    sendNativeToken,
+    sendToken,
+    getTxHistory
 }

@@ -1,5 +1,6 @@
 const Account = require("../models/accountModel")
 const Token = require("../models/tokenModel")
+const Wallet = require("../models/walletModel")
 
 
 
@@ -21,9 +22,18 @@ exports.getToken = async (req, res) => {
 
 exports.importToken = async (req, res) => {
 
-    const { walletId, accountId } = req.params
-    console.log(walletId)
+    const { accountId } = req.params
+
     console.log(accountId)
+
+
+    // chek wallet exist
+    const wallet = await Wallet.findOne( {seedHash: {$eq:req.body.walletHash} })
+    if (!wallet) {
+        return res.status(404).json({ status: "fail", message: "wallet not found" })
+
+    }
+
 
     // find account of id
     const account = await Account.findById(accountId)

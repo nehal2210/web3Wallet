@@ -5,7 +5,7 @@ import { setPasswordState, setPasswordVerify } from "../redux/counter";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import {SHA256} from "crypto-js";
-import { walletAddAccount, walletDecryptPhrase } from "../redux/wallet";
+import { walletAddAccount, walletDecrypt, walletSendToken, walletTxHistory } from "../redux/wallet";
 import { RootState } from "../redux/store";
 
 
@@ -13,7 +13,14 @@ const VerifyPassword = () => {
     const dispatch = useDispatch();
     const [Password,SetPassword] = useState("")
     const account = useSelector((state:RootState)=>state.user.newAccount)
+    
     const wallet = useSelector((state:RootState)=>state.wallet)
+    const operation = useSelector((state:RootState)=>state.wallet.operation)
+    const currentNetwork = useSelector((state:RootState)=>state.wallet.currentNetwork)
+    const currentAccount = useSelector((state:RootState)=>state.wallet.currentAccount)
+    const reciever = useSelector((state:RootState)=>state.wallet.reciever)
+    const currentToken = useSelector((state:RootState)=>state.wallet.currentToken)
+
 
 
     console.log(Password)
@@ -26,24 +33,90 @@ const VerifyPassword = () => {
         const passwordHash = SHA256(Password).toString()
 
         if (passwordHashStore === passwordHash) {
-
             console.log("password matched")
-            // set password in state
-            setPasswordState(Password)
+
+            if (operation === "Addaccount") {
+                
 
             // close modal
             dispatch(setPasswordVerify(false))
 
-            dispatch(walletDecryptPhrase(Password)).then((res:any)=>{
+            dispatch(walletDecrypt(Password,"seedPhrase")).then((res:any)=>{
 
                 console.log("pppppppppppppp",res.payload)
                 dispatch(walletAddAccount({esp:res.payload, password:Password,aountName:account.aountName, accountNumber:account.accountNumber}))
 
 
             })
-        }
 
-        else{
+        }
+else if (operation === "sendNativeToken") {
+ 
+
+ 
+
+const params = {password:Password,type:"privateKey",address:currentAccount.address} 
+    dispatch(walletDecrypt(params)).then((res:any)=>{
+
+        console.log("pppppppppppppp",res.payload)
+        const data = {
+            operation:operation,
+            rpcUrl:currentNetwork.providerURL,
+            epk:res.payload,
+            password:Password,
+            addressTo:reciever.address,
+            addressFrom:currentAccount.address,
+            amount:reciever.amount,
+            tokenAddress:""
+        }
+        dispatch(walletSendToken(data)).then((res:any)=>{
+
+            // error handle
+            dispatch(walletTxHistory({address:currentAccount.address,network:currentNetwork.name }))
+        })
+
+
+    })
+
+       // close modal
+       dispatch(setPasswordVerify(false)) 
+
+}
+else if (operation === "sendToken") {
+ 
+
+ 
+
+    const params = {password:Password,type:"privateKey",address:currentAccount.address} 
+        dispatch(walletDecrypt(params)).then((res:any)=>{
+    
+            console.log("pppppppppppppp",res.payload)
+            const data = {
+                operation:operation,
+                rpcUrl:currentNetwork.providerURL,
+                epk:res.payload,
+                password:Password,
+                addressTo:reciever.address,
+                addressFrom:currentAccount.address,
+                amount:reciever.amount,
+                tokenAddress:currentToken.address
+            }
+            dispatch(walletSendToken(data)).then((res:any)=>{
+
+                // error handle
+                dispatch(walletTxHistory({address:currentAccount.address,network:currentNetwork.name }))
+            })
+    
+    
+    
+        })
+    
+           // close modal
+           dispatch(setPasswordVerify(false)) 
+    
+    }
+
+}else{
             console.log("wrong Password")
         }
 

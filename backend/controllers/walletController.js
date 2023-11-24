@@ -95,7 +95,7 @@ exports.importWallet = async (req, res) => {
 
 
 exports.getWallets = async (req, res) => {
-    const data = await Wallet.find({}).populate("accounts").populate("networks")
+    const data = await Wallet.find({}).populate("accounts.tokens").populate("networks")
     return res.status(200).json({ status: "success", data: data })
 }
 
@@ -103,7 +103,15 @@ exports.getWallet = async (req, res) => {
 
     console.log("aaaaaaaaaa")
     console.log(req.body.walletHash)
-    const data = await Wallet.findOne( {seedHash: {$eq:req.body.walletHash} }).populate("accounts").populate("networks")
+    const data = await Wallet.findOne( {seedHash: {$eq:req.body.walletHash} }).populate("accounts").populate(
+        {
+          path: "accounts",
+          populate : {
+            path: "tokens",
+            model: "Token"
+          }
+        }
+       ).populate("networks")
     return res.status(200).json({ status: "success", wallet: data })
 }
 

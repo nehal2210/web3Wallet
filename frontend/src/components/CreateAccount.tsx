@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import VerifyPassword from "./VerifyPassword";
 import { setNewAccountFields, setPasswordVerify } from "../redux/counter";
+import { setOperation } from "../redux/wallet";
 
 
 const CreateAccount = ({ isNewAccount, accountType }: any) => {
@@ -22,6 +23,7 @@ const CreateAccount = ({ isNewAccount, accountType }: any) => {
 
     const handleAccountCreate = ()=>{
         const accName = accountName ? accountName : `Account ${wallet.accountCount + 1}`
+        dispatch(setOperation("Addaccount"))
         dispatch(setPasswordVerify(true))
         dispatch(setNewAccountFields({aountName:accName,accountNumber:wallet.accountCount + 1}))
 
