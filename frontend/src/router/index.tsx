@@ -12,7 +12,7 @@ function AppRouter() {
     <div className="">
       <Routes>
 
-        <Route path="/" element=
+        <Route path="/home" element=
         {
         <ProtectedRoute>
           <Home/>
@@ -20,11 +20,11 @@ function AppRouter() {
           
         } />
         
+        <Route path="/" Component={LandingPage} />
         <Route path="/demo" Component={Demo} />
         <Route path="/app" Component={WalletApp} />
         <Route path="/add-network" Component={Addnetwork} />
         <Route path="/import-tokens" Component={ImportTokens} />
-        <Route path="/landing-page" Component={LandingPage} />
 
         {/* <Route path="/sign-up" Component={SignUp} />
         <Route path="/inbox" Component={Inbox} />
