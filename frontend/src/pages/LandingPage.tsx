@@ -8,7 +8,7 @@ import Transaction from "../components/landingPageComponents/Transaction";
 const LandingPage = () => {
   return (
     <>
-<div className="h-[100vh] overflow-auto">
+<div className="h-[100vh] overflow-y-auto bg-primary absolute ">
   
       <NonCostodialWallet />
       <MultichainWallet/>
