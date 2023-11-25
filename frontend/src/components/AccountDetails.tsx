@@ -4,9 +4,19 @@ import logo from "../assets/images/logo.png";
 import { BiSolidCopy } from "react-icons/bi";
 import { AiFillEdit } from "react-icons/ai";
 import { useState } from "react";
+import { Tooltip } from "antd";
 
 const AccountDetails = ({ isAccountDetails }: any) => {
     const [showPrivateKey, setShowPrivateKey] = useState(false);
+
+    const [tooltipContent, setTooltipContent] = useState('Copy Phrase');
+    const copyToClipboard = () => {
+        setTooltipContent('Copied!');
+
+    setTimeout(() => {
+        setTooltipContent('Copy Phrase');
+      }, 2000);
+    }
 
     
     return (
@@ -34,7 +44,9 @@ const AccountDetails = ({ isAccountDetails }: any) => {
 
                             <div className="bg-green p-2 mt-5 flex justify-center rounded-md items-center">
                                 <p className="text-black">dfseudfiey78fy7f78sdyc78tzxc</p>
-                                <BiSolidCopy className="text-btnColor mx-2 cursor-pointer" />
+                                <Tooltip title={tooltipContent}>
+                                <BiSolidCopy className="text-btnColor mx-2 cursor-pointer" onClick={copyToClipboard} />
+                                </Tooltip>
                             </div>
                             <div className=" w-full px-4 py-3 cursor-pointer">
                                 <span className="text-black">private key for</span> <span className="text-btnColor  ">Account 2</span>
@@ -42,7 +54,11 @@ const AccountDetails = ({ isAccountDetails }: any) => {
                             <div className="bg-green  h-[50px] w-[90%]   mt-3 flex justify-between rounded-md items-center px-3">
                                 <span className="text-black cursor-pointer ">dfseudfiey78fy7f78sdyc78tzxc7yc78tzxc7</span>
 
-                                <span> <BiSolidCopy className="text-btnColor cursor-pointer   " /></span>
+                                <span>
+                                <Tooltip title={tooltipContent}>
+                                     <BiSolidCopy className="text-btnColor cursor-pointer" onClick={copyToClipboard} />
+                                     </Tooltip>
+                                     </span>
                             </div>
 
                             <div className="flex items-center justify-center ">
@@ -57,7 +73,9 @@ const AccountDetails = ({ isAccountDetails }: any) => {
                             </div>
                             <div className="bg-green p-2 mt-5 flex justify-center rounded-md items-center">
                                 <p className="text-black cursor-pointer">dfseudfiey78fy7f78sdyc78tzxddac</p>
-                                <BiSolidCopy className="text-btnColor mx-2 cursor-pointer" />
+                                <Tooltip title={tooltipContent}>
+                                <BiSolidCopy className="text-btnColor mx-2 cursor-pointer" onClick={copyToClipboard}/>
+                                </Tooltip>
                             </div>
                             <div className="flex items-center justify-center ">
                                 <button onClick={() => { setShowPrivateKey(true) }} className="px-6 py-3 rounded-full text-white border border-white bg-secondary-dark hover:bg-btnColorHover mt-4">Show private key</button>
