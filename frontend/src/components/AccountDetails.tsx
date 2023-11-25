@@ -4,10 +4,16 @@ import logo from "../assets/images/logo.png";
 import { BiSolidCopy } from "react-icons/bi";
 import { AiFillEdit } from "react-icons/ai";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { formateAddress } from "../services/utils";
+import { RootState } from "../redux/store";
+import { setAccountDetails } from "../redux/wallet";
 
 const AccountDetails = ({ isAccountDetails }: any) => {
+    const dispatch = useDispatch();
     const [showPrivateKey, setShowPrivateKey] = useState(false);
-
+    const accountDetails = useSelector((state: RootState) => state.wallet.accountDetails)
+    
     
     return (
         <div className="fixed z-10 top-0 right-0 bottom-0 left-0 w-full h-[100vh] bg-bgColor2 bg-opacity-50 flex flex-col pt-5 items-center">
@@ -15,7 +21,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
             <img src={logo} alt="logo" />
             <div className="w-[22%] h-[65%] pb- bg-primary mt-5 border border-white rounded-lg z-40">
                 <div className="w-full flex justify-end pt-2 pr-2 text-2xl ">
-                    <BsX onClick={() => isAccountDetails(false)} className="text-btnColor cursor-pointer" />
+                    <BsX onClick={() => dispatch(setAccountDetails({}))} className="text-btnColor cursor-pointer" />
                 </div>
                 <div className="  w-full ">
                     <p className="text-heading text-2xl text-center cursor-pointer font-bold ">Show Private key</p>
@@ -25,7 +31,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
                         {/* image */}
                     </div>
                     <div className="flex w-full justify-center py-3 cursor-pointer">
-                        <span className="text-black">Account 2</span> <span className=" px-4 text-btnColor py-1"><AiFillEdit /></span>
+                        <span className="text-black">{accountDetails.name}</span> <span className=" px-4 text-btnColor py-1"></span>
                     </div>
                 </div>
                 {
@@ -33,20 +39,20 @@ const AccountDetails = ({ isAccountDetails }: any) => {
                         <div className="flex flex-col justify-center items-center">
 
                             <div className="bg-green p-2 mt-5 flex justify-center rounded-md items-center">
-                                <p className="text-black">dfseudfiey78fy7f78sdyc78tzxc</p>
+                                <p className="text-black">{formateAddress(accountDetails.address)}</p>
                                 <BiSolidCopy className="text-btnColor mx-2 cursor-pointer" />
                             </div>
                             <div className=" w-full px-4 py-3 cursor-pointer">
-                                <span className="text-black">private key for</span> <span className="text-btnColor  ">Account 2</span>
+                                <span className="text-black">private key for</span> <span className="text-btnColor  ">{accountDetails.name}</span>
                             </div>
                             <div className="bg-green  h-[50px] w-[90%]   mt-3 flex justify-between rounded-md items-center px-3">
-                                <span className="text-black cursor-pointer ">dfseudfiey78fy7f78sdyc78tzxc7yc78tzxc7</span>
+                                <span className="text-black cursor-pointer ">{formateAddress('Private Key')}</span>
 
                                 <span> <BiSolidCopy className="text-btnColor cursor-pointer   " /></span>
                             </div>
 
                             <div className="flex items-center justify-center ">
-                                <button onClick={() => isAccountDetails(false)} className="px-12 py-2  rounded-full text-white border border-white bg-secondary-dark hover:bg-btnColorHover mt-5">Done</button>
+                                <button onClick={() => dispatch(setAccountDetails(true))} className="px-12 py-2  rounded-full text-white border border-white bg-secondary-dark hover:bg-btnColorHover mt-5">Done</button>
                             </div>
                         </div>
 
@@ -56,7 +62,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
                             <div className="w-[110px] h-[90px] bg-btnColor mt-3 ">
                             </div>
                             <div className="bg-green p-2 mt-5 flex justify-center rounded-md items-center">
-                                <p className="text-black cursor-pointer">dfseudfiey78fy7f78sdyc78tzxddac</p>
+                                <p className="text-black cursor-pointer">{formateAddress(accountDetails.address)}</p>
                                 <BiSolidCopy className="text-btnColor mx-2 cursor-pointer" />
                             </div>
                             <div className="flex items-center justify-center ">

@@ -12,6 +12,7 @@ import SentToken from "../components/SentToken";
 import { useEffect } from "react";
 import { getWallet, setCurrentTokenForSend, setOperation, walletGetBalance, walletGetToken, walletTxHistory } from "../redux/wallet";
 import { setsendTokenModal } from "../redux/counter";
+import ImportToken from "../components/ImportToken";
 
 
 const WalletApp = () => {
@@ -24,6 +25,7 @@ const WalletApp = () => {
     const currentAccount = useSelector((state:RootState)=>state.wallet.currentAccount)
     const currentNetwork = useSelector((state:RootState)=>state.wallet.currentNetwork)
     const balance = useSelector((state:RootState)=>state.wallet.balance)
+    const openImportTokenModal = useSelector((state:RootState)=>state.user.openImportTokenModal)
 
 
 
@@ -106,6 +108,14 @@ const WalletApp = () => {
                     <SentToken />
                     :
                     null
+                }
+
+                {
+                openImportTokenModal ? 
+                <ImportToken />
+                :
+                null
+
                 }
 
             </div>

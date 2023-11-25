@@ -6,10 +6,30 @@ import ProtectedRoute from "./ProtectedRoute";
 import Addnetwork from "../pages/AddNetwork";
 import ImportTokens from "../pages/importTokens";
 import LandingPage from "../pages/LandingPage";
+import { BallTriangle } from "react-loader-spinner";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import { RingLoader } from 'react-spinners';
 
 function AppRouter() {
+  const loading = useSelector((state: RootState) => state.wallet.loading)
+
+
   return (
     <div className="">
+      {
+        loading ?
+          <div className="absolute top-0 right-0 bottom-0 left-0 w-full bg-bgShade bg-opacity-60 flex justify-center items-center z-50">
+        <RingLoader
+          color="#5736d6"
+          size={120}
+          speedMultiplier={1}
+        />
+          </div>
+         :
+        null
+      } 
+      
       <Routes>
 
         <Route path="/home" element=

@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
 import ethereumIcon from '../assets/images/Group 55.png';
-import { BsFillPersonFill, BsThreeDotsVertical } from "react-icons/bs";
+import { BsFillPersonFill } from "react-icons/bs";
 import HeaderTokenItem from "./HeaderTokenItem";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -8,22 +9,30 @@ import NetworkDetails from "./NetworkDetails";
 import OpenAccount from "./OpenAccount";
 import CreateAccount from "./CreateAccount";
 import AccountDetails from "./AccountDetails";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { truncate } from "fs/promises";
+import { setOpenAccount } from "../redux/counter";
 
 
 
 const AppHeader = () => {
+
+
+
+    const dispatch = useDispatch();
+    const openAccountModal = useSelector((state: RootState) => state.user.openAccount)
+
+    const openAccountDetails = useSelector((state: RootState) => state.wallet.accountDetails)
 
     const [openNetworkMenu, setOpenNetworkMenu] = useState(false);
     const [openNetworkModal, setOpenNetworkModal] = useState(false);
 
     // const [openNetworkDetailstype, setOpenNetworkDetailstype] = useState("");
 
-    const [openAccount, setOpenAccount] = useState(false);
+    // const [openAccount, setOpenAccount] = useState(false);
     const [isNewAccount, setIsNewAccount] = useState();
-    const [openAccountDetails, setOpenAccountDetails] = useState(false);
+    // const [openAccountDetails, setOpenAccountDetails] = useState(false);
     const [exploreNetwork, setExploreNetwork] = useState(true);
 
     const currentAccount = useSelector((state:RootState)=>state.wallet.currentAccount)
@@ -68,7 +77,7 @@ const handleAddNetwork=()=>{
                             {
                                 wallet["networks"].map((network:any,i:any) => {
                                     return (
-                                        <HeaderTokenItem  setOpenNetworkModal={setOpenNetworkModal}  setExploreNetwork={setExploreNetwork}  network={network} SetIsEditable={ SetIsEditable} />
+                                        <HeaderTokenItem setOpenNetworkModal={setOpenNetworkModal}  setExploreNetwork={setExploreNetwork}  network={network} SetIsEditable={ SetIsEditable} />
                                     )
                                 })
                             }
@@ -87,7 +96,7 @@ const handleAddNetwork=()=>{
 
 
             <div className="flex-1 flex justify-center">
-                <button onClick={() => {setOpenAccount(true)}} className="flex items-center">
+                <button onClick={() => {dispatch(setOpenAccount(true))}} className="flex items-center">
                     <div className="w-8 h-8 bg-bgColor text-white rounded-full flex justify-center items-center cursor-pointer">
                         <BsFillPersonFill />
                     </div>
@@ -98,7 +107,7 @@ const handleAddNetwork=()=>{
 
 
             <div className="flex-1 flex justify-end">
-                <BsThreeDotsVertical className="cursor-pointer" />
+                {/* <BsThreeDotsVertical className="cursor-pointer" /> */}
             </div>
 
             {
@@ -110,7 +119,7 @@ const handleAddNetwork=()=>{
             }
 
             {
-                openAccount ? 
+                openAccountModal ? 
                 <OpenAccount isAccountOpen={(value: boolean) => setOpenAccount(value)} isNewAccount={(value: any) => {setIsNewAccount(value); setOpenAccount(false)}}  />
                 : 
                 null
@@ -125,8 +134,8 @@ const handleAddNetwork=()=>{
 
             }
             {
-                openAccountDetails ? 
-                <AccountDetails isAccountDetails={(value: any) => setOpenAccountDetails(value)} />
+                openAccountDetails.address ? 
+                <AccountDetails />
                 : 
                 null
 

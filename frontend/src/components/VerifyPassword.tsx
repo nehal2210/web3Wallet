@@ -41,7 +41,7 @@ const VerifyPassword = () => {
             // close modal
             dispatch(setPasswordVerify(false))
 
-            dispatch(walletDecrypt(Password,"seedPhrase")).then((res:any)=>{
+            dispatch(walletDecrypt({password: Password, type: "seedPhrase"})).then((res:any)=>{
 
                 console.log("pppppppppppppp",res.payload)
                 dispatch(walletAddAccount({esp:res.payload, password:Password,aountName:account.aountName, accountNumber:account.accountNumber}))
