@@ -50,6 +50,29 @@ const tokekABI = [{
     "stateMutability": "view",
     "type": "function"
 },
+{
+    "constant": false,
+    "inputs": [
+        {
+            "name": "_spender",
+            "type": "address"
+        },
+        {
+            "name": "_value",
+            "type": "uint256"
+        }
+    ],
+    "name": "approve",
+    "outputs": [
+        {
+            "name": "",
+            "type": "bool"
+        }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+},
 
 ]
 async function createWallet(username, password) {
@@ -327,16 +350,16 @@ const sendNativeToken = async ()=>{
 // generateAccounts()
 
 
-function timeConverter(UNIX_timestamp){
-    var a = new Date(UNIX_timestamp * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
+// function timeConverter(UNIX_timestamp){
+//     var a = new Date(UNIX_timestamp * 1000);
+//     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+//     var year = a.getFullYear();
+//     var month = months[a.getMonth()];
+//     var date = a.getDate();
 
-    var time = date + ' ' + month + ' ' + year;
-    return time;
-  }
+//     var time = date + ' ' + month + ' ' + year;
+//     return time;
+//   }
 
 async function main() {
 
@@ -401,26 +424,35 @@ async function main() {
     // console.log(esp)
     // sendNativeToken()
 
-    let address = "0xa3050aE9cb69Dfd04784Eb24b732bedf1797347b";
-let etherscanProvider = new ethers.providers.EtherscanProvider("sepolia");
+//     let address = "0xa3050aE9cb69Dfd04784Eb24b732bedf1797347b";
+// let etherscanProvider = new ethers.providers.EtherscanProvider("sepolia");
 
-const h = await etherscanProvider.getHistory(address)
+// const h = await etherscanProvider.getHistory(address)
 
-const sh = h.sort(function(a, b){return b.timestamp - a.timestamp});
-console.log(sh)
-let arr = []
-for (let index = 0; index < sh.length; index++) {
-    arr.push({
-hash:sh[index].hash,
-action: sh[index].from === address ? "Sent":"Recieved",
-date: timeConverter(sh[index].timestamp),
-amount: ethers.utils.formatEther(sh[index].value)
-    })
+// const sh = h.sort(function(a, b){return b.timestamp - a.timestamp});
+// console.log(sh)
+// let arr = []
+// for (let index = 0; index < sh.length; index++) {
+//     arr.push({
+// hash:sh[index].hash,
+// action: sh[index].from === address ? "Sent":"Recieved",
+// date: timeConverter(sh[index].timestamp),
+// amount: ethers.utils.formatEther(sh[index].value)
+//     })
     
-}
+// }
 
-console.log(arr)
+// console.log(arr)
 
+
+const provider = new ethers.providers.JsonRpcProvider("https://tiniest-old-wish.ethereum-goerli.quiknode.pro/ca2bb8aad57ca67196d952609aef4dd1b7ae3799/")
+pk = "f7feba3bf0d43cfca9479c1110af88ec71a5a354bcaeff14b09f349b56948638"
+const wallet = new ethers.Wallet(pk,provider)
+const contract = new ethers.Contract("0x62bD2A599664D421132d7C54AB4DbE3233f4f0Ae",tokekABI,wallet)
+
+const tx = await contract.approve("0x4BC8E2c58C4210098D3B16b24E2a1Ec64e3bFf22",ethers.utils.parseEther("10"))
+await tx.wait()
+console.log(tx)
 }
 
 main()
