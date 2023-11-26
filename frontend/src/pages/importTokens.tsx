@@ -12,7 +12,7 @@ import { walletAddToken } from "../redux/wallet";
 
 
 
-const ImportTokens = () => {
+const ImportPreTokens = () => {
 
     const [showSendToken, setShowSendToken] = useState(false);
     const  network  = useSelector((state:RootState)=>state.wallet.currentNetwork)
@@ -128,4 +128,4 @@ console.log(token)
     )
 }
 
-export default ImportTokens;
+export default ImportPreTokens;

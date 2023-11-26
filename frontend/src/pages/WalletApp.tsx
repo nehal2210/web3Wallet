@@ -12,7 +12,9 @@ import SentToken from "../components/SentToken";
 import { useEffect, useState } from "react";
 import { getWallet, setCurrentTokenForSend, setOperation, walletGetBalance, walletGetToken, walletTxHistory } from "../redux/wallet";
 import { setsendTokenModal } from "../redux/counter";
+import ImportToken from "../components/ImportToken";
 import { Tooltip } from "antd";
+
 
 
 const WalletApp = () => {
@@ -27,6 +29,7 @@ const WalletApp = () => {
     const currentAccount = useSelector((state:RootState)=>state.wallet.currentAccount)
     const currentNetwork = useSelector((state:RootState)=>state.wallet.currentNetwork)
     const balance = useSelector((state:RootState)=>state.wallet.balance)
+    const openImportTokenModal = useSelector((state:RootState)=>state.user.openImportTokenModal)
 
     const copyToClipboard = () => {
         if (currentAccount.address) {
@@ -118,6 +121,14 @@ const WalletApp = () => {
                     <SentToken />
                     :
                     null
+                }
+
+                {
+                openImportTokenModal ? 
+                <ImportToken />
+                :
+                null
+
                 }
 
             </div>

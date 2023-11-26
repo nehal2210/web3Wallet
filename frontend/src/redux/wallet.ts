@@ -20,7 +20,8 @@ export interface WalletState {
 
   reciever: any,
   operation:string,
-  txHistory:any
+  txHistory:any,
+  accountDetails: any
 
 
 
@@ -39,7 +40,8 @@ currentTokens:[],
 currentToken:{},
 reciever:{},
 operation:"",
-txHistory:[]
+txHistory:[],
+accountDetails: {}
 
 };
 
@@ -186,11 +188,21 @@ export const wallet = createSlice({
 
     },
     changeAccount:(state, action: PayloadAction<any>)=>{
+      state.currentAccount = action.payload
 
     },
 
     setCurrentTokenForSend:(state, action: PayloadAction<any>)=>{
       state.currentToken = action.payload
+    },
+
+    setCurrentNetwork:(state, action: PayloadAction<any>)=>{
+      state.currentNetwork = action.payload
+    },
+
+
+    setAccountDetails:(state, action: PayloadAction<any>)=>{
+      state.accountDetails = action.payload
     },
 
 
@@ -380,6 +392,9 @@ export const {
     saveUser,
     saveReciverDetails,
     setOperation,
-    setCurrentTokenForSend
+    setCurrentTokenForSend,
+    changeAccount,
+    setCurrentNetwork,
+    setAccountDetails
 } = wallet.actions;
 export default wallet.reducer;

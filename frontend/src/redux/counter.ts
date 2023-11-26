@@ -17,7 +17,9 @@ export interface CounterState {
   openSentToken: boolean;
   passwordVerify: boolean;
   password:string;
-  newAccount:any
+  newAccount:any;
+  openAccount: boolean;
+  openImportTokenModal: boolean;
 }
 
 const initialState: CounterState = {
@@ -36,7 +38,9 @@ const initialState: CounterState = {
   openSentToken: false,
   passwordVerify: false,
   password: "",
-  newAccount:{}
+  newAccount:{},
+  openAccount: false,
+  openImportTokenModal: false,
 };
 
 export const addUser = createSlice({
@@ -95,6 +99,12 @@ export const addUser = createSlice({
     },
     setNewAccountFields:(state, action: PayloadAction<any>)=>{
       state.newAccount = action.payload;
+    },
+    setOpenAccount:(state, action: PayloadAction<any>)=>{
+      state.openAccount = action.payload;
+    },
+    setImportTokenModal:(state, action: PayloadAction<any>)=>{
+      state.openImportTokenModal = action.payload;
     }
 
   },
@@ -114,6 +124,8 @@ export const {
   setPasswordVerify,
   setSentTokenModal,
   setPasswordState,
-  setNewAccountFields
+  setNewAccountFields,
+  setOpenAccount,
+  setImportTokenModal
 } = addUser.actions;
 export default addUser.reducer;

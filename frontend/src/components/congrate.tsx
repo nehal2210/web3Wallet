@@ -13,20 +13,20 @@ const Congrate = () => {
                 </div>
 
                 <h2 className="text-5xl text-heading font-bold text-center mt-4">Wallet creation successful</h2>
-                <p className="mt-6 text-white-1 w-[80%]">
+                <p className="mt-6 w-[80%]">
                     You've successfully protected your wallet. Keep your Secret Recovery Phrase safe and secret
                 </p>
 
-                <div className="w-3/5 mx-auto my-4 text-white">
+                <div className="w-3/5 mx-auto my-4 ">
                     <ul className="ml-6 list-disc">
                         <li className="text-btnColor">
-                            <span className="text-white">MetaMask can't recover your Sec.</span>
+                            <span className="">MetaMask can't recover your Sec.</span>
                         </li>
                         <li className="text-btnColor">
-                            <span className="text-white">MetaMask will never ask you for y Save as... Phrase.</span>
+                            <span className="">MetaMask will never ask you for y Save as... Phrase.</span>
                         </li>
                         <li className="text-btnColor">
-                            <span className="text-white">
+                            <span className="">
                                 Never share your Secret Recover or risk your funds being stolen.
                             </span>
                         </li>

@@ -1,10 +1,17 @@
 import { Dropdown, MenuProps } from "antd";
 import { BsGrid, BsThreeDotsVertical } from "react-icons/bs";
+import { formateAddress } from "../services/utils";
+import { useDispatch, useSelector } from "react-redux";
+import { changeAccount, setAccountDetails } from "../redux/wallet";
+import { RootState } from "../redux/store";
+import { setOpenAccount } from "../redux/counter";
 
 
 
-const AccountProfiles = ({address,name}:any) => {
+const AccountProfiles = ({account}:any) => {
 
+    const currentAccount = useSelector((state: RootState) => state.wallet.currentAccount)
+    const dispatch = useDispatch();
     const items: MenuProps['items'] = [
         {
             key: '1',
@@ -13,7 +20,7 @@ const AccountProfiles = ({address,name}:any) => {
                     <div className="border border-btnColor p-1 flex justify-center items-center">
                         <BsGrid className="text-btnColor" />
                     </div>
-                    <p className="text-btnColor sm ms-2 underline">Account Details</p>
+                    <p onClick={(e) => {e.stopPropagation(); dispatch(setAccountDetails(account))}} className="text-btnColor sm ms-2 underline">Account Details</p>
                 </div>
             ),
         }
@@ -21,16 +28,17 @@ const AccountProfiles = ({address,name}:any) => {
 
 
     return (
-        <div className="w-full h-24 px-3 py-2">
-            <div className="w-full px-2 text-black h-full bg-green rounded-lg flex justify-between items-center">
+        <div className="w-full h-24 px-3 py-2 cursor-pointer">
+            <div onClick={() => {dispatch(changeAccount(account)); dispatch(setOpenAccount(false))}} className={currentAccount.address === account.address ? 'w-full px-2 text-black h-full bg-green rounded-lg flex justify-between items-center border-[3px] border-btnColorHover' : 'w-full px-2 text-black h-full bg-green rounded-lg flex justify-between items-center'}>
                 <div className="flex">
                     <div className="w-[50px] h-[50px] bg-btnColor rounded-full">
                         {/* image */}
                     </div>
 
                     <div className="ms-2">
-                        <p>{name}</p>
-                        <p>{address}</p>
+                        <p>{account.name}</p>
+                        {/* <p>{address.substring(0, 10 / 2)}...${address.substring(address.length - 10 / 2)}</p> */}
+                        <p>{formateAddress(account.address)}</p>
                     </div>
                 </div>
 

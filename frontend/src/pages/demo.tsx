@@ -7,7 +7,7 @@ import { BallTriangle } from 'react-loader-spinner'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { DatePicker } from "antd";
-
+import { RingLoader } from 'react-spinners';
 
 function Demo() {
     const count = useSelector((state: RootState) => state.user.value)
@@ -55,6 +55,12 @@ function Demo() {
                 <ToastContainer />
 
                 <DatePicker />
+
+                <RingLoader
+          color="#5736d6"
+          size={100}
+          speedMultiplier={1}
+        />
             </div>
 
             <button onClick={() => dispatch(setPasswordVerify(true))} className="bg-green">Password Verify</button>

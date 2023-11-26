@@ -1,14 +1,15 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { BiPlus, BiRevision } from "react-icons/bi";
 import TokenItem from "./token-item";
 import ActivityItem from "./ActivityItem";
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import { setImportTokenModal } from '../redux/counter';
 
 
 const TokensTable = ({ tableHeading }: any) => {
-
+    const dispatch = useDispatch();
 
     const currentTokens = useSelector((state:RootState)=>state.wallet.currentTokens)
     const activityHistoryData = useSelector((state:RootState)=>state.wallet.txHistory)
@@ -48,14 +49,18 @@ const TokensTable = ({ tableHeading }: any) => {
             </div>
 
             <div className="flex justify-between w-full px-4 mt-1">
-                <div className="flex items-center cursor-pointer">
-                    <div className="w-4 h-4 border border-btnColor flex justify-center items-center">
-                        <BiPlus className="text-btnColor" />
-                    </div>
-                    <Link to='/import-tokens'>
-                    <p className="text-btnColor ms-2 text-sm">Import Token</p>
-                    </Link>
-                </div>
+                {
+                    tableHeading === 'Tokens' ?
+                        <div className="flex items-center cursor-pointer">
+                            <div className="w-4 h-4 border border-btnColor flex justify-center items-center">
+                                <BiPlus className="text-btnColor" />
+                            </div>
+                                <p onClick={() => dispatch(setImportTokenModal(true))} className="text-btnColor ms-2 text-sm">Import Token</p>
+                        </div>
+                        :
+                        <div></div>
+                }
+                
 
                 <div className="flex items-center cursor-pointer">
                     <div className="w-4 h-4 border border-btnColor flex justify-center items-center">

@@ -97,19 +97,19 @@ function Recovery() {
           </div>
 
           {/* Divider Line */}
-          <div className="w-16 h-1 rounded-full bg-btnColor opacity-40"></div>
+          <div className={wallet.address ? 'w-16 h-1 rounded-full bg-btnColor' : 'w-16 h-1 rounded-full bg-btnColor opacity-40'}></div>
 
           <div className="bg-transparant rounded-full flex justify-center items-center h-10 w-10 ">
-            <div className="bg-btnColorHover rounded-full flex justify-center items-center h-7 w-7 opacity-30">
+            <div className={wallet.address ? 'bg-btnColorHover rounded-full flex justify-center items-center h-7 w-7' : 'bg-btnColorHover rounded-full flex justify-center items-center h-7 w-7 opacity-30'}>
               <p className="text-primary">2</p>
             </div>
           </div>
 
           {/* Divider Line */}
-          <div className="w-16 h-1 rounded-full bg-btnColor opacity-40"></div>
+          <div className={checkPhrase ? 'w-16 h-1 rounded-full bg-btnColor' : 'w-16 h-1 rounded-full bg-btnColor opacity-40'}></div>
 
           <div className="bg-transparant rounded-full flex justify-center items-center h-10 w-10 ">
-            <div className="bg-btnColorHover rounded-full flex justify-center items-center h-7 w-7 opacity-30">
+            <div className={checkPhrase ? 'bg-btnColorHover rounded-full flex justify-center items-center h-7 w-7' : 'bg-btnColorHover rounded-full flex justify-center items-center h-7 w-7 opacity-30'}>
               <p className="text-primary">3</p>
             </div>
           </div>
