@@ -9,12 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import TokenConfirmation from "../components/TokenConfirmation";
 import SentToken from "../components/SentToken";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getWallet, setCurrentTokenForSend, setOperation, walletGetBalance, walletGetToken, walletTxHistory } from "../redux/wallet";
 import { setsendTokenModal } from "../redux/counter";
+import { Tooltip } from "antd";
 
 
 const WalletApp = () => {
+    const [tooltipContent, setTooltipContent] = useState('Copy Phrase');
+   
 
   
     const dispatch = useDispatch()
@@ -25,13 +28,20 @@ const WalletApp = () => {
     const currentNetwork = useSelector((state:RootState)=>state.wallet.currentNetwork)
     const balance = useSelector((state:RootState)=>state.wallet.balance)
 
-
+    const copyToClipboard = () => {
+        if (currentAccount.address) {
+          navigator.clipboard.writeText(currentAccount.address);
+          setTooltipContent('Copied!');
+          setTimeout(() => {
+            setTooltipContent('Copy Phrase');
+          }, 2000);
+        }
+      };
+   
 
     useEffect(()=>{
-
         if (!currentAccount.address) {
-            
-            dispatch(getWallet())
+            dispatch(getWallet())   
         }
         else{
 
@@ -70,7 +80,9 @@ const WalletApp = () => {
 
                 <div className=" p-2 mt-5 flex justify-center rounded-md items-center  bg-green">
                     <p className="text-black">{currentAccount.address}</p>
-                    <BiSolidCopy className="text-btnColor mx-2 cursor-pointer" />
+                    <Tooltip title={tooltipContent}>
+                    <BiSolidCopy className="text-btnColor mx-2 cursor-pointer"  onClick={copyToClipboard} />
+                    </Tooltip>
                 </div>
 
                 <div className="mt-4 flex justify-center items-center'">
