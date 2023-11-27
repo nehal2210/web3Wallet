@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { incrementStep } from "../redux/counter";
 import { AiOutlineEye } from "react-icons/ai";
@@ -22,6 +23,7 @@ interface IWallet {
 
 
 function Recovery() {
+  const importWallet = useSelector((state: RootState) => state.wallet.importWallet)
 
   const [tooltipContent, setTooltipContent] = useState('Copy Phrase');
  
@@ -39,9 +41,13 @@ function Recovery() {
 
 
 
-  const setSteps = () => {
-    dispatch(incrementStep(0));
-  };
+  useEffect(() => {
+    if(importWallet){
+      setCheckPhrase(true);
+    }else{
+      setCheckPhrase(false);
+    }
+  }, [importWallet])
 
 
   const revealPhrase = () => {
@@ -97,10 +103,10 @@ function Recovery() {
           </div>
 
           {/* Divider Line */}
-          <div className={wallet.address ? 'w-16 h-1 rounded-full bg-btnColor' : 'w-16 h-1 rounded-full bg-btnColor opacity-40'}></div>
+          <div className={wallet.address || importWallet ? 'w-16 h-1 rounded-full bg-btnColor' : 'w-16 h-1 rounded-full bg-btnColor opacity-40'}></div>
 
           <div className="bg-transparant rounded-full flex justify-center items-center h-10 w-10 ">
-            <div className={wallet.address ? 'bg-btnColorHover rounded-full flex justify-center items-center h-7 w-7' : 'bg-btnColorHover rounded-full flex justify-center items-center h-7 w-7 opacity-30'}>
+            <div className={wallet.address || importWallet ? 'bg-btnColorHover rounded-full flex justify-center items-center h-7 w-7' : 'bg-btnColorHover rounded-full flex justify-center items-center h-7 w-7 opacity-30'}>
               <p className="text-primary">2</p>
             </div>
           </div>
@@ -170,11 +176,13 @@ function Recovery() {
           <PhraseBox wallet={wallet} checkPhrase={checkPhrase} confirmWord={confirmWord} setConfirmWord={setConfirmWord} />
 
           {/* Overflow Container */}
-          {!wallet.address &&
+          {!wallet.address && !importWallet ?
             <div className="w-full flex flex-col justify-center items-center h-full top-0 absolute rounded-lg backdrop-blur-sm bg-bgShade/50 bg-opacity-50">
               <AiOutlineEye className="text-black1" />
               <p className="text-black1">Save in a password manager</p>
-            </div>}
+            </div>
+            :
+            null}
         </div>
         {/* Button */}
         <div className="flex justify-center flex-col items-center">

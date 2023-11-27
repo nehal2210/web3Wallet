@@ -6,8 +6,8 @@ import netwokimage from "../../assets/images/Group 215.png";
 
 const Transaction = () => {
   return (
-    <div className="flex justify-center mt-20  ">
-      <div className="flex justify-evenly w-[70%] ">
+    <div className="flex justify-center w-full h-[80vh]">
+      <div className="flex justify-evenly w-[100%] ">
         <div className="w-[25%] ">
           <img src={transactionimage} alt="transactionimages" />
           <p className="mt-8">

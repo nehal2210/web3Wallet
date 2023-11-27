@@ -21,7 +21,8 @@ export interface WalletState {
   reciever: any,
   operation:string,
   txHistory:any,
-  accountDetails: any
+  accountDetails: any;
+  importWallet: boolean;
 
 
 
@@ -41,7 +42,8 @@ currentToken:{},
 reciever:{},
 operation:"",
 txHistory:[],
-accountDetails: {}
+accountDetails: {},
+importWallet: false,
 
 };
 
@@ -203,6 +205,9 @@ export const wallet = createSlice({
 
     setAccountDetails:(state, action: PayloadAction<any>)=>{
       state.accountDetails = action.payload
+    },
+    setImportWallet:(state, action: PayloadAction<any>)=>{
+      state.importWallet = action.payload
     },
 
 
@@ -395,6 +400,7 @@ export const {
     setCurrentTokenForSend,
     changeAccount,
     setCurrentNetwork,
-    setAccountDetails
+    setAccountDetails,
+    setImportWallet
 } = wallet.actions;
 export default wallet.reducer;

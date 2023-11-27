@@ -1,7 +1,11 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 
 
 function PhraseBox({wallet,checkPhrase,confirmWord,setConfirmWord}:any) {
+  
+const importWallet = useSelector((state: RootState) => state.wallet.importWallet)
  
  const handleInputPhrase = (e: any, i:Number) =>{
   // console.log(i)
@@ -24,10 +28,16 @@ function PhraseBox({wallet,checkPhrase,confirmWord,setConfirmWord}:any) {
                      {i}
                    </div>
                    <div className="w-[75%] ms-1">
-                     {checkPhrase && (i === 0 || i === 4 || i === 8) ?
+                    {
+                      importWallet ?
+                      <input className="w-full h-[30px] border border-btnColor p-2 rounded-md items-center bg-green" type="text" onChange={(e) => handleInputPhrase(e, i)}></input>
+                      :
+                      null
+                    }
+                     {checkPhrase && !importWallet && (i === 0 || i === 4 || i === 8) ?
                        <input className="w-full h-[30px] border border-btnColor p-2 rounded-md items-center bg-green" type="text" onChange={(e) => handleInputPhrase(e, i)}></input>
                        :
-                       <span className="ml-2 text-center w-full">{wallet?.phrase[i] ? wallet?.phrase[i] : word}</span>
+                       <span className="ml-2 text-center w-full">{wallet?.phrase[i] ? wallet?.phrase[i] : ''}</span>
                      }
                    </div>
                  </div>
