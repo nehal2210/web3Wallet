@@ -28,6 +28,7 @@ function MainComponenet() {
           <button
            onClick={() => {dispatch(incrementStep(2)); dispatch(setImportWallet(true))}}
            className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover">Import Wallet</button>
+
         </div>
       </div>
     </>
