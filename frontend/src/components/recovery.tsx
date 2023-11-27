@@ -7,6 +7,7 @@ import { createWallet, generateWallet } from "../services/blockchain";
 import PhraseBox from "./PhraseBox";
 import { BiSolidCopy } from "react-icons/bi"
 import { RootState } from "../redux/store";
+import { Tooltip } from 'antd';
 
 
 
@@ -24,7 +25,8 @@ interface IWallet {
 function Recovery() {
   const importWallet = useSelector((state: RootState) => state.wallet.importWallet)
 
-
+  const [tooltipContent, setTooltipContent] = useState('Copy Phrase');
+ 
   const dispatch = useDispatch();
   const User = useSelector((state: RootState) => state.wallet)
   const [wallet, setWallet] = useState<IWallet>({
@@ -81,6 +83,11 @@ function Recovery() {
 
   const copyPhrase = () => {
     navigator.clipboard.writeText(wallet.phrase.join(","))
+    setTooltipContent('Copied!');
+  
+    setTimeout(() => {
+      setTooltipContent('Copy Phrase');
+    }, 2000); // Reset after 2 seconds (adjust the duration as needed)
   }
 
 
@@ -161,8 +168,10 @@ function Recovery() {
 
           {!checkPhrase && wallet.phrase.length &&
             <div className="w-full flex justify-end p-2">
+            <Tooltip title={tooltipContent}>
               <BiSolidCopy className="text-btnColorHover cursor-pointer" onClick={copyPhrase} />
-            </div>
+            </Tooltip>
+          </div>
           }
           <PhraseBox wallet={wallet} checkPhrase={checkPhrase} confirmWord={confirmWord} setConfirmWord={setConfirmWord} />
 
