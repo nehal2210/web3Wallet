@@ -1,12 +1,11 @@
 import { useDispatch } from "react-redux";
 import { incrementStep } from "../redux/counter";
+import { setImportWallet } from "../redux/wallet";
 
 function MainComponenet() {
   const dispatch = useDispatch();
 
-  const setSteps = () => {
-    dispatch(incrementStep(1));
-  };
+
   return (
     <>
       <div className="w-[50%] h-[60vh] bg-primary card-shadow z-10 bg-opacity-80 rounded-2xl p-12 flex flex-col justify-between">
@@ -21,12 +20,14 @@ function MainComponenet() {
         </div>
         <div className="flex justify-center flex-col items-center">
           <button
-            onClick={setSteps}
+            onClick={() => {dispatch(incrementStep(1)); dispatch(setImportWallet(false))}}
             className="bg-btnColor rounded-full w-48 p-3 text-white-1 hover:bg-btnColorHover"
           >
             Create Wallet
           </button>
-          {/* <button className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover">Import Wallet</button> */}
+          <button
+           onClick={() => {dispatch(incrementStep(2)); dispatch(setImportWallet(true))}}
+           className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover">Import Wallet</button>
         </div>
       </div>
     </>

@@ -8,14 +8,15 @@ import Transaction from "../components/landingPageComponents/Transaction";
 const LandingPage = () => {
   return (
     <>
-<div className="h-[100vh] overflow-y-auto bg-primary absolute ">
-  
-      <NonCostodialWallet />
-      <MultichainWallet/>
-      <EnhancedDualEncription/>
-      <Transaction/>
-      <TheOnlyWallet/>
-      <LandingFooter/>
+      <div className="h-[100vh] overflow-y-auto bg-primary absolute ">
+        <div className="pt-2 px-8">
+          <NonCostodialWallet />
+          <MultichainWallet />
+          <EnhancedDualEncription />
+          <Transaction />
+          <TheOnlyWallet />
+        </div>
+        <LandingFooter />
       </div>
     </>
   );
