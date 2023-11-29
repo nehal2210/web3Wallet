@@ -80,14 +80,14 @@ exports.createWallet = async (req, res) => {
 exports.importWallet = async (req, res) => {
 
     console.log(req.body)
-    const wallet = await Wallet.findOne({ "seedHash": req.body.seedHash })
+    const wallet = await Wallet.findOne({ "seedHash": req.body.seedHash, "password": req.body.passwordHash })
     console.log("wallet", wallet)
     if (!!wallet) {
 
-        return res.status(200).json({ status: "success", message: "wallet has been imported" })
+        return res.status(200).json({ status: "success", message: "wallet has been imported", noOfAccounts: wallet.accountCount, isAuthentic : true })
     }
 
-    return res.status(404).json({ status: "fail", message: "wallet not found" })
+    return res.status(404).json({ status: "fail", message: "wallet not found",isAuthentic : false, noOfAccounts:0 })
 
 
 }

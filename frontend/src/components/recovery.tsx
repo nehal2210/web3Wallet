@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { incrementStep } from "../redux/counter";
+import { incrementStep, setPasswordVerify } from "../redux/counter";
 import { AiOutlineEye } from "react-icons/ai";
 import { useState } from "react"
 import { createWallet, generateWallet } from "../services/blockchain";
@@ -8,6 +8,7 @@ import PhraseBox from "./PhraseBox";
 import { BiSolidCopy } from "react-icons/bi"
 import { RootState } from "../redux/store";
 import { Tooltip } from 'antd';
+import { setIMporteddPhrase, setOperation, walletImport } from '../redux/wallet';
 
 
 
@@ -61,21 +62,35 @@ function Recovery() {
   const ConfirmPhrase = async () => {
     console.log(confirmWord)
 
-    if (confirmWord[0] == wallet.phrase[0] && confirmWord[4] == wallet.phrase[4] && confirmWord[8] == wallet.phrase[8]) {
-
-      // apply loader here
-      console.log("Confirmed")
-      const iscreated = await createWallet(User.username, User.password, wallet)
-      if (iscreated) {
-
-
-        dispatch(incrementStep(3));
-      }
-      return
-
+    if (importWallet) {
+      //Todo:  if word not exist in confirmWord eror produce
+      
+      dispatch(setIMporteddPhrase(Object.values(confirmWord)))
+      dispatch(setOperation("importwallet"))
+      dispatch(setPasswordVerify(true)) 
+      
+    
     }
+    else{
 
-    setWarning(true)
+      if (confirmWord[0] == wallet.phrase[0] && confirmWord[4] == wallet.phrase[4] && confirmWord[8] == wallet.phrase[8]) {
+        
+        // apply loader here
+        console.log("Confirmed")
+        const iscreated = await createWallet(User.username, User.password, wallet)
+        if (iscreated) {
+          
+
+          dispatch(incrementStep(3));
+        }
+        return
+        
+      }
+    }  
+      
+      setWarning(true)
+      
+  
 
 
   }

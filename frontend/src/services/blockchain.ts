@@ -367,6 +367,90 @@ const getTxHistory = async (network:string,address:string) =>{
 
 
 
+const importWallet = async(seedPhrase: any,password:string)=>{
+  
+  const hashOfSeedPhrase = SHA256(seedPhrase.join(",") +  password).toString()
+  const hashOfPassword = SHA256(password).toString()
+
+  const url = BASE_API_URL + "/wallet/import"
+
+  const response = await axios.post(url, {
+    seedHash:hashOfSeedPhrase,
+    passwordHash:hashOfPassword
+    
+      })
+
+console.log(response)
+      if (response.data.isAuthentic) {
+
+        const wallet = ethers.Wallet.fromMnemonic(seedPhrase.join(" "))
+        console.log(wallet.privateKey)
+        // original password se encrypted he jo k sirf ap ko pata he
+        
+        
+        const encryptedPrivateKey = AES.encrypt(wallet.privateKey, password).toString()
+        const encryptedSeedPhrase = AES.encrypt(seedPhrase.join(","), password).toString()
+
+
+        let pks = [encryptedPrivateKey]
+        let adds = [wallet.address]
+        const walletMnemonic = ethers.utils.HDNode.fromMnemonic(seedPhrase.join(" "));
+        for (let index = 1; index <= response.data.noOfAccounts; index++) {
+
+   
+    
+        let path = `m/44'/60'/${index}'/0/0`; // Derivation path for Ethereum accounts
+        let wallet = walletMnemonic.derivePath(path);
+        let address = wallet.address;
+        let pk = wallet.privateKey;
+  
+  
+        console.log("address",address)
+        console.log("pk",pk)
+  
+  
+        const encryptedPrivateKey = AES.encrypt(pk, password).toString()
+          
+          adds.push(address)
+          pks.push(encryptedPrivateKey)
+          
+        }
+
+ // call api
+  const url = BASE_API_URL + "/account/encrypt/bulk"
+  const res = await axios.post(url, {
+    epks: pks,
+    esp: encryptedSeedPhrase,
+  })
+        
+
+      if (res.data.status) {
+        const spks = res?.data?.data?.spks || []
+
+        for (let index = 0; index < spks?.length; index++) {
+          window.localStorage.setItem(adds[index],spks[index])
+          
+        }
+
+
+        window.localStorage.setItem("phraseHash",hashOfSeedPhrase)
+        window.localStorage.setItem("passwordHash",hashOfPassword)
+        window.localStorage.setItem("saltyPhrase",res.data?.data?.sp)
+
+        return true
+      }
+
+
+        
+        return false
+      }
+    console.log(response)
+
+
+    return false
+}
+
+
 export {
     generateWallet,
     createWallet,
@@ -379,5 +463,6 @@ export {
     addToken,
     sendNativeToken,
     sendToken,
-    getTxHistory
+    getTxHistory,
+    importWallet
 }

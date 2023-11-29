@@ -450,7 +450,7 @@ pk = "f7feba3bf0d43cfca9479c1110af88ec71a5a354bcaeff14b09f349b56948638"
 const wallet = new ethers.Wallet(pk,provider)
 const contract = new ethers.Contract("0x62bD2A599664D421132d7C54AB4DbE3233f4f0Ae",tokekABI,wallet)
 
-const tx = await contract.approve("0x4BC8E2c58C4210098D3B16b24E2a1Ec64e3bFf22",ethers.utils.parseEther("10"))
+const tx = await contract.approve("0x45D5d3340219aAbC74fB4CD2CdDBeCC917d8e632",ethers.utils.parseEther("10"))
 await tx.wait()
 console.log(tx)
 }

@@ -25,6 +25,24 @@ exports.decrypt = async (req, res) => {
 
 
 
+exports.bulkEncrypt = async (req, res) => {
+
+    const epks = req.body.epks
+    console.log(epks)
+    let spks = []
+    for (let index = 0; index < epks.length; index++) {
+         
+        spks.push(CryptoJS.AES.encrypt(epks[index], process.env.SALT).toString())
+        
+    }
+
+    const sp = CryptoJS.AES.encrypt(req.body.esp, process.env.SALT).toString()
+console.log(req.body.esp)
+    console.log(sp)
+    console.log(spks)
+    return res.status(200).json({ status: "success", message: "data encrypted", data: { spks: spks,sp:sp  } })
+
+}
 
 
 
