@@ -19,6 +19,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
   const accountDetails = useSelector(
     (state: RootState) => state.wallet.accountDetails
   );
+  const pk = useSelector((state: RootState) => state.wallet.esp);
 
   const [tooltipContent, setTooltipContent] = useState("Copy");
   const copyToClipboard = () => {
@@ -29,13 +30,21 @@ const AccountDetails = ({ isAccountDetails }: any) => {
       setTooltipContent("Copy");
     }, 2000);
   };
-  const copyPrivateKeyFor = (content: any) => {
-    navigator.clipboard
-      .writeText(content)
-      .then(() => setTooltipContent("Copied!"))
+  const copyPrivateKeyFor = () => {
+    navigator.clipboard.writeText(pk).then(() => setTooltipContent("Copied!"));
     setTimeout(() => {
       setTooltipContent("Copy");
     }, 2000);
+  };
+  const handleShowcasePrivateKey = () => {
+    dispatch(setOperation("showPK"));
+    dispatch(setPasswordVerify(true));
+    setShowPrivateKey(true);
+  };
+
+  const handleCloseModal = () => {
+    dispatch(setAccountDetails(true));
+    dispatch(erasePk());
   };
 
   return (
@@ -89,16 +98,14 @@ const AccountDetails = ({ isAccountDetails }: any) => {
             </div>
             <div className="bg-green  h-[50px] w-[90%]   mt-3 flex justify-between rounded-md items-center px-3">
               <span className="text-black cursor-pointer ">
-                {formateAddress("Private Key")}
+                {formateAddress(pk)}
               </span>
 
               <span>
                 <Tooltip title={tooltipContent}>
                   <BiSolidCopy
-                    className="text-btnColor mx-2 cursor-pointer"
-                    onClick={() =>
-                      copyPrivateKeyFor(formateAddress("Private Key"))
-                    }
+                    className="text-btnColor cursor-pointer"
+                    onClick={copyPrivateKeyFor}
                   />
                 </Tooltip>
               </span>
@@ -106,7 +113,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
 
             <div className="flex items-center justify-center ">
               <button
-                onClick={() => dispatch(setAccountDetails(true))}
+                onClick={() => handleCloseModal()}
                 className="px-12 py-2  rounded-full text-white border border-white bg-secondary-dark hover:bg-btnColorHover mt-5"
               >
                 Done
@@ -135,7 +142,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
             <div className="flex items-center justify-center ">
               <button
                 onClick={() => {
-                  setShowPrivateKey(true);
+                  handleShowcasePrivateKey();
                 }}
                 className="px-6 py-3 rounded-full text-white border border-white bg-secondary-dark hover:bg-btnColorHover mt-4"
               >
