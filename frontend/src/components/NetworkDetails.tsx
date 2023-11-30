@@ -52,7 +52,7 @@ event.preventDefault()
                 <div className="w-full flex justify-end pt-2 pr-2 text-2xl">
                     <BsX onClick={() => openNet("")} className="text-btnColor cursor-pointer" />
                 </div>
-                <h1 className="text-black text-2xl text-center font-bold">{"Network Details"}</h1>
+                <h1 className="text-black text-2xl text-center font-bold">{isEditable ? "Add Network":"Network Details"}</h1>
 
                 <div className="flex justify-center flex-col mt-4 items-center">
 

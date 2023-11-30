@@ -227,7 +227,10 @@ export const wallet = createSlice({
     },
     setError: (state, action: PayloadAction<any>) => {
       state.error = action.payload
-    }
+    },
+    erasePk: (state) => {
+      state.esp = ''
+    },
 
   },
 
@@ -463,6 +466,7 @@ export const {
   setAccountDetails,
   setImportWallet,
   setIMporteddPhrase,
-  setError
+  setError,
+  erasePk
 } = wallet.actions;
 export default wallet.reducer;

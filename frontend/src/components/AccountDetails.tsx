@@ -7,10 +7,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formateAddress } from "../services/utils";
 import { RootState } from "../redux/store";
-import { setAccountDetails } from "../redux/wallet";
+import { erasePk, setAccountDetails, setOperation } from "../redux/wallet";
 import { Tooltip } from "antd";
 import Avatar, { genConfig } from "react-nice-avatar";
 import QRCode from "react-qr-code";
+import { setPasswordVerify } from "../redux/counter";
 const AccountDetails = ({ isAccountDetails }: any) => {
   const dispatch = useDispatch();
   const [showPrivateKey, setShowPrivateKey] = useState(false);

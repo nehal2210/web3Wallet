@@ -123,7 +123,8 @@ async function decrypt(password:any,type:string,address:string="") {
       })
       console.log("decrypt",decryptResponse.data.data.esp)
       const esp = decryptResponse.data.data.ed
-      return esp
+      const pk = AES.decrypt(esp, password).toString(enc.Utf8)
+      return pk
     }
 
 
@@ -276,15 +277,15 @@ const addToken = async(accountId:string,data:any)=>{
 
 
 
-const sendNativeToken = async (rpcUrl:string,epk:string,password:string,addressTo:string,addressFrom:string,amount:string)=>{
+const sendNativeToken = async (rpcUrl:string,pk:string,password:string,addressTo:string,addressFrom:string,amount:string)=>{
 
     const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
     console.log("native")
     console.log(password)
-    console.log(epk)
+    
     console.log(amount)
     console.log(addressTo)
-    const pk = AES.decrypt(epk, password).toString(enc.Utf8)
+    
     console.log(pk)
     
     const wallet = new ethers.Wallet(pk,provider)
@@ -304,15 +305,14 @@ const sendNativeToken = async (rpcUrl:string,epk:string,password:string,addressT
 };
 
 
-const sendToken = async (rpcUrl:string,epk:string,password:string,addressTo:string,amount:string,tokenAddress:string)=>{
+const sendToken = async (rpcUrl:string,pk:string,password:string,addressTo:string,amount:string,tokenAddress:string)=>{
 
   const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
   console.log("native")
   console.log(password)
-  console.log(epk)
+
   console.log(amount)
   console.log(addressTo)
-  const pk = AES.decrypt(epk, password).toString(enc.Utf8)
   console.log(pk)
   
   const wallet = new ethers.Wallet(pk,provider)

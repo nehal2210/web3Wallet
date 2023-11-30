@@ -7,3 +7,15 @@ token send confirmation screen set
 
 activity me goto reciept ka button daalna he jo scan pr le jaae ga
 
+password screen set krni he
+
+copy paste sb me sahi hona chahiye
+
+network select hone tab close hona chahiye
+
+network select hone pr cheezen is k mutabiq change ho jaaen
+
+
+
+
+
