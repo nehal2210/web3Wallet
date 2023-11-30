@@ -9,8 +9,8 @@ import { formateAddress } from "../services/utils";
 import { RootState } from "../redux/store";
 import { setAccountDetails } from "../redux/wallet";
 import { Tooltip } from "antd";
-
-
+import Avatar, { genConfig } from 'react-nice-avatar'
+import QRCode from "react-qr-code";
 const AccountDetails = ({ isAccountDetails }: any) => {
     const dispatch = useDispatch();
     const [showPrivateKey, setShowPrivateKey] = useState(false);
@@ -38,14 +38,22 @@ const AccountDetails = ({ isAccountDetails }: any) => {
                     <BsX onClick={() => dispatch(setAccountDetails({}))} className="text-btnColor cursor-pointer" />
                 </div>
                 <div className="  w-full ">
-                    <p className="text-heading text-2xl text-center cursor-pointer font-bold ">Show Private key</p>
+                    <p className="text-heading text-2xl text-center cursor-pointer font-bold ">Account Details</p>
                 </div>
                 <div className="flex flex-col justify-center items-center ">
-                    <div className="w-[85px] h-[85px] bg-secondary-dark rounded-full cursor-pointer mt-5">
+                    {/* <div className="w-[85px] h-[85px] bg-secondary-dark rounded-full cursor-pointer mt-5"> */}
                         {/* image */}
-                    </div>
+                    {/* </div> */}
+
+                    <Avatar className="w-[85px] h-[85px]" {...genConfig(accountDetails.address)} />
                     <div className="flex w-full justify-center py-3 cursor-pointer">
-                        <span className="text-black">{accountDetails.name}</span> <span className=" px-4 text-btnColor py-1"></span>
+                        <span className="text-black">{accountDetails.name}</span>
+                         {/* <span className=" px-4 text-btnColor py-1"></span> */}
+                         <div className="px-4 py-1">
+                         {/* <QRCode  value={accountDetails.address} /> */}
+
+                         </div>
+    
                     </div>
                 </div>
                 {
@@ -81,7 +89,8 @@ const AccountDetails = ({ isAccountDetails }: any) => {
 
                         :
                         <div className="flex flex-col justify-center items-center">
-                            <div className="w-[110px] h-[90px] bg-btnColor mt-3 ">
+                            <div className="w-[110px] h-[90px] p-1 mt-3 relative">
+                                <QRCode style={{ height: "100%", maxWidth: "100%", width: "100%" }} value={accountDetails.address} />
                             </div>
                             <div className="bg-green p-2 mt-5 flex justify-center rounded-md items-center">
 

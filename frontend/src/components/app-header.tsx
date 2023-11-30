@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { truncate } from "fs/promises";
 import { setOpenAccount } from "../redux/counter";
-
+import Avatar, { genConfig } from 'react-nice-avatar'
 
 
 const AppHeader = () => {
@@ -97,9 +97,8 @@ const handleAddNetwork=()=>{
 
             <div className="flex-1 flex justify-center">
                 <button onClick={() => {dispatch(setOpenAccount(true))}} className="flex items-center">
-                    <div className="w-8 h-8 bg-bgColor text-white rounded-full flex justify-center items-center cursor-pointer">
-                        <BsFillPersonFill />
-                    </div>
+
+                        <Avatar className="w-8 h-8" {...genConfig(currentAccount.address)} />
                     <p className="ms-4 cursor-pointer">{currentAccount.name}</p>
                     <BiSolidDownArrow className="ms-4 cursor-pointer" size={'12px'} />
                 </button>
