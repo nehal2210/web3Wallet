@@ -6,7 +6,7 @@ import { setConfirmationSendTokenModal, setPasswordVerify, setSentTokenModal } f
 import { RootState } from "../redux/store";
 import { formateAddress } from "../services/utils";
 import { setOperation } from "../redux/wallet";
-
+import Avatar, { genConfig } from 'react-nice-avatar'
 
 const TokenConfirmation = () => {
     
@@ -39,13 +39,13 @@ const TokenConfirmation = () => {
                     <div>
                         <p className="text-heading text-1xl  cursor-pointer font-semibold">Token Confirmation</p>
                     </div>
-                    <AiFillEdit className="text-btnColor cursor-pointer" />
+                    {/* <AiFillEdit className="text-btnColor cursor-pointer" /> */}
                 </div>
 
                 <div className="flex  justify-between  items-center mt-5">
                     <div className="flex bg-green w-[275px] py-4 rounded-xl ">
                         <div className="flex justify-center  items-center w-full ">
-                            <p className="h-10 w-10 rounded-full bg-btnColor "></p>
+                            <Avatar className="h-10 w-10 " {...genConfig(currentAccount.address)} />
                             <p className="ps-5 text-black">{formateAddress(currentAccount.address)}</p>
                         </div>
                     </div>
@@ -55,7 +55,7 @@ const TokenConfirmation = () => {
                     <div>
                         <div className="flex bg-green w-[275px] py-4 rounded-xl ">
                             <div className="flex justify-center  items-center w-full ">
-                                <p className="h-10 w-10 rounded-full bg-btnColor "></p>
+                            <Avatar className="h-10 w-10 " {...genConfig(recieverAccount.address)} />
                                 <p className="ps-5 text-black">{formateAddress(recieverAccount.address)}</p>
                             </div>
                         </div>
@@ -75,7 +75,7 @@ const TokenConfirmation = () => {
                                 <p className="text-black ps-20 text-lg">{recieverAccount.amount} {operation === "sendToken"? token.symbol : currentNetwork.name}</p>
                             </div>
                             <div >
-                                <p className="text-balck text-sm ps-20">$ 1220 USD</p>
+                                {/* <p className="text-balck text-sm ps-20">$ 1220 USD</p> */}
                             </div>
                         </div>
                     </div>
@@ -89,10 +89,10 @@ const TokenConfirmation = () => {
                     </div>
                     <div>
                         <p className="text-black text-xs ps-16">$ 1220 USD</p>
-                        <p className="text-black text-2xl ps-12 py-2">0.2 ETH</p>
+                        <p className="text-black text-2xl ps-12 py-2">{recieverAccount.amount} {operation === "sendToken"? token.symbol : currentNetwork.name}</p>
                         <div className="flex ">
                             <p className="text-btnColor  ">Max Amount:</p>
-                            <p className="text-black text-xs pt-1 ps-2">0.2 ETH</p>
+                            <p className="text-black text-xs pt-1 ps-2">0.0 {operation === "sendToken"? token.symbol : currentNetwork.name}</p>
                         </div>
                     </div>
                 </div>
@@ -105,12 +105,12 @@ const TokenConfirmation = () => {
                         <p className="text-black text-sm">Amount gas fee</p>
                     </div>
                     <div>
-                        <p className="text-black text-xs ps-16">$ 1220 USD</p>
-                        <p className="text-black text-2xl ps-12 py-2">0.2 ETH</p>
-                        <div className="flex ">
+                        {/* <p className="text-black text-xs ps-16">$ 1220 USD</p> */}
+                        <p className="text-black text-2xl ps-12 py-2">{recieverAccount.amount} {operation === "sendToken"? token.symbol : currentNetwork.name} </p>
+                        {/* <div className="flex ">
                             <p className="text-btnColor  ">Max Amount:</p>
                             <p className="text-black text-xs pt-1 ps-2">0.4 ETH</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="w-full h-[4px] bg-btnColor mt-20"></div>

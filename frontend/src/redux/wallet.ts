@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { API, BASE_API_URL, DATABASE, DB_TABLE } from "../constants";
+import { API, BASE_API_URL} from "../constants";
 import axios from "axios";
 import { addNetwork, addToken, createAccount, decrypt, getBalanceOfNative, getBalanceOfTokens, getTxHistory, importWallet, sendNativeToken, sendToken } from "../services/blockchain";
 
@@ -23,6 +23,7 @@ export interface WalletState {
   txHistory: any,
   accountDetails: any;
   importWallet: boolean;
+  loadingCounter : any
   importedPhrase: any;
   error: string
 
@@ -46,15 +47,13 @@ const initialState: WalletState = {
   accountDetails: {},
   importWallet: false,
   importedPhrase: [],
+  loadingCounter : 0,
   error: ''
 };
 
 export const getWallet: any = createAsyncThunk("getWallet", async () => {
 
-  // const db = new Dexie(DATABASE);
-  // const phrases = await db.table(DB_TABLE.SEED_PHRASE).get(1)
-  // console.log("ccccc")
-  // console.log(phrases)
+
   const ph = window.localStorage.getItem("phraseHash")
   console.log(ph)
   const url = BASE_API_URL + API.WALLET + "/get"
@@ -235,71 +234,75 @@ export const wallet = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getWallet.pending, (state, action) => {
-        console.log('pending', action);
+        state.loadingCounter += 1;
         state.loading = true;
+        console.log('pending', action);
         // state.error = null;
       })
       .addCase(getWallet.fulfilled, (state, action) => {
         console.log('fulfilled', action);
-        state.loading = false;
         state.data = action.payload.data.wallet
         state.currentAccount = action.payload.data.wallet.accounts[0]
         state.currentNetwork = action.payload.data.wallet.networks[0]
-        // action.payload.data.wallet.accounts[0].tokens.forEach((e: any) => {
-
-        //   action.payload.data.wallet.networks[0].name === e.network  && state.currentTokens.push(getBalanceOfTokens(e,action.payload.data.wallet.networks[0].providerURL,action.payload.data.wallet.accounts[0].address))
-
-        // });
+        state.loading = false;
+        state.loadingCounter -= 1;
       })
       .addCase(getWallet.rejected, (state, action) => {
         console.log('rejected', action);
         state.loading = false;
+        state.loadingCounter -= 1;
         // state.error = action.error.message;
       })
 
 
       // walletAddNetwork
-
       .addCase(walletAddNetwork.pending, (state, action) => {
         console.log('pending', action);
         state.loading = true;
+        state.loadingCounter += 1;
         // state.error = null;
       })
       .addCase(walletAddNetwork.fulfilled, (state, action) => {
         console.log('fulfilled', action);
-        state.loading = false;
         state.data.networks.push(action.payload.network)
+        state.loading = false;
+        state.loadingCounter -= 1;
       })
       .addCase(walletAddNetwork.rejected, (state, action) => {
         console.log('rejected', action);
         state.loading = false;
+        state.loadingCounter -= 1;
         // state.error = action.error.message;
       })
 
 
-      // wallet DECRYPT SEEDPHRSE
 
+      // wallet DECRYPT SEEDPHRSE
       .addCase(walletDecrypt.pending, (state, action) => {
         console.log('pending', action);
         state.loading = true;
+        state.loadingCounter += 1;
         // state.error = null;
       })
       .addCase(walletDecrypt.fulfilled, (state, action) => {
         console.log('fulfilled', action);
-        state.loading = false;
         state.esp = action.payload
+        state.loading = false;
+        state.loadingCounter -= 1;
       })
       .addCase(walletDecrypt.rejected, (state, action) => {
         console.log('rejected', action);
         state.loading = false;
+        state.loadingCounter -= 1;
         // state.error = action.error.message;
       })
 
-      // wallet Add Account
 
+      // wallet Add Account
       .addCase(walletAddAccount.pending, (state, action) => {
         console.log('pending', action);
         state.loading = true;
+        state.loadingCounter += 1;
         // state.error = null;
       })
       .addCase(walletAddAccount.fulfilled, (state, action) => {
@@ -307,65 +310,75 @@ export const wallet = createSlice({
         state.data.accounts.push(action.payload.account)
         state.currentAccount = action.payload.account
         state.loading = false;
+        state.loadingCounter -= 1;
       })
       .addCase(walletAddAccount.rejected, (state, action) => {
         console.log('rejected', action);
         state.loading = false;
+        state.loadingCounter -= 1;
         // state.error = action.error.message;
       })
 
-      // get balnce
 
+      // get balnce
       .addCase(walletGetBalance.pending, (state, action) => {
         console.log('pending', action);
         state.loading = true;
+        state.loadingCounter += 1;
         // state.error = null;
       })
       .addCase(walletGetBalance.fulfilled, (state, action) => {
         console.log('fulfilled', action);
         state.balance = action.payload
         state.loading = false;
+        state.loadingCounter -= 1;
       })
       .addCase(walletGetBalance.rejected, (state, action) => {
         console.log('rejected', action);
         state.loading = false;
+        state.loadingCounter -= 1;
         // state.error = action.error.message;
       })
 
 
       //walletAddToken
-
       .addCase(walletAddToken.pending, (state, action) => {
         console.log('pending', action);
         state.loading = true;
+        state.loadingCounter += 1;
         // state.error = null;
       })
       .addCase(walletAddToken.fulfilled, (state, action) => {
         console.log('fulfilled', action);
         // state.balance = action.payload
         state.loading = false;
+        state.loadingCounter -= 1;
       })
       .addCase(walletAddToken.rejected, (state, action) => {
         console.log('rejected', action);
         state.loading = false;
+        state.loadingCounter -= 1;
         // state.error = action.error.message;
       })
 
-      //walletsendToken
 
+      //walletsendToken
       .addCase(walletSendToken.pending, (state, action) => {
         console.log('pending', action);
         state.loading = true;
+        state.loadingCounter += 1;
         // state.error = null;
       })
       .addCase(walletSendToken.fulfilled, (state, action) => {
         console.log('fulfilled', action);
         // state.balance = action.payload
         state.loading = false;
+        state.loadingCounter -= 1;
       })
       .addCase(walletSendToken.rejected, (state, action) => {
         console.log('rejected', action);
         state.loading = false;
+        state.loadingCounter -= 1;
         // state.error = action.error.message;
       })
       // walletGetToken
@@ -374,16 +387,19 @@ export const wallet = createSlice({
       .addCase(walletGetToken.pending, (state, action) => {
         console.log('pending', action);
         state.loading = true;
+        state.loadingCounter += 1;
         // state.error = null;
       })
       .addCase(walletGetToken.fulfilled, (state, action) => {
         console.log('fulfilled', action);
         state.currentTokens = action.payload
         state.loading = false;
+        state.loadingCounter -= 1;
       })
       .addCase(walletGetToken.rejected, (state, action) => {
         console.log('rejected', action);
         state.loading = false;
+        state.loadingCounter -= 1;
         // state.error = action.error.message;
       })
 
@@ -393,16 +409,19 @@ export const wallet = createSlice({
       .addCase(walletTxHistory.pending, (state, action) => {
         console.log('pending', action);
         state.loading = true;
+        state.loadingCounter += 1;
         // state.error = null;
       })
       .addCase(walletTxHistory.fulfilled, (state, action) => {
         console.log('fulfilled', action);
         state.txHistory = action.payload
         state.loading = false;
+        state.loadingCounter -= 1;
       })
       .addCase(walletTxHistory.rejected, (state, action) => {
         console.log('rejected', action);
         state.loading = false;
+        state.loadingCounter -= 1;
         // state.error = action.error.message;
       })
 
@@ -413,15 +432,18 @@ export const wallet = createSlice({
       .addCase(walletImport.pending, (state, action) => {
         console.log('pending', action);
         state.loading = true;
+        state.loadingCounter += 1;
         // state.error = null;
       })
       .addCase(walletImport.fulfilled, (state, action) => {
         console.log('fulfilled', action);
         state.loading = false;
+        state.loadingCounter -= 1;
       })
       .addCase(walletImport.rejected, (state, action) => {
         console.log('rejected', action);
         state.loading = false;
+        state.loadingCounter -= 1;
         // state.error = action.error.message;
       })
 

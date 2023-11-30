@@ -13,12 +13,13 @@ import { RingLoader } from 'react-spinners';
 
 function AppRouter() {
   const loading = useSelector((state: RootState) => state.wallet.loading)
+  const loaderCount = useSelector((state: RootState) => state.wallet.loadingCounter)
 
 
   return (
     <div className="">
       {
-        loading ?
+        (loading || loaderCount > 0) ?
           <div className="absolute top-0 right-0 bottom-0 left-0 w-full bg-bgShade bg-opacity-60 flex justify-center items-center z-50">
         <RingLoader
           color="#5736d6"

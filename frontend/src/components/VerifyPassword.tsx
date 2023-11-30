@@ -6,7 +6,7 @@ import { setPasswordState, setPasswordVerify } from "../redux/counter";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { SHA256 } from "crypto-js";
-import { walletAddAccount, walletDecrypt, walletImport, walletSendToken, walletTxHistory } from "../redux/wallet";
+import { walletAddAccount, walletDecrypt, walletGetBalance, walletGetToken, walletImport, walletSendToken, walletTxHistory } from "../redux/wallet";
 import { RootState } from "../redux/store";
 import { useNavigate } from "react-router-dom";
 
@@ -92,6 +92,7 @@ const VerifyPassword = () => {
 
                             // error handle
                             dispatch(walletTxHistory({ address: currentAccount.address, network: currentNetwork.name }))
+                            dispatch(walletGetBalance({ address: currentAccount.address, rpcUrl: currentNetwork.providerURL }))
                         })
 
 
@@ -124,6 +125,8 @@ const VerifyPassword = () => {
 
                             // error handle
                             dispatch(walletTxHistory({ address: currentAccount.address, network: currentNetwork.name }))
+                            dispatch(walletGetToken({tokens:currentAccount.tokens, rpcUrl: currentNetwork.providerURL, address: currentAccount.address, network: currentNetwork.name }))
+
                         })
 
 

@@ -1,7 +1,16 @@
+import { Button } from "antd";
 import { BsFillArrowDownLeftCircleFill, BsFillArrowUpRightCircleFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 
 const ActivityItem = ({ data }: any) => {
+
+    const currentNetwork = useSelector((state:RootState)=>state.wallet.currentNetwork)
+
+    const gotoRecipt = ()=>{
+        window.open(currentNetwork?.scanURL+"/tx/"+data?.hash, "_blank", "noreferrer");
+    }
     return (
         <div className="w-full  my-2 rounded-lg p-4 card-shadow z-10 bg-opacity-80  bg-green">
             <div className="flex justify-between ">
@@ -22,6 +31,7 @@ const ActivityItem = ({ data }: any) => {
                 </div>
                 <div>
                     <p className="text-black font-semibold">{data.amount}</p>
+                    <Button onClick={gotoRecipt}>Receipt</Button>
                     {/* <p className="text-black mt-1 text-xs font-semibold">120</p> */}
                 </div>
             </div>

@@ -1,5 +1,9 @@
 lending page k sides me thora margin brhaan he or us k backlground me jo animation chl rhi he use rok kr 
 circles ko static kr na he.
 
-app k loader ko hr jgaa check krna he
+account details ki screen ko set krna he
+
+token send confirmation screen set
+
+activity me goto reciept ka button daalna he jo scan pr le jaae ga
 
