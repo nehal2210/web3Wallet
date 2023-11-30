@@ -1,5 +1,6 @@
 import AppHeader from "../components/app-header";
 import logo from "../assets/images/logo.png";
+import walletlogo from "../assets/images/wallet_logo.png";
 import { BsInfoLg, BsX } from "react-icons/bs";
 import { Input } from 'antd';
 import { useState, useEffect } from "react";
@@ -69,7 +70,7 @@ const ImportToken = () => {
     return (
         <div className="absolute h-fit z-10 top-0 right-0 bottom-0 left-0 w-full bg-bgColor2 bg-opacity-20 flex flex-col pt-5 items-center">
 
-            <img src={logo} alt="logo" />
+            <img src={walletlogo} alt="logo" />
             <div className="w-[50%]  rounded-3xl mb-2 mt-4 p-4 bg-white-1 card-shadow" >
                 <div className="w-full flex justify-end pt-2 pr-2 text-2xl ">
                     <BsX onClick={() => dispatch(setImportTokenModal(false))} className="text-btnColor cursor-pointer" />

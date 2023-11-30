@@ -1,5 +1,6 @@
 import { BsX } from "react-icons/bs";
 import logo from "../assets/images/logo.png";
+import walletlogo from "../assets/images/wallet_logo.png";
 import { Input } from "antd";
 import { AiOutlineSearch } from "react-icons/ai";
 import AccountProfiles from "./AccountProfiles";
@@ -17,7 +18,7 @@ const OpenAccount = ({ isAccountOpen, isNewAccount, isOpenAccountDetails }: any)
     return (
         <div className="fixed z-10 top-0 right-0 bottom-0 left-0 w-full h-[100vh] bg-bgColor2 bg-opacity-50 flex flex-col pt-5 items-center">
 
-            <img src={logo} alt="logo" />
+            <img src={walletlogo} alt="logo" />
             <div className="w-[25%] pb-4 bg-primary mt-5 border border-white rounded-lg z-40">
                 <div className="w-full flex justify-end pt-2 pr-2 text-2xl">
                     <BsX onClick={() => dispatch(setOpenAccount(false))} className="text-btnColor cursor-pointer" />

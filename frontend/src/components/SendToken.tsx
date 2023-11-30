@@ -1,5 +1,6 @@
 import { BsX } from "react-icons/bs";
 import logo from "../assets/images/logo.png";
+import walletlogo from "../assets/images/wallet_logo.png";
 import EthereumIcon from '../assets/images/Group 55.png';
 import { Input } from "antd";
 import { setConfirmationSendTokenModal, setsendTokenModal } from "../redux/counter";
@@ -45,7 +46,7 @@ const SendToken = () => {
     return (
         <div className="fixed z-10 top-0 right-0 bottom-0 left-0 w-full h-[100vh] bg-bgColor2 bg-opacity-50 flex flex-col pt-5 items-center">
 
-            <img src={logo} alt="logo" />
+            <img src={walletlogo} alt="logo" />
 
             <div className="w-[35%]  rounded-3xl bg-white card-shadow mt-4 py-4 px-6">
                 <div className="w-full flex justify-between items-center pt-2 pr-2 text-2xl ">
@@ -80,7 +81,7 @@ const SendToken = () => {
                 <div className="flex justify-between mt-6">
                     <p>Amount</p>
                     <div className="w-[70%] p-4 bg-green rounded-xl">
-                    <Input name="amount" value={sendTokenData.amount} onChange={handleChange} className="text-black  border-btnColor bg-green " suffix={<span className="flex"><img  src={EthereumIcon} alt="Ethereum Icon" /> <p className="ms-2">{operation === "sendToken" ? token.symbol:token.name}</p></span>}   />
+                    <Input name="amount" value={sendTokenData.amount} onChange={handleChange} className="text-black   border-btnColor bg-greens " suffix={<span className="flex"><img  src={EthereumIcon} alt="Ethereum Icon" /> <p className="ms-2">{operation === "sendToken" ? token.symbol:token.name}</p></span>}   />
                       
 
                     </div>

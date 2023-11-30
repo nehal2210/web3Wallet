@@ -7,7 +7,7 @@ import { createWallet, generateWallet } from "../services/blockchain";
 import PhraseBox from "./PhraseBox";
 import { BiSolidCopy } from "react-icons/bi"
 import { RootState } from "../redux/store";
-import { Tooltip } from 'antd';
+import { Input, Tooltip } from 'antd';
 import { setIMporteddPhrase, setOperation, walletImport } from '../redux/wallet';
 
 
@@ -159,22 +159,36 @@ function Recovery() {
           </p>
 
           {/* Tips Section */}
-          <div className="w-3/5 mx-auto my-1 text-black1">
-            <h6 className="ml-1">Tips:</h6>
-            <ul className="ml-6 list-disc">
-              <li className="text-btnColor">
-                <span className="text-black1">Save in a password manager</span>
-              </li>
-              <li className="text-btnColor">
-                <span className="text-black1">Store in a safe deposit box</span>
-              </li>
-              <li className="text-btnColor">
-                <span className="text-black1">
-                  Write down and store in multiple secret places
-                </span>
-              </li>
-            </ul>
-          </div>
+          {
+            !importWallet ?
+            <div className="w-3/5 mx-auto my-1 text-black1">
+              <h6 className="ml-1">Tips:</h6>
+              <ul className="ml-6 list-disc">
+                <li className="text-btnColor">
+                  <span className="text-black1">Save in a password manager</span>
+                </li>
+                <li className="text-btnColor">
+                  <span className="text-black1">Store in a safe deposit box</span>
+                </li>
+                <li className="text-btnColor">
+                  <span className="text-black1">
+                    Write down and store in multiple secret places
+                  </span>
+                </li>
+              </ul>
+            </div>
+            :
+              <div className='w-[82%] mx-auto flex my-2'>
+                <Input className="bg-green border-none placeholder-gray px-2 text-black text-lg mt-1" type='text' placeholder='cake,wear,find,word,less,save,good,tips,place,only,keep,name' />
+                <button
+                  onClick={() => { ConfirmPhrase() }}
+                  className='bg-btnColor rounded-full w-24 ms-3 p-1 text-white-1 mt-2 hover:bg-btnColorHover'
+                >
+                  Confirm
+                </button>
+              </div>
+          }
+          
         </div>
 
         {/* Password Section */}
@@ -191,7 +205,7 @@ function Recovery() {
           <PhraseBox wallet={wallet} checkPhrase={checkPhrase} confirmWord={confirmWord} setConfirmWord={setConfirmWord} />
 
           {/* Overflow Container */}
-          {!wallet.address && !importWallet ?
+          {!wallet.address && importWallet ?
             <div className="w-full flex flex-col justify-center items-center h-full top-0 absolute rounded-lg backdrop-blur-sm bg-bgShade/50 bg-opacity-50">
               <AiOutlineEye className="text-black1" />
               <p className="text-black1">Save in a password manager</p>
@@ -206,9 +220,9 @@ function Recovery() {
 
           {checkPhrase ?
             <button
-              // disabled={true}
+              disabled={importWallet}
               onClick={() => { ConfirmPhrase() }}
-              className="bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover"
+              className={importWallet ? 'bg-green rounded-full w-48 p-3 text-white-1 mt-4' :'bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover'}
             >
               Confirm
             </button>
