@@ -19,7 +19,7 @@ import { Tooltip } from "antd";
 
 
 const WalletApp = () => {
-    const [tooltipContent, setTooltipContent] = useState('Copy Phrase');
+    const [tooltipContent, setTooltipContent] = useState('Copy');
    
 
   
@@ -37,7 +37,7 @@ const WalletApp = () => {
           navigator.clipboard.writeText(currentAccount.address);
           setTooltipContent('Copied!');
           setTimeout(() => {
-            setTooltipContent('Copy Phrase');
+            setTooltipContent('Copy');
           }, 2000);
         }
       };
