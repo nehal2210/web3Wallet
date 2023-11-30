@@ -23,7 +23,8 @@ export interface WalletState {
   txHistory: any,
   accountDetails: any;
   importWallet: boolean;
-  importedPhrase: any
+  importedPhrase: any;
+  error: string
 
 
 }
@@ -44,7 +45,8 @@ const initialState: WalletState = {
   txHistory: [],
   accountDetails: {},
   importWallet: false,
-  importedPhrase: []
+  importedPhrase: [],
+  error: ''
 };
 
 export const getWallet: any = createAsyncThunk("getWallet", async () => {
@@ -223,6 +225,9 @@ export const wallet = createSlice({
     },
     setIMporteddPhrase: (state, action: PayloadAction<any>) => {
       state.importedPhrase = action.payload
+    },
+    setError: (state, action: PayloadAction<any>) => {
+      state.error = action.payload
     }
 
   },
@@ -435,6 +440,7 @@ export const {
   setCurrentNetwork,
   setAccountDetails,
   setImportWallet,
-  setIMporteddPhrase
+  setIMporteddPhrase,
+  setError
 } = wallet.actions;
 export default wallet.reducer;

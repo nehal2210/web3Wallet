@@ -35,6 +35,8 @@ module.exports = {
       "header-gradient2": "#e2cdf42e",
       "font-color": "#130621",
       "bg-color": "#260312",
+      "danger": '#ff0000',
+      "danger-light": '#f2a6a6'
     },
     fontFamily: {
       sans: ["Graphik", "sans-serif"],
