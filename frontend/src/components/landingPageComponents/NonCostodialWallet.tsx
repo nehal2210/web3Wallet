@@ -1,4 +1,5 @@
 import logo from "../../assets/images/logo.png";
+import walletlogo from "../../assets/images/wallet_logo.png";
 import Rectangle from "../../assets/images/Rectangle.png";
 import criptolock from "../../assets/images/criptolock.gif"
 
@@ -7,7 +8,7 @@ const NonCostodialWallet = () => {
     return (
         <div className="flex justify-between placeholder w-full h-[98vh]">
             <div className="text-black w-full">
-                <img className="w-16" src={logo} alt="logo" />
+                <img className="w-36" src={walletlogo} alt="logo" />
                 <div className="w-full pt-10 flex justify-between">
                     <div>
                         <h1 className="mt-20 text-7xl font-bold ">Non-Costodial <span className="font-bold text-btnColor">Wallet</span></h1>
