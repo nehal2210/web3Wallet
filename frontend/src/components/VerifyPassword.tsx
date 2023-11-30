@@ -15,7 +15,7 @@ const VerifyPassword = () => {
     const dispatch = useDispatch();
     const [Password, SetPassword] = useState("")
     const account = useSelector((state: RootState) => state.user.newAccount)
-
+    const accountDetails = useSelector((state: RootState) => state.wallet.accountDetails)
     const wallet = useSelector((state: RootState) => state.wallet)
     const operation = useSelector((state: RootState) => state.wallet.operation)
     const currentNetwork = useSelector((state: RootState) => state.wallet.currentNetwork)
@@ -69,6 +69,15 @@ const VerifyPassword = () => {
                     })
 
                 }
+                else if (operation === "showPK") {
+    
+                        // close modal
+                        
+                        dispatch(walletDecrypt({ password: Password, type: "privateKey",address: accountDetails.address }))
+                        
+                        dispatch(setPasswordVerify(false))
+    
+                    }
                 else if (operation === "sendNativeToken") {
 
 
