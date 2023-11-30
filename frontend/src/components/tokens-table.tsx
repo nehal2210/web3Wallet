@@ -6,6 +6,7 @@ import ActivityItem from "./ActivityItem";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { setImportTokenModal } from '../redux/counter';
+import { getWallet } from "../redux/wallet";
 
 
 const TokensTable = ({ tableHeading }: any) => {
@@ -13,6 +14,11 @@ const TokensTable = ({ tableHeading }: any) => {
 
     const currentTokens = useSelector((state:RootState)=>state.wallet.currentTokens)
     const activityHistoryData = useSelector((state:RootState)=>state.wallet.txHistory)
+
+
+    const handleRefresh = () =>{
+        dispatch(getWallet())
+    }
 
     return (
         <div className="w-[48%] h-[340px] rounded-xl  flex flex-col items-center p-2 card-shadow bg-opacity-80">
@@ -66,7 +72,7 @@ const TokensTable = ({ tableHeading }: any) => {
                     <div className="w-4 h-4 border border-btnColor flex justify-center items-center">
                         <BiRevision className="text-btnColor" />
                     </div>
-                    <p className="text-btnColor ms-2 text-sm">Refresh List</p>
+                    <p  onClick={handleRefresh} className="text-btnColor ms-2 text-sm">Refresh List</p>
                 </div>
             </div>
 
