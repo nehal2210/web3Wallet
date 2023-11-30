@@ -1,6 +1,7 @@
 import { BiSolidRightArrowAlt } from "react-icons/bi";
 import { BsX } from "react-icons/bs";
 import logo from "../assets/images/logo.png";
+import walletlogo from "../assets/images/wallet_logo.png";
 import { useDispatch } from "react-redux";
 import { setConfirmationSendTokenModal, setSentTokenModal } from "../redux/counter";
 
@@ -12,7 +13,7 @@ const SentToken = () => {
     return (
         <div className="absolute z-10 top-0 right-0 bottom-0 left-0 w-full bg-bgColor2 bg-opacity-20 flex flex-col pt-5 items-center">
 
-            <img src={logo} alt="logo" />
+            <img src={walletlogo} alt="logo" />
             <div className="rounded-3xl bg-white  p-4 w-[50%] px-8  absolute top-10 h-[90vh]">
                 <div className="w-full flex justify-between items-center pt-2 pr-2 text-2xl ">
                     <p className="text-heading text-3xl text-start cursor-pointer font-semibold">Sent</p>

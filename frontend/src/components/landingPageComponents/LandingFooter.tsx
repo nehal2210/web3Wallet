@@ -1,12 +1,14 @@
 
 import logo from "../../assets/images/logo.png";
+import walletlogo from "../../assets/images/wallet_logo.png";
+
 
 const LandingFooter = () => {
     return (
         <div className="bg-bgShade w-full mt-16 ">
             <div className="flex ms-12 pb-10">
                 <div className="mt-12">
-                    <img className="w-16 " src={logo} alt="logo" />
+                    <img className="w-36 " src={walletlogo} alt="logo" />
                     <h1 className="text-2xl font-semibold mt-8">Download Chrome Extention</h1>
                     <button className="bg-secondary-dark text-white rounded-full w-52 h-12 mt-4 ">Download Extention</button>
 

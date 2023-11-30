@@ -1,5 +1,6 @@
 import AppHeader from "../components/app-header";
 import logo from "../assets/images/logo.png";
+import walletlogo from "../assets/images/wallet_logo.png";
 import { BsFillForwardFill, BsInfoLg, BsX } from "react-icons/bs";
 import { Input } from "antd";
 import EthereumIcon from "../assets/images/Group 55.png";
@@ -9,8 +10,8 @@ import { BiSolidRightArrowAlt } from "react-icons/bi";
 const Addnetwork = () => {
   return (
     <div className="flex flex-col justify-center items-center m-4">
-      <div className="w-16">
-        <img src={logo} alt="Logo" />
+      <div className="w-36">
+        <img src={walletlogo} alt="Logo" />
       </div>
 
       <div className="w-[80%] p-4 bg-primary mt-3 rounded-2xl flex flex-col items-center card-shadow z-10 bg-opacity-80">
