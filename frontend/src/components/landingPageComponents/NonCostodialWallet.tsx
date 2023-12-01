@@ -6,9 +6,10 @@ import criptolock from "../../assets/images/criptolock.gif"
 
 const NonCostodialWallet = () => {
     return (
-        <div className="flex justify-between placeholder w-full h-[80vh] px-10">
+
+        <div className="flex justify-between placeholder w-full h-[80vh] px-10 ">
             <div className="text-black w-full">
-                <img className="w-36" src={walletlogo} alt="logo" />
+                <img className="w-36 -ms-8" src={walletlogo} alt="logo" />
                 <div className="w-full pt-10 flex justify-between">
                     <div>
                         <h1 className="mt-20 text-7xl font-bold ">Non-Costodial <span className="font-bold text-btnColor">Wallet</span></h1>
