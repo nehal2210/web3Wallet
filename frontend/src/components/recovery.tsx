@@ -26,7 +26,7 @@ interface IWallet {
 function Recovery() {
   const importWallet = useSelector((state: RootState) => state.wallet.importWallet)
 
-  const [tooltipContent, setTooltipContent] = useState('Copy Phrase');
+  const [tooltipContent, setTooltipContent] = useState('Copy');
  
   const dispatch = useDispatch();
   const User = useSelector((state: RootState) => state.wallet)
@@ -106,7 +106,7 @@ function Recovery() {
     setTooltipContent('Copied!');
   
     setTimeout(() => {
-      setTooltipContent('Copy Phrase');
+      setTooltipContent('Copy');
     }, 2000); // Reset after 2 seconds (adjust the duration as needed)
   }
 
