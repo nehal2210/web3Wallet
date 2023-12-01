@@ -1,4 +1,4 @@
-import AppHeader from "../components/app-header";
+import AppHeader from "./AppHeader";
 import logo from "../assets/images/logo.png";
 import walletlogo from "../assets/images/wallet_logo.png";
 import { BsInfoLg, BsX } from "react-icons/bs";

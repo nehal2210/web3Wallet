@@ -312,6 +312,7 @@ export const wallet = createSlice({
         console.log('fulfilled', action);
         state.data.accounts.push(action.payload.account)
         state.currentAccount = action.payload.account
+        state.data.accountCount += 1;
         state.loading = false;
         state.loadingCounter -= 1;
       })
