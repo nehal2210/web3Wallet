@@ -6,7 +6,8 @@ import netwokimage from "../../assets/images/Group 215.png";
 
 const Transaction = () => {
   return (
-    <div className="flex   h-[80vh]">
+
+    <div className="flex   h-[80vh] animated-circle-landing-page">
       <div className="flex justify-around  w-full ">
         <div className="w-[25%] ">
           <img src={transactionimage} alt="transactionimages" />
