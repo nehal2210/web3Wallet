@@ -1,9 +1,9 @@
 lending page k sides me thora margin brhaan he or us k backlground me jo animation chl rhi he use rok kr 
-circles ko static kr na he.
+circles ko static kr na he. done
 
-account details ki screen ko set krna he
+account details ki screen ko set krna he done
 
-token send confirmation screen set
+token send confirmation screen set 
 
 activity me goto reciept ka button daalna he jo scan pr le jaae ga
 
@@ -18,4 +18,11 @@ network select hone pr cheezen is k mutabiq change ho jaaen
 
 wallet ki api 
 
+
+shayan
+feature,simple,ride,harsh,burst,liar,unit,top,misery,hub,right,among
+0xBf591a4b2E2845E6514049a0319ca8fCF2eA2320
+0xBf591a4b2E2845E6514049a0319ca8fCF2eA2320
+0x68d847f57eb61e7ffbe059c3bc341c2eb2a1ea28abe7f7770519f3ea97a5fb1b
+Add acount k naam me msla he
 

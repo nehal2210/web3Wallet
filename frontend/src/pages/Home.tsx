@@ -3,7 +3,7 @@ import MainComponenet from "../components/main";
 import { RootState } from "../redux/store";
 import SignUp from "../components/sign-up";
 import Recovery from "../components/recovery";
-import Congrate from "../components/congrate";
+import CongrateScreen from "../components/CongrateScreen";
 import WalletApp from "./WalletApp";
 
 function Home() {
@@ -18,7 +18,7 @@ function Home() {
       case 2:
         return <Recovery />;
       case 3:
-        return <Congrate />;
+        return <CongrateScreen />;
       case 4:
           return <WalletApp />;
       default:

@@ -250,13 +250,19 @@ const getBalanceOfTokens = async(tokens:any,rpcUrl:string,address:string,current
 
 const getTokenDetail = async(address:string,rpcUrl:string)=>{
 
-    const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
-
-    const contract = new  ethers.Contract(address,ERC20_ABI,provider)
-
-  
-    const res = await  Promise.all([contract.name(),contract.symbol(),contract.decimals()])
-    return res
+    try {
+    
+      const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+      const contract = new  ethers.Contract(address,ERC20_ABI,provider)
+      const res = await  Promise.all([contract.name(),contract.symbol(),contract.decimals()])
+      return res
+      
+    } catch (error) {
+    
+      throw "Contract Address not Correct";
+      
+    }
+    
 
 }
 

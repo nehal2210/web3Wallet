@@ -354,7 +354,7 @@ export const wallet = createSlice({
       })
       .addCase(walletAddToken.fulfilled, (state, action) => {
         console.log('fulfilled', action);
-        // state.balance = action.payload
+        state.currentTokens.push({...action.payload.token, balance : "0.0"})
         state.loading = false;
         state.loadingCounter -= 1;
       })
