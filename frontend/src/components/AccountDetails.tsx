@@ -63,20 +63,13 @@ const AccountDetails = ({ isAccountDetails }: any) => {
           </p>
         </div>
         <div className="flex flex-col justify-center items-center ">
-          {/* <div className="w-[85px] h-[85px] bg-secondary-dark rounded-full cursor-pointer mt-5"> */}
-          {/* image */}
-          {/* </div> */}
-
           <Avatar
-            className="w-[85px] h-[85px]"
+            className="w-[85px] h-[85px] mt-4"
             {...genConfig(accountDetails.address)}
           />
-          <div className="flex w-full justify-center py-3 cursor-pointer">
-            <span className="text-black">{accountDetails.name}</span>
-            {/* <span className=" px-4 text-btnColor py-1"></span> */}
-            <div className="px-4 py-1">
-              {/* <QRCode  value={accountDetails.address} /> */}
-            </div>
+          <div className="flex w-full justify-center cursor-pointer">
+            <span className="text-center  text-black">{accountDetails.name}</span>
+            
           </div>
         </div>
         {showPrivateKey ? (
@@ -96,8 +89,8 @@ const AccountDetails = ({ isAccountDetails }: any) => {
               <span className="text-black">private key for</span>{" "}
               <span className="text-btnColor  ">{accountDetails.name}</span>
             </div>
-            <div className="bg-green  h-[50px] w-[90%]   mt-3 flex justify-between rounded-md items-center px-3">
-              <span className="text-black cursor-pointer ">
+            <div className="bg-green  h-[50px] w-[90%]  mt-3 flex justify-between rounded-md items-center px-3">
+              <span className="text-black text-center w-full cursor-pointer ">
                 {formateAddress(pk)}
               </span>
 
@@ -128,7 +121,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
                 value={accountDetails.address}
               />
             </div>
-            <div className="bg-green p-2 mt-5 flex justify-center rounded-md items-center">
+            <div className="bg-green p-2 mt-3 flex justify-center rounded-md items-center">
               <p className="text-black cursor-pointer">
                 {formateAddress(accountDetails.address)}
               </p>
@@ -144,7 +137,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
                 onClick={() => {
                   handleShowcasePrivateKey();
                 }}
-                className="px-6 py-3 rounded-full text-white border border-white bg-secondary-dark hover:bg-btnColorHover mt-4"
+                className="px-6 py-3 mt-3 rounded-full text-white border border-white bg-secondary-dark hover:bg-btnColorHover mt-4"
               >
                 Show private key
               </button>

@@ -3,7 +3,7 @@ import walletlogo from "../assets/images/wallet_logo.png";
 import { BsThreeDotsVertical, BsFillPersonFill } from "react-icons/bs";
 import { BiSolidCopy, BiSolidDownArrow, BiSolidSend } from 'react-icons/bi';
 import ethereumIcon from '../assets/images/ethereum-icon.png';
-import AppHeader from "../components/app-header";
+import AppHeader from "../components/AppHeader";
 import TokensTable from "../components/tokens-table";
 import SendToken from "../components/SendToken";
 import { useDispatch, useSelector } from "react-redux";

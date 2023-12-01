@@ -26,7 +26,7 @@ exports.createWallet = async (req, res) => {
 
     const network = new Network({
         name: "Sepolia",
-        providerURL: "https://rpc.sepolia.org",
+        providerURL: "https://ethereum-sepolia.publicnode.com",
         scanURL: "https://sepolia.etherscan.io",
         coinName: "Eth",
         chainId: "11155111"
@@ -34,27 +34,7 @@ exports.createWallet = async (req, res) => {
     })
     await network.save()
 
-    // Second Method
-    // const account = await Account.create({
-    //     name: accountName,
-    //     accountNumber: 0,
-
-    // })
-
-    // await account.create()
-    // first test network sepolia
-
-    // const network = await Network.create({
-    //     name: "Sepolia",
-    //     providerURL: "https://rpc.sepolia.org",
-    //     scanURL: "https://sepolia.etherscan.io",
-    //     coinName: "Eth",
-    //     chainId: "11155111"
-
-    // })
-
-    // await network.create()
-
+ 
     const pk = req.body.pk
     const sp = req.body.sp
 
