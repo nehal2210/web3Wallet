@@ -11,7 +11,7 @@ import { RootState } from "../redux/store";
 import TokenConfirmation from "../components/TokenConfirmation";
 import SentToken from "../components/SentToken";
 import { useEffect, useState } from "react";
-import { getWallet, setCurrentTokenForSend, setOperation, walletGetBalance, walletGetToken, walletTxHistory } from "../redux/wallet";
+import { getWallet, setCurrentTokenForSend, setError, setOperation, walletGetBalance, walletGetToken, walletTxHistory } from "../redux/wallet";
 import { setsendTokenModal } from "../redux/counter";
 import ImportToken from "../components/ImportToken";
 import { Tooltip } from "antd";
@@ -44,17 +44,24 @@ const WalletApp = () => {
    
 
     useEffect(()=>{
-        if (!currentAccount.address) {
-            dispatch(getWallet())   
+        try {
+        
+            if (!currentAccount.address) {
+                dispatch(getWallet())   
+            }
+            else{
+    
+                console.log(currentAccount.address)
+                console.log(currentNetwork.providerURL)
+                dispatch(walletGetBalance({address:currentAccount.address,rpcUrl:currentNetwork.providerURL}))
+                dispatch(walletGetToken({tokens:currentAccount.tokens,rpcUrl:currentNetwork.providerURL, address:currentAccount.address,network:currentNetwork.name}))
+                dispatch(walletTxHistory({address:currentAccount.address,network:currentNetwork.name}))
+            
+            }
+        } catch (error) {
+            dispatch(setError(error))
         }
-        else{
-
-            console.log(currentAccount.address)
-            console.log(currentNetwork.providerURL)
-            dispatch(walletGetBalance({address:currentAccount.address,rpcUrl:currentNetwork.providerURL}))
-            dispatch(walletGetToken({tokens:currentAccount.tokens,rpcUrl:currentNetwork.providerURL, address:currentAccount.address,network:currentNetwork.name}))
-            dispatch(walletTxHistory({address:currentAccount.address,network:currentNetwork.name}))
-        }
+        
 
 
     },[currentAccount.address])
