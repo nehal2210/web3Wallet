@@ -38,6 +38,7 @@ function Recovery() {
 
   const [checkPhrase, setCheckPhrase] = useState(false)
   const [confirmWord, setConfirmWord]: any = useState({})
+  const [phrase, setPhrase]: any = useState("") 
   const [warning, setWarning] = useState(false)
 
 
@@ -64,10 +65,14 @@ function Recovery() {
 
     if (importWallet) {
       //Todo:  if word not exist in confirmWord eror produce
-      
-      dispatch(setIMporteddPhrase(Object.values(confirmWord)))
-      dispatch(setOperation("importwallet"))
-      dispatch(setPasswordVerify(true)) 
+      const listOfWords = phrase.split(",")
+      if (listOfWords.length === 12) {
+        
+        console.log(importWallet) 
+        dispatch(setIMporteddPhrase(listOfWords))
+        dispatch(setOperation("importwallet"))
+        dispatch(setPasswordVerify(true)) 
+      }
       
     
     }
@@ -179,13 +184,7 @@ function Recovery() {
             </div>
             :
               <div className='w-[82%] mx-auto flex my-2'>
-                <Input className="bg-green border-none placeholder-gray px-2 text-black text-lg mt-1" type='text' placeholder='cake,wear,find,word,less,save,good,tips,place,only,keep,name' />
-                <button
-                  onClick={() => { ConfirmPhrase() }}
-                  className='bg-btnColor rounded-full w-24 ms-3 p-1 text-white-1 mt-2 hover:bg-btnColorHover'
-                >
-                  Confirm
-                </button>
+                <Input onChange={(e)=>{setPhrase(e.target.value)}} value={phrase} className="bg-green border-none placeholder-gray px-2 text-black text-lg mt-1" type='text' placeholder='cake,wear,find,word,less,save,good,tips,place,only,keep,name' />
               </div>
           }
           
@@ -202,17 +201,17 @@ function Recovery() {
             </Tooltip>
           </div>
           }
-          <PhraseBox wallet={wallet} checkPhrase={checkPhrase} confirmWord={confirmWord} setConfirmWord={setConfirmWord} />
-
+ 
+         {!importWallet && <PhraseBox wallet={wallet} checkPhrase={checkPhrase} confirmWord={confirmWord} setConfirmWord={setConfirmWord} />}
           {/* Overflow Container */}
-          {!wallet.address && importWallet ?
+          {!wallet.address && !importWallet &&
             <div className="w-full flex flex-col justify-center items-center h-full top-0 absolute rounded-lg backdrop-blur-sm bg-bgShade/50 bg-opacity-50">
               <AiOutlineEye className="text-black1" />
               <p className="text-black1">Save in a password manager</p>
             </div>
-            :
-            null}
+            }
         </div>
+
         {/* Button */}
         <div className="flex justify-center flex-col items-center">
 
@@ -220,9 +219,9 @@ function Recovery() {
 
           {checkPhrase ?
             <button
-              disabled={importWallet}
+            disabled={!phrase}
               onClick={() => { ConfirmPhrase() }}
-              className={importWallet ? 'bg-green rounded-full w-48 p-3 text-white-1 mt-4' :'bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover'}
+              className={!phrase ? 'bg-green rounded-full w-48 p-3 text-white-1 mt-4' :'bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover'}
             >
               Confirm
             </button>

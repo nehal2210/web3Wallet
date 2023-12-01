@@ -151,7 +151,11 @@ const VerifyPassword = () => {
                 console.log("wrong Password")
             }
 
+
         }
+
+
+        dispatch(setPasswordVerify(false))
     }
 
 
