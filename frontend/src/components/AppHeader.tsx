@@ -10,6 +10,7 @@ import Avatar, { genConfig } from 'react-nice-avatar'
 import { useDispatch, useSelector } from "react-redux";
 import ethereumIcon from '../assets/images/Group 55.png';
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
+import { setOpenNetworkMenu } from "../redux/wallet";
 
 
 const AppHeader = () => {
@@ -21,7 +22,7 @@ const AppHeader = () => {
     const [isNewAccount, setIsNewAccount] = useState();
     const [isEditable, SetIsEditable] = useState(false)
     const [exploreNetwork, setExploreNetwork] = useState(true);
-    const [openNetworkMenu, setOpenNetworkMenu] = useState(false);
+    // const [openNetworkMenu, setOpenNetworkMenu] = useState(false);
     const [openNetworkModal, setOpenNetworkModal] = useState(false);
 
     const wallet: any = useSelector((state: RootState) => state.wallet.data)
@@ -29,6 +30,7 @@ const AppHeader = () => {
     const openAccountDetails = useSelector((state: RootState) => state.wallet.accountDetails)
     const currentAccount = useSelector((state: RootState) => state.wallet.currentAccount)
     const currentNetwork = useSelector((state: RootState) => state.wallet.currentNetwork)
+    const openNetworkMenu = useSelector((state: RootState) => state.wallet.openNetworkMenu)
 
     const handleAddNetwork = () => {
         SetIsEditable(true)
@@ -41,7 +43,7 @@ const AppHeader = () => {
         <div className="relative py-2 px-4 flex justify-between items-center w-full bg-white rounded-full shadow-sm shadow-black1 card-shadow z-10 bg-opacity-80">
 
             <div className="flex-1">
-                <button onClick={() => { setOpenNetworkMenu(!openNetworkMenu) }} className="h-[30px] w-fit border border-white flex items-center rounded-md bg-green">
+                <button onClick={() => { dispatch(setOpenNetworkMenu(!openNetworkMenu)) }} className="h-[30px] w-fit border border-white flex items-center rounded-md bg-green">
 
                     <div className="w-5 bg-btnColor h-full rounded-md flex justify-center items-center">
                         <img src={ethereumIcon} alt="blockchain icon" />

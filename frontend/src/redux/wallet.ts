@@ -10,13 +10,14 @@ export interface WalletState {
   username: string;
   password: string;
   esp: string;
-  data: any
-  loading: boolean
-  currentAccount: any
-  currentNetwork: any
-  balance: string
-  currentTokens: any
-  currentToken: any
+  data: any;
+  loading: boolean;
+  currentAccount: any;
+  currentNetwork: any;
+  balance: string;
+  currentTokens: any;
+  currentToken: any;
+  openNetworkMenu: boolean;
 
   reciever: any,
   operation: string,
@@ -48,7 +49,8 @@ const initialState: WalletState = {
   importWallet: false,
   importedPhrase: [],
   loadingCounter : 0,
-  error: ''
+  error: '',
+  openNetworkMenu: false
 };
 
 export const getWallet: any = createAsyncThunk("getWallet", async () => {
@@ -227,6 +229,9 @@ export const wallet = createSlice({
     },
     setError: (state, action: PayloadAction<any>) => {
       state.error = action.payload
+    },
+    setOpenNetworkMenu: (state, action: PayloadAction<any>) => {
+      state.openNetworkMenu = action.payload
     },
     erasePk: (state) => {
       state.esp = ''
@@ -468,6 +473,7 @@ export const {
   setImportWallet,
   setIMporteddPhrase,
   setError,
-  erasePk
+  erasePk,
+  setOpenNetworkMenu
 } = wallet.actions;
 export default wallet.reducer;
