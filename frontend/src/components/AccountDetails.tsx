@@ -114,7 +114,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
             <div className="flex items-center justify-center ">
               <button
                 onClick={() => handleCloseModal()}
-                className="px-12 py-2  rounded-full text-white border border-white bg-secondary-dark hover:bg-btnColorHover mt-5"
+                className="px-12 py-2  rounded-full text-white border border-white bg-btnColor hover:bg-btnColorHover mt-5"
               >
                 Done
               </button>
@@ -144,7 +144,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
                 onClick={() => {
                   handleShowcasePrivateKey();
                 }}
-                className="px-6 py-3 rounded-full text-white border border-white bg-secondary-dark hover:bg-btnColorHover mt-4"
+                className="px-6 py-3 rounded-full text-white border border-white bg-btnColor hover:bg-btnColorHover mt-4"
               >
                 Show private key
               </button>

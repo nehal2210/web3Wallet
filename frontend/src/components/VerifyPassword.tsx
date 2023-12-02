@@ -170,7 +170,7 @@ const VerifyPassword = () => {
                     <Input onChange={(e) => SetPassword(e.target.value)} className="bg-green border-none placeholder-header-gradient2  px-2  text-black text-lg mt-1" type="password" />
                 </div>
                 <div className="flex items-center justify-center ">
-                    <button onClick={handleSubmitPassword} className="px-12 py-2 rounded-full text-white bg-secondary-dark hover:bg-btnColorHover mt-4">save</button>
+                    <button onClick={handleSubmitPassword} className="px-12 py-2 rounded-full text-white bg-btnColor hover:bg-btnColorHover mt-4">save</button>
                 </div>
             </div>
         </div>

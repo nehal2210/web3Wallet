@@ -7,7 +7,7 @@ const Congrate = () => {
 
     return (
         <>
-            <div className="w-[50%] flex justify-center items-center flex-col bg-primary rounded-2xl pb-8">
+            <div className="w-[50%] flex justify-center shadow-2xl shadow-btnColor items-center flex-col bg-primary rounded-2xl pb-8">
                 <div className='mt-8'>
                     <img src={congratIcon} alt='congratulations-icon' />
                 </div>

@@ -55,7 +55,7 @@ const handleAddNetwork=()=>{
             <div className="flex-1">
 
                 <button onClick={() => { setOpenNetworkMenu(!openNetworkMenu) }} className="h-[30px] w-fit border border-white flex items-center rounded-md bg-green">
-                    <div className="w-5 bg-btnColor h-full rounded-md flex justify-center items-center">
+                    <div className="w-5 bg-btnColor hover:bg-btnColorHover h-full rounded-md flex justify-center items-center">
                         <img src={ethereumIcon} alt="blockchain icon" />
                     </div>
                     <p className="text-heading ms-2">{currentNetwork.name}</p>
@@ -84,7 +84,7 @@ const handleAddNetwork=()=>{
                         </div>
     
                         
-                            <button onClick={() =>handleAddNetwork() } className="bg-secondary-dark hover:bg-btnColorHover rounded-full w-40 p-2 text-white-1 mt-4 ms-2">
+                            <button onClick={() =>handleAddNetwork() } className="bg-btnColor hover:bg-btnColorHover rounded-full w-40 p-2 text-white-1 mt-4 ms-2">
                                 Add Network
                             </button>
               

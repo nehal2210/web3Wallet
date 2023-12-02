@@ -10,7 +10,7 @@ const LandingFooter = () => {
                 <div className="mt-12">
                     <img className="w-36 " src={walletlogo} alt="logo" />
                     <h1 className="text-2xl font-semibold mt-8">Download Chrome Extention</h1>
-                    <button className="bg-secondary-dark text-white rounded-full w-52 h-12 mt-4 ">Download Extention</button>
+                    <button className="bg-btnColor hover:bg-btnColorHover text-white rounded-full w-52 h-12 mt-4 ">Download Extention</button>
 
                 </div>
                 <div className="flex mt-12 ms-12">
