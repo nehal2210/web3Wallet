@@ -43,7 +43,7 @@ const AccountDetails = ({ isAccountDetails }: any) => {
   };
 
   const handleCloseModal = () => {
-    dispatch(setAccountDetails(true));
+    dispatch(setAccountDetails({}));
     dispatch(erasePk());
   };
 

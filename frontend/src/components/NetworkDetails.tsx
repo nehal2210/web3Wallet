@@ -6,7 +6,7 @@ import ethIcon from '../assets/images/Group 55.png';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
-import { walletAddNetwork } from "../redux/wallet";
+import { setOpenNetworkMenu, walletAddNetwork } from "../redux/wallet";
 
 const NetworkDetails = ({ openNet,exploreNetwork,isEditable }: any) => {
 
@@ -41,7 +41,8 @@ const handleSubmit = (event:any)=>{
 event.preventDefault()
     console.log(FormData)
     dispatch(walletAddNetwork(FormData))
-
+    dispatch(setOpenNetworkMenu(false))
+    openNet(false)
 }
 
     return (
