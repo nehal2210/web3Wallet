@@ -92,7 +92,7 @@ const WalletApp = () => {
                 <div className="mt-4 flex justify-center items-center'">
                     <p className="text-heading text-xl font-bold">{`${balance} ${currentNetwork.coinName}`}</p>
                     <div  onClick={hanndleSendToken} className="bg-bgColor ms-2 p-2 rounded-full flex justify-center items-center">
-                        <BiSolidSend className="text-white -rotate-45" />
+                        <BiSolidSend className="text-white -rotate-45 cursor-pointer" />
                     </div>
                 </div>
 
