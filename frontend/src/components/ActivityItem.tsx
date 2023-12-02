@@ -31,7 +31,7 @@ const ActivityItem = ({ data }: any) => {
                 </div>
                 <div>
                     <p className="text-black font-semibold">{data.amount}</p>
-                    <Button onClick={gotoRecipt}>Receipt</Button>
+                    <Button className=" bg-btnColorHover hover:bg-secondary-dark  rounded-full text-white-1" onClick={gotoRecipt}>Receipt</Button>
                     {/* <p className="text-black mt-1 text-xs font-semibold">120</p> */}
                 </div>
             </div>
