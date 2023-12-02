@@ -177,7 +177,7 @@ const VerifyPassword = () => {
                 </div>
                 <div className=" flex-col justify-center items-center px-5 mt-2" >
                     <label className="text-black ms-2 ">Enter your Password here</label>
-                    <Input onChange={(e) => SetPassword(e.target.value)} className="bg-green border-none placeholder-header-gradient2  px-2  text-black text-lg mt-1" />
+                    <Input onChange={(e) => SetPassword(e.target.value)} className="bg-green border-none placeholder-header-gradient2  px-2  text-black text-lg mt-1" type="password" />
                 </div>
                 <div className="flex items-center justify-center ">
                     <button onClick={handleSubmitPassword} className="px-12 py-2 rounded-full text-white bg-secondary-dark hover:bg-btnColorHover mt-4">save</button>
