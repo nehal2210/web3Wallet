@@ -12,9 +12,9 @@ import TokenConfirmation from "../components/TokenConfirmation";
 import SentToken from "../components/SentToken";
 import { useEffect, useState } from "react";
 import { getWallet, setCurrentTokenForSend, setError, setOperation, walletGetBalance, walletGetToken, walletTxHistory } from "../redux/wallet";
-import { setsendTokenModal } from "../redux/counter";
+import { setImportTokenModal, setsendTokenModal } from "../redux/counter";
 import ImportToken from "../components/ImportToken";
-import { Tooltip } from "antd";
+import { Modal, Tooltip } from "antd";
 
 
 
@@ -131,13 +131,15 @@ const WalletApp = () => {
                     null
                 }
 
-                {
-                openImportTokenModal ? 
-                <ImportToken />
-                :
-                null
-
-                }
+                <Modal title="Import Token" footer={null} open={openImportTokenModal} onOk={() => dispatch(setImportTokenModal(false))} onCancel={() => dispatch(setImportTokenModal(false))}>
+                    <ImportToken />
+                </Modal>
+                {/* {
+                    openImportTokenModal ?
+                        <ImportToken />
+                        :
+                        null
+                } */}
 
             </div>
         </div>
