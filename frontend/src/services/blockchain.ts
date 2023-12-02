@@ -315,12 +315,12 @@ const sendToken = async (rpcUrl: string, pk: string, password: string, addressTo
 };
 
 
-const getTxHistory = async (network: string, address: string) => {
+const getTxHistory = async (chainId: string, address: string) => {
 
   try {
     
-  
-  const etherscanProvider = new ethers.providers.EtherscanProvider(network.toLowerCase());
+  console.log(chainId)
+  const etherscanProvider = new ethers.providers.EtherscanProvider(Number(chainId));
   const h = await etherscanProvider.getHistory(address)
   const sh = h.sort(function (a: any, b: any) { return b.timestamp - a.timestamp });
 
