@@ -349,6 +349,9 @@ const getTxHistory = async (network: string, address: string) => {
 
 const importWallet = async (seedPhrase: any, password: string) => {
 
+  try {
+    
+ 
   const hashOfSeedPhrase = SHA256(seedPhrase.join(",") + password).toString()
   const hashOfPassword = SHA256(password).toString()
 
@@ -360,11 +363,9 @@ const importWallet = async (seedPhrase: any, password: string) => {
 
   })
 
-  console.log(response)
   if (response.data.isAuthentic) {
 
     const wallet = ethers.Wallet.fromMnemonic(seedPhrase.join(" "))
-    console.log(wallet.privateKey)
     // original password se encrypted he jo k sirf ap ko pata he
 
 
@@ -423,6 +424,12 @@ const importWallet = async (seedPhrase: any, password: string) => {
 
 
   return false
+
+
+} catch (error) {
+  throw "Error: Failed to import Wallet"
+    
+}
 }
 
 
