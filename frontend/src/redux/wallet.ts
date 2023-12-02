@@ -14,11 +14,14 @@ export interface WalletState {
   loading: boolean;
   currentAccount: any;
   currentNetwork: any;
+  currentAccountNumber: any;
+  currentNetworkNumber: any;
+  
   balance: string;
   currentTokens: any;
   currentToken: any;
   openNetworkMenu: boolean;
-
+  
   reciever: any,
   operation: string,
   txHistory: any,
@@ -39,6 +42,8 @@ const initialState: WalletState = {
   data: {},
   currentAccount: {},
   currentNetwork: {},
+  currentAccountNumber: 0,
+  currentNetworkNumber: 0,
   balance: "0.0",
   currentTokens: [],
   currentToken: {},
@@ -217,6 +222,14 @@ export const wallet = createSlice({
       state.currentNetwork = action.payload
     },
 
+    setCurrentNetworkNumber : (state, action: PayloadAction<any>) => {
+      state.currentNetworkNumber = action.payload
+    },
+
+    
+    setCurrentAccountNumber : (state, action: PayloadAction<any>) => {
+      state.currentAccountNumber = action.payload
+    },
 
     setAccountDetails: (state, action: PayloadAction<any>) => {
       state.accountDetails = action.payload
@@ -250,8 +263,8 @@ export const wallet = createSlice({
       .addCase(getWallet.fulfilled, (state, action) => {
         console.log('fulfilled', action);
         state.data = action.payload.data.wallet
-        state.currentAccount = action.payload.data.wallet.accounts[0]
-        state.currentNetwork = action.payload.data.wallet.networks[0]
+        state.currentAccount = action.payload.data.wallet.accounts[state.currentAccountNumber]
+        state.currentNetwork = action.payload.data.wallet.networks[state.currentNetworkNumber]
         state.loading = false;
         state.loadingCounter -= 1;
       })
@@ -474,6 +487,8 @@ export const {
   setIMporteddPhrase,
   setError,
   erasePk,
-  setOpenNetworkMenu
+  setOpenNetworkMenu,
+  setCurrentAccountNumber,
+  setCurrentNetworkNumber
 } = wallet.actions;
 export default wallet.reducer;

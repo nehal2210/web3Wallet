@@ -64,7 +64,7 @@ const WalletApp = () => {
         
 
 
-    },[currentAccount.address])
+    },[currentAccount.address, currentNetwork.name])
 
 
 

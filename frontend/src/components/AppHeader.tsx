@@ -4,7 +4,7 @@ import { RootState } from "../redux/store";
 import AccountAdd from "./AccountAdd";
 import NetworkDetails from "./NetworkDetails";
 import AccountDetails from "./AccountDetails";
-import HeaderTokenItem from "./HeaderTokenItem";
+import NetworkMenue from "./NetworkMenue";
 import { setOpenAccount } from "../redux/counter";
 import Avatar, { genConfig } from 'react-nice-avatar'
 import { useDispatch, useSelector } from "react-redux";
@@ -63,15 +63,15 @@ const AppHeader = () => {
 
 
             {
-                openNetworkMenu ?
+                openNetworkMenu &&
                     <div className="absolute  top-14 w-[30%] h-[26rem] bg-primary border-white border-2 rounded-lg p-2 card-shadow z-10">
                         <p className="text-black m-4 font-semibold ">Add new network</p>
 
                         <div className="px-2 w-full max-h-[300px] h-[270px] overflow-x-auto" id="style-4">
                             {
-                                wallet["networks"].map((network: any, i: any) => {
+                                wallet["networks"].map((network: any, index: any) => {
                                     return (
-                                        <HeaderTokenItem setOpenNetworkModal={setOpenNetworkModal} setExploreNetwork={setExploreNetwork} network={network} SetIsEditable={SetIsEditable} />
+                                        <NetworkMenue networkNumber = {index} setOpenNetworkModal={setOpenNetworkModal} setExploreNetwork={setExploreNetwork} network={network} SetIsEditable={SetIsEditable} />
                                     )
                                 })
                             }
@@ -82,8 +82,7 @@ const AppHeader = () => {
                         </button>
 
                     </div>
-                    :
-                    null
+                
             }
 
             <div className="flex-1 flex justify-center">
