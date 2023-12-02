@@ -102,7 +102,7 @@ const VerifyPassword = () => {
                         dispatch(walletSendToken(data)).then((res: any) => {
 
                          
-                            dispatch(walletTxHistory({ address: currentAccount.address, network: currentNetwork.name }))
+                            dispatch(walletTxHistory({ address: currentAccount.address, chainId: currentNetwork.chainId }))
                             dispatch(walletGetBalance({ address: currentAccount.address, rpcUrl: currentNetwork.providerURL }))
                         })
 
@@ -135,7 +135,7 @@ const VerifyPassword = () => {
                         dispatch(walletSendToken(data)).then((res: any) => {
 
                             // error handle
-                            dispatch(walletTxHistory({ address: currentAccount.address, network: currentNetwork.name }))
+                            dispatch(walletTxHistory({ address: currentAccount.address, chainId: currentNetwork.chainId }))
                             dispatch(walletGetToken({ tokens: currentAccount.tokens, rpcUrl: currentNetwork.providerURL, address: currentAccount.address, network: currentNetwork.name }))
 
                         })

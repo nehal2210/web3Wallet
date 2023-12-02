@@ -55,7 +55,7 @@ const WalletApp = () => {
                 console.log(currentNetwork.providerURL)
                 dispatch(walletGetBalance({address:currentAccount.address,rpcUrl:currentNetwork.providerURL}))
                 dispatch(walletGetToken({tokens:currentAccount.tokens,rpcUrl:currentNetwork.providerURL, address:currentAccount.address,network:currentNetwork.name}))
-                dispatch(walletTxHistory({address:currentAccount.address,network:currentNetwork.name}))
+                dispatch(walletTxHistory({address:currentAccount.address,chainId:currentNetwork.chainId}))
             
             }
         } catch (error) {

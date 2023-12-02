@@ -161,9 +161,9 @@ export const walletSendToken: any = createAsyncThunk("walletSendToken", async (d
 
 export const walletTxHistory: any = createAsyncThunk("walletTxHistory", async (data: any) => {
 
-  const { address, network } = data
+  const { address, chainId } = data
 
-  const res = await getTxHistory(network, address)
+  const res = await getTxHistory(chainId, address)
   console.log(res)
   return res
 
