@@ -10,7 +10,8 @@ import Avatar, { genConfig } from 'react-nice-avatar'
 import { useDispatch, useSelector } from "react-redux";
 import ethereumIcon from '../assets/images/Group 55.png';
 import { BiSolidDownArrow, BiSolidUpArrow } from "react-icons/bi";
-import { setOpenNetworkMenu } from "../redux/wallet";
+import { setAccountDetails, setOpenNetworkMenu } from "../redux/wallet";
+import { Modal } from "antd";
 
 
 const AppHeader = () => {
@@ -99,23 +100,30 @@ const AppHeader = () => {
             <div className="flex-1 flex justify-end">
             </div>
 
-            {
-                openNetworkModal &&
-                <NetworkDetails isEditable={isEditable} exploreNetwork={exploreNetwork} openNet={(value: boolean) => setOpenNetworkModal(value)} />
-            }
+            {/* {
+                openNetworkModal && */}
+                <Modal title={isEditable ? "Add Network":"Network Details"} footer={null} open={openNetworkModal} onOk={() => setOpenNetworkModal(false)} onCancel={() => setOpenNetworkModal(false)}>
+                    <NetworkDetails isEditable={isEditable} exploreNetwork={exploreNetwork} openNet={(value: boolean) => setOpenNetworkModal(value)} />
+                </Modal>
+            {/* } */}
 
-            {
-                openAccountModal &&
-                <AccountMenu isAccountOpen={(value: boolean) => setOpenAccount(value)} isNewAccount={(value: any) => { setIsNewAccount(value); setOpenAccount(false) }} />
-            }
+            {/* {
+                openAccountModal && */}
+                <Modal title="Select An Account" footer={null} open={openAccountModal} onOk={() => dispatch(setOpenAccount(false))} onCancel={() => dispatch(setOpenAccount(false))}>
+                    <AccountMenu isAccountOpen={(value: boolean) => setOpenAccount(value)} isNewAccount={(value: any) => { setIsNewAccount(value); setOpenAccount(false) }} />
+                </Modal>
+            {/* } */}
 
             {
                 isNewAccount && <AccountAdd accountType={isNewAccount} isNewAccount={(value: any) => setIsNewAccount(value)} />
             }
 
-            {
-                openAccountDetails.address && <AccountDetails />
-            }
+            {/* {
+                openAccountDetails.address &&  */}
+                <Modal title="Account Details" footer={null} open={openAccountDetails.address} onOk={() => dispatch(setAccountDetails(false))} onCancel={() => dispatch(setAccountDetails(false))}>
+                    <AccountDetails />
+                </Modal>
+            {/* } */}
 
         </div>
 

@@ -10,7 +10,7 @@ import { BiSolidRightArrowAlt } from "react-icons/bi";
 const Addnetwork = () => {
   return (
     <div className="flex flex-col justify-center items-center m-4">
-      <div className="w-36">
+      {/* <div className="w-36">
         <img src={walletlogo} alt="Logo" />
       </div>
 
@@ -69,7 +69,7 @@ const Addnetwork = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

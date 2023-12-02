@@ -219,9 +219,9 @@ function Recovery() {
 
           {checkPhrase ?
             <button
-            disabled={!phrase}
+            disabled={!phrase && importWallet}
               onClick={() => { ConfirmPhrase() }}
-              className={!phrase ? 'bg-green rounded-full w-48 p-3 text-white-1 mt-4' :'bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover'}
+              className={!phrase && importWallet ? 'bg-green rounded-full w-48 p-3 text-white-1 mt-4' :'bg-btnColor rounded-full w-48 p-3 text-white-1 mt-4 hover:bg-btnColorHover'}
             >
               Confirm
             </button>
