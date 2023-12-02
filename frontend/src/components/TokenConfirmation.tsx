@@ -34,12 +34,8 @@ const TokenConfirmation = () => {
         <div className="fixed z-10 top-0 right-0 bottom-0 left-0 w-full h-[100vh] bg-bgColor2 bg-opacity-50 flex flex-col pt-5 items-center">
 
             <div className=" bg-primary rounded-3xl card-shadow mt-4 p-4 w-[40%]">
-                <div className="w-full flex justify-between pt-2  text-2xl  items-center">
-                    <div></div>
-                    <div>
-                        <p className="text-heading text-1xl  cursor-pointer font-semibold">Token Confirmation</p>
-                    </div>
-                    {/* <AiFillEdit className="text-btnColor cursor-pointer" /> */}
+                <div className="w-full flex  justify-center pt-2 ">
+                        <p className="text-heading text-2xl  cursor-pointer font-semibold">Token Confirmation</p>
                 </div>
 
                 <div className="flex  justify-between  items-center mt-5">
