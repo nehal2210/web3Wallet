@@ -26,3 +26,12 @@ feature,simple,ride,harsh,burst,liar,unit,top,misery,hub,right,among
 0x68d847f57eb61e7ffbe059c3bc341c2eb2a1ea28abe7f7770519f3ea97a5fb1b
 Add acount k naam me msla he
 
+Fuji
+https://avalanche-fuji-c-chain.publicnode.com
+43113
+AVAX
+https://testnet.snowtrace.io/
+
+alone,country,prosper,devote,retire,balcony,industry,dirt,orient,icon,swap,wage
+0xa84c67c1E5ED07a3B8aa0be691EbAb7d0f0D18bf
+0x541c78dfbd1a5e87cf14f480ecf246656fe34dec4bb7a43e8248c4ecab9c7e5c

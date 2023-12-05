@@ -2,10 +2,14 @@ import logo from "../../assets/images/logo.png";
 import walletlogo from "../../assets/images/wallet_logo.png";
 import Rectangle from "../../assets/images/Rectangle.png";
 import criptolock from "../../assets/images/criptolock.gif"
-
+import { useNavigate } from "react-router-dom";
 
 const NonCostodialWallet = () => {
+
+    const navigate =  useNavigate()
     return (
+
+
 
         <div className="flex justify-between placeholder w-full h-[80vh] px-10 ">
             <div className="text-black w-full">
@@ -16,7 +20,7 @@ const NonCostodialWallet = () => {
                         {/* <span className="text-6xl font-bold text-btnColor mt-2">Wallet</span> */}
                         <p className="mt-4 text-xl" >protect your crypto with non-costodial Wallet</p>
                         <p className="font-semibold text-xl">YOUR KEYS YOUR RULES</p>
-                        <button className="bg-secondary-dark text-white font-semibold rounded-full w-52 h-12 mt-4">Download Extention</button>
+                        <button onClick={()=>{navigate("/home")}} className="bg-secondary-dark text-white font-semibold rounded-full w-52 h-12 mt-4">Download Extention</button>
                     </div>
                     <div >
                         <img src={criptolock} alt="Rectangle" />

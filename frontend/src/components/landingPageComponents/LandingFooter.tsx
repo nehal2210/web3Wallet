@@ -1,16 +1,17 @@
 
 import logo from "../../assets/images/logo.png";
 import walletlogo from "../../assets/images/wallet_logo.png";
-
+import { useNavigate } from "react-router-dom";
 
 const LandingFooter = () => {
+    const navigate = useNavigate()
     return (
         <div className="bg-bgShade w-full mt-16 ">
             <div className="flex ms-12 pb-10">
                 <div className="mt-12">
                     <img className="w-36 " src={walletlogo} alt="logo" />
                     <h1 className="text-2xl font-semibold mt-8">Download Chrome Extention</h1>
-                    <button className="bg-secondary-dark text-white rounded-full w-52 h-12 mt-4 ">Download Extention</button>
+                    <button onClick={()=>{navigate("/home")}} className="bg-secondary-dark text-white rounded-full w-52 h-12 mt-4 ">Download Extention</button>
 
                 </div>
                 <div className="flex mt-12 ms-12">

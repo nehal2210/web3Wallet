@@ -40,10 +40,16 @@ function AppRouter() {
           
         } />
         
-        <Route path="/" Component={LandingPage} />
-        <Route path="/demo" Component={Demo} />
+        <Route path="/"   element=
+        {
+        <ProtectedRoute>
+          <LandingPage/>
+        </ProtectedRoute>
+          
+        }  />
+        {/* <Route path="/demo" Component={Demo} /> */}
         <Route path="/app" Component={WalletApp} />
-        <Route path="/add-network" Component={Addnetwork} />
+        {/* <Route path="/add-network" Component={Addnetwork} /> */}
 
         {/* <Route path="/sign-up" Component={SignUp} />
         <Route path="/inbox" Component={Inbox} />
