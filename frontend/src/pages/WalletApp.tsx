@@ -32,6 +32,7 @@ const WalletApp = () => {
     const balance = useSelector((state:RootState)=>state.wallet.balance)
     const openImportTokenModal = useSelector((state:RootState)=>state.user.openImportTokenModal)
 
+
     const copyToClipboard = () => {
         if (currentAccount.address) {
           navigator.clipboard.writeText(currentAccount.address);
@@ -106,37 +107,27 @@ const WalletApp = () => {
 
                 <div className="flex w-full justify-between items-center mt-10">
                 <TokensTable tableHeading="Tokens"/>
-
                 <TokensTable tableHeading="Activity"/>
                 </div>
 
                 {
-                    openSendToken ?
+                    openSendToken &&
                     <SendToken  />
-                    :
-                    null
                 }
 
                 {
-                    openConfirmationSendToken ?
+                    openConfirmationSendToken &&
                     <TokenConfirmation />
-                    :
-                    null
                 }
                 
                 {
-                    openSentToken ?
+                    openSentToken &&
                     <SentToken />
-                    :
-                    null
                 }
 
                 {
-                openImportTokenModal ? 
+                openImportTokenModal &&
                 <ImportToken />
-                :
-                null
-
                 }
 
             </div>
