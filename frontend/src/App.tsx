@@ -17,11 +17,11 @@ function App() {
     <BrowserRouter>
     <div>
       {
-        error &&
+        !!error &&
         <div className='w-full h-[100vh] absolute top-0 flex justify-center items-start'>
           <div className='w-[50%] rounded-lg p-1 border border-danger bg-danger-light flex justify-between z-50'>
             <div className='w-[90%]'>
-              <p className='text-danger text-center'>Something Went Wrong...</p>
+              <p className='text-danger text-center'>{error}</p>
             </div>
             <div className='w-[10%] flex justify-end items-center'>
               <BiX onClick={() => dispatch(setError(''))} className='cursor-pointer' />

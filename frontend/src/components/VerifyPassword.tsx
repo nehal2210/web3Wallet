@@ -6,7 +6,7 @@ import { setPasswordState, setPasswordVerify } from "../redux/counter";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { SHA256 } from "crypto-js";
-import { walletAddAccount, walletDecrypt, walletGetBalance, walletGetToken, walletImport, walletSendToken, walletTxHistory } from "../redux/wallet";
+import { setError, walletAddAccount, walletDecrypt, walletGetBalance, walletGetToken, walletImport, walletSendToken, walletTxHistory } from "../redux/wallet";
 import { RootState } from "../redux/store";
 import { useNavigate } from "react-router-dom";
 
@@ -22,7 +22,7 @@ const VerifyPassword = () => {
     const currentAccount = useSelector((state: RootState) => state.wallet.currentAccount)
     const reciever = useSelector((state: RootState) => state.wallet.reciever)
     const currentToken = useSelector((state: RootState) => state.wallet.currentToken)
-    const importedPhrase =  useSelector((state: RootState) => state.wallet.importedPhrase)
+    const importedPhrase = useSelector((state: RootState) => state.wallet.importedPhrase)
     const navigate = useNavigate()
 
 
@@ -30,16 +30,18 @@ const VerifyPassword = () => {
 
     const handleSubmitPassword = () => {
 
-        // chek password first
+        try {
+            
+       
 
         if (operation === "importwallet") {
 
-            dispatch(walletImport({seedPhrase: importedPhrase, password:Password})).then((res:any)=>{
+            dispatch(walletImport({ seedPhrase: importedPhrase, password: Password })).then((res: any) => {
                 if (res.payload) {
-                    
+
                     navigate("/app")
                 }
-                else{
+                else {
                     console.log("error")
                 }
             })
@@ -70,14 +72,14 @@ const VerifyPassword = () => {
 
                 }
                 else if (operation === "showPK") {
-    
-                        // close modal
-                        
-                        dispatch(walletDecrypt({ password: Password, type: "privateKey",address: accountDetails.address }))
-                        
-                        dispatch(setPasswordVerify(false))
-    
-                    }
+
+                    // close modal
+
+                    dispatch(walletDecrypt({ password: Password, type: "privateKey", address: accountDetails.address }))
+
+                    dispatch(setPasswordVerify(false))
+
+                }
                 else if (operation === "sendNativeToken") {
 
 
@@ -99,8 +101,8 @@ const VerifyPassword = () => {
                         }
                         dispatch(walletSendToken(data)).then((res: any) => {
 
-                            // error handle
-                            dispatch(walletTxHistory({ address: currentAccount.address, network: currentNetwork.name }))
+                         
+                            dispatch(walletTxHistory({ address: currentAccount.address, chainId: currentNetwork.chainId }))
                             dispatch(walletGetBalance({ address: currentAccount.address, rpcUrl: currentNetwork.providerURL }))
                         })
 
@@ -133,8 +135,8 @@ const VerifyPassword = () => {
                         dispatch(walletSendToken(data)).then((res: any) => {
 
                             // error handle
-                            dispatch(walletTxHistory({ address: currentAccount.address, network: currentNetwork.name }))
-                            dispatch(walletGetToken({tokens:currentAccount.tokens, rpcUrl: currentNetwork.providerURL, address: currentAccount.address, network: currentNetwork.name }))
+                            dispatch(walletTxHistory({ address: currentAccount.address, chainId: currentNetwork.chainId }))
+                            dispatch(walletGetToken({ tokens: currentAccount.tokens, rpcUrl: currentNetwork.providerURL, address: currentAccount.address, network: currentNetwork.name }))
 
                         })
 
@@ -151,8 +153,16 @@ const VerifyPassword = () => {
                 console.log("wrong Password")
             }
 
+
         }
+
+    } catch (error) {
+        dispatch(setError(error))
     }
+     
+    dispatch(setPasswordVerify(false))
+    
+}
 
 
     return (

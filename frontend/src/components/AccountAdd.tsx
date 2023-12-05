@@ -12,7 +12,7 @@ import { setNewAccountFields, setPasswordVerify } from "../redux/counter";
 import { setOperation } from "../redux/wallet";
 
 
-const CreateAccount = ({ isNewAccount, accountType }: any) => {
+const AccountAdd = ({ isNewAccount, accountType }: any) => {
     
   
     const wallet = useSelector((state:RootState)=>state.wallet.data)
@@ -81,4 +81,4 @@ const CreateAccount = ({ isNewAccount, accountType }: any) => {
 }
 
 
-export default CreateAccount;
+export default AccountAdd;

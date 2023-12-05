@@ -4,7 +4,6 @@ import Home from "../pages/Home";
 import WalletApp from "../pages/WalletApp";
 import ProtectedRoute from "./ProtectedRoute";
 import Addnetwork from "../pages/AddNetwork";
-import ImportTokens from "../pages/importTokens";
 import LandingPage from "../pages/LandingPage";
 import { BallTriangle } from "react-loader-spinner";
 import { useSelector } from "react-redux";
@@ -41,11 +40,16 @@ function AppRouter() {
           
         } />
         
-        <Route path="/" Component={LandingPage} />
-        <Route path="/demo" Component={Demo} />
+        <Route path="/"   element=
+        {
+        <ProtectedRoute>
+          <LandingPage/>
+        </ProtectedRoute>
+          
+        }  />
+        {/* <Route path="/demo" Component={Demo} /> */}
         <Route path="/app" Component={WalletApp} />
-        <Route path="/add-network" Component={Addnetwork} />
-        <Route path="/import-tokens" Component={ImportTokens} />
+        {/* <Route path="/add-network" Component={Addnetwork} /> */}
 
         {/* <Route path="/sign-up" Component={SignUp} />
         <Route path="/inbox" Component={Inbox} />

@@ -63,6 +63,6 @@ exports.importToken = async (req, res) => {
     // if account does not exist then throw error
     // Todo
 
-    return res.status(201).json({ status: "success", message: "token has been imported" })
+    return res.status(201).json({ status: "success", message: "token has been imported", token:token })
 }
 

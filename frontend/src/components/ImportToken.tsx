@@ -1,4 +1,4 @@
-import AppHeader from "../components/app-header";
+import AppHeader from "./AppHeader";
 import logo from "../assets/images/logo.png";
 import walletlogo from "../assets/images/wallet_logo.png";
 import { BsInfoLg, BsX } from "react-icons/bs";
@@ -8,20 +8,19 @@ import SendToken from './../pages/../components/SendToken';
 import { RootState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { getTokenDetail } from "../services/blockchain";
-import { walletAddToken } from "../redux/wallet";
+import { setError, walletAddToken } from "../redux/wallet";
 import { setImportTokenModal } from "../redux/counter";
 
 
 const ImportToken = () => {
+    
+    const dispatch = useDispatch()
 
     const [showSendToken, setShowSendToken] = useState(false);
-    const network = useSelector((state: RootState) => state.wallet.currentNetwork)
-    const account = useSelector((state: RootState) => state.wallet.currentAccount)
-
     const [token, SetToken] = useState({ address: "", name: "", symbol: "", decimal: "" })
 
-
-    const dispatch = useDispatch()
+    const network = useSelector((state: RootState) => state.wallet.currentNetwork)
+    const account = useSelector((state: RootState) => state.wallet.currentAccount)
 
     const handleButtonClick = () => {
 
@@ -34,18 +33,10 @@ const ImportToken = () => {
         console.log(data)
         console.log(account)
 
-        dispatch(walletAddToken({ accountId: account._id, body: data }));
+        dispatch(walletAddToken({ accountId: account._id, body: data }))
         dispatch(setImportTokenModal(false));
 
     };
-
-    // useEffect(()=>{
-    //     getTokenDetail("0x3e622317f8C93f7328350cF0B56d9eD4C620C5d6",network.providerURL)
-
-    // }
-
-
-    // ,[])
 
 
     const handleChange = async (e: any) => {
@@ -53,16 +44,17 @@ const ImportToken = () => {
         SetToken((prevToken) => ({ ...prevToken, [e.target.name]: e.target.value }))
 
         if (e.target.name === "address" && e.target.value.length === 42) {
+            
+            try{
 
-            const data: any = await getTokenDetail(e.target.value, network.providerURL)
-            // Todo:  apply conditions to check if request failed then you have to show error
+                const data: any = await getTokenDetail(e.target.value, network.providerURL)
+                SetToken({ address: e.target.value, name: data[0], symbol: data[1], decimal: data[2] })
+            }
+            catch(e:any){
+                dispatch(setError(e))
+            }
 
-            SetToken({ address: e.target.value, name: data[0], symbol: data[1], decimal: data[2] })
         }
-        // else{
-
-        //     SetToken((prevToken)=>({...prevToken,[e.target.name]:e.target.value}))
-        // }
 
     }
 
@@ -76,7 +68,7 @@ const ImportToken = () => {
                     <BsX onClick={() => dispatch(setImportTokenModal(false))} className="text-btnColor cursor-pointer" />
                 </div>
                 <div className="  w-full pb-4 ">
-                    <p className="text-heading text-3xl text-center cursor-pointer font-bold">Import Tokens</p>
+                    <p className="text-heading text-3xl text-center cursor-pointer font-bold">Import Token</p>
                 </div>
 
                 <div className="flex justify-center items-center flex-col">
