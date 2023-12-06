@@ -77,7 +77,7 @@ const AppHeader = () => {
                             }
                         </div>
 
-                        <button onClick={() => handleAddNetwork()} className="bg-secondary-dark hover:bg-btnColorHover rounded-full w-40 p-2 text-white-1 mt-4 ms-2">
+                        <button onClick={() => handleAddNetwork()} className="bg-btnColor hover:bg-btnColorHover rounded-full w-40 p-2 text-white-1 mt-4 ms-2">
                             Add Network
                         </button>
 
