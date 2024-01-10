@@ -88,8 +88,8 @@ event.preventDefault()
                             isEditable
                                 ?
                                 <div className="flex justify-evenly items-center mt-4">
-                                    <button  onClick={(e)=>handleSubmit(e)}  className="w-32 py-1 rounded-full text-white bg-btnColor hover:bg-btnColorHover ">Save</button>
-                                    <button onClick={() => openNet("")} className="w-32 py-1 rounded-full text-black card-shadow  hover:bg-green ">Cancel</button>
+                                    <button  onClick={(e)=>handleSubmit(e)}  className="w-32 py-1 rounded-full text-white bg-btnColor hover:bg-btnColorHover">Save</button>
+                                    <button onClick={() => openNet("")} className="w-32 py-1 rounded-full text-black card-shadow border border-btnColor text-btnColor hover:bg-btnColorHover hover:text-white">Cancel</button>
 
                                 </div>
                                 :

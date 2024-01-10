@@ -46,7 +46,7 @@ const AccountMenu = ({ isAccountOpen, isNewAccount, isOpenAccountDetails }: any)
                 </div>
 
                 <div className="flex justify-center flex-col items-center mt-2">
-                    <button className="bg-secondary-dark px-8 py-2 hover:bg-btnColorHover border border-white text-white rounded-full" onClick={() => { isNewAccount('add-account') }}>Add Account</button>
+                    <button className="bg-btnColor hover:bg-btnColorHover px-8 py-2  border border-white text-white rounded-full" onClick={() => { isNewAccount('add-account') }}>Add Account</button>
                 </div>
 
             </div>

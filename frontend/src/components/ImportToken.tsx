@@ -102,7 +102,7 @@ const ImportToken = () => {
                     </div>
                     <div>
                         <button onClick={handleButtonClick}
-                            className="px-12 py-3 rounded-full text-white bg-secondary-dark hover:bg-btnColorHover mt-6 text-lg ">Add Token</button>
+                            className="px-12 py-3 rounded-full text-white bg-btnColor hover:bg-btnColorHover mt-6 text-lg ">Add Token</button>
 
                     </div>
                 </div>

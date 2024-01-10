@@ -65,9 +65,9 @@ const AccountAdd = ({ isNewAccount, accountType }: any) => {
                     {
                         accountType !== 'add-account'
                             ?
-                            <button className="px-12 py-2 rounded-full text-white bg-secondary-dark hover:bg-btnColorHover mt-4">Import</button>
+                            <button className="px-12 py-2 rounded-full text-white bg-btnColor hover:bg-btnColorHover mt-4">Import</button>
                             :
-                            <button onClick={handleAccountCreate} className="px-12 py-2 rounded-full text-white bg-secondary-dark hover:bg-btnColorHover mt-4">Create</button>
+                            <button onClick={handleAccountCreate} className="px-12 py-2 rounded-full text-white bg-btnColor hover:bg-btnColorHover mt-4">Create</button>
                     }
                 </div>
 
