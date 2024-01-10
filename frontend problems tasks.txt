@@ -1,0 +1,37 @@
+lending page k sides me thora margin brhaan he or us k backlground me jo animation chl rhi he use rok kr 
+circles ko static kr na he. done
+
+account details ki screen ko set krna he done
+
+token send confirmation screen set 
+
+activity me goto reciept ka button daalna he jo scan pr le jaae ga
+
+password screen set krni he
+
+copy paste sb me sahi hona chahiye
+
+network select hone tab close hona chahiye
+
+network select hone pr cheezen is k mutabiq change ho jaaen
+
+
+wallet ki api 
+
+
+shayan
+feature,simple,ride,harsh,burst,liar,unit,top,misery,hub,right,among
+0xBf591a4b2E2845E6514049a0319ca8fCF2eA2320
+0xBf591a4b2E2845E6514049a0319ca8fCF2eA2320
+0x68d847f57eb61e7ffbe059c3bc341c2eb2a1ea28abe7f7770519f3ea97a5fb1b
+Add acount k naam me msla he
+
+Fuji
+https://avalanche-fuji-c-chain.publicnode.com
+43113
+AVAX
+https://testnet.snowtrace.io/
+
+alone,country,prosper,devote,retire,balcony,industry,dirt,orient,icon,swap,wage
+0xa84c67c1E5ED07a3B8aa0be691EbAb7d0f0D18bf
+0x541c78dfbd1a5e87cf14f480ecf246656fe34dec4bb7a43e8248c4ecab9c7e5c
