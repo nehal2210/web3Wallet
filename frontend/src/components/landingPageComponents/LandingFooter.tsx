@@ -10,8 +10,8 @@ const LandingFooter = () => {
             <div className="flex ms-12 pb-10">
                 <div className="mt-12">
                     <img className="w-36 " src={walletlogo} alt="logo" />
-                    <h1 className="text-2xl font-semibold mt-8">Download Chrome Extention</h1>
-                    <button onClick={()=>{navigate("/home")}} className="bg-btnColor hover:bg-btnColorHover text-white rounded-full w-52 h-12 mt-4 ">Download Extention</button>
+                    <p className="font-semibold text-xl mt-8">YOUR KEYS YOUR RULES</p>
+                    <button onClick={()=>{navigate("/home")}} className="bg-btnColor hover:bg-btnColorHover font-semibold text-lg text-white rounded-full w-52 h-12 mt-4 ">Go to wallet</button>
 
                 </div>
                 <div className="flex mt-12 ms-12">
@@ -51,7 +51,7 @@ const LandingFooter = () => {
                 </div>
             </div>
             <div className="flex justify-end pb-4 pr-4">
-                <p>CopyRight@2023 Exodus Movement</p>
+                <p>CopyRight@2023 </p>
             </div>
 
 
